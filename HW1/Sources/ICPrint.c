@@ -8,6 +8,7 @@
 
 #include "ICPrint.h"
 
+
 void ICPrintHelloWorld () {
-    printf("Hello world!");
+    printf("Hello, World!\n");
 }
