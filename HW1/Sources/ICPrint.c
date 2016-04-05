@@ -9,6 +9,6 @@
 #include "ICPrint.h"
 
 
-void ICPrintHelloWorld () {
-    printf("Hello, World!\n");
-}
+//void ICPrintHelloWorld () {
+ //   printf("Hello, World!\n");
+//}

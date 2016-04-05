@@ -10,6 +10,6 @@
 #define ICPrint_h
 #include <stdio.h>
 
-void ICPrintHelloWorld ();
+//void ICPrintHelloWorld ();
 
 #endif /* ICPrint_h */

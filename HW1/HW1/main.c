@@ -9,19 +9,19 @@
 #include <stdio.h>
 //#include "ICPrint.h"
 
-void ICPrintHelloWorld () {
+void ICPrintHelloWorld () {         // ICPrintHelloWorld after calling runs code inside scope or till "return;"
     printf("Hello, World!\n");
 }
 
 /*
-void ICPrintHelloWorld () {     // redefinition of function. Can't compile
+void ICPrintHelloWorld () {
     printf("Hello, World!\n");
 }
 
 void ICPrintHelloWorld () {
     printf("Hello, World!\n");
 }
-*/
+ */
 
 //  ICPrintHelloWorld ();       // out of function "main" scope and out of stack. "Conflicting types"
 
