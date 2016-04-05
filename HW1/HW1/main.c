@@ -10,7 +10,7 @@
 //#include "ICPrint.h"
 
 void ICPrintHelloWorld () {         // ICPrintHelloWorld after calling runs code inside scope or till "return;"
-    printf("Hello, World!\n");
+    printf("Hello, mama!\n");
 }
 
 /*
