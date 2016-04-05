@@ -13,6 +13,10 @@ void ICPrintHelloWorld () {         // ICPrintHelloWorld after calling runs code
     printf("Hello, mama!\n");       //Easy to change output in function. Text changed in one please, output changed everyware
 }
 
+void ICPrintHelloParensts () {
+    ICPrintHelloWorld();
+    printf("Hello, papa!\n");
+}
 /*
 void ICPrintHelloWorld () {
     printf("Hello, World!\n");
@@ -24,7 +28,7 @@ void ICPrintHelloWorld () {
  */
 
 //  ICPrintHelloWorld ();       // out of function "main" scope and out of stack. "Conflicting types"
-
+//  ICPrintHelloParensts ();    //function will not run before of main
 
 int main(int argc, const char * argv[]) {
     // return 0;
@@ -36,7 +40,7 @@ int main(int argc, const char * argv[]) {
     // return 0;
     printf("Pasha\n");
     // return 0;
-    
+    ICPrintHelloParensts ();
     ICPrintHelloWorld();      //Calls function ICPrintHelloW
     // return 0;
     ICPrintHelloWorld();      // can call function as much as we need
@@ -44,12 +48,14 @@ int main(int argc, const char * argv[]) {
     ICPrintHelloWorld();
     // return 0;
     ICPrintHelloWorld();
-    return 0;            // return stops function impementation and go out from the function with return value with type of function or nothing if void function
     
+    ICPrintHelloParensts ();
+    return 0;            // return stops function impementation and go out from the function with return value with type of function or nothing if void function
+//    ICPrintHelloParensts ();  //function will not run after return;
     
 //    ICPrintHelloWorld();    //Code after "return" will not run. "Return" ends the function
 }
-
+//  ICPrintHelloParensts (); //function will not run out of main
 //  ICPrintHelloWorld();      // out of function "main" scope and out of stack. "Conflicting types"
 
 /*
