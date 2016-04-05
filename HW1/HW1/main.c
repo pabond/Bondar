@@ -34,6 +34,9 @@ int main(int argc, const char * argv[]) {
     printf("Pasha\n");
     
     ICPrintHelloWorld();      //Calls function ICPrintHelloW
+    ICPrintHelloWorld();      // can call function as much as we need
+    ICPrintHelloWorld();
+    ICPrintHelloWorld();
     
     return 0;
     
