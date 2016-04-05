@@ -10,7 +10,7 @@
 //#include "ICPrint.h"
 
 void ICPrintHelloWorld () {         // ICPrintHelloWorld after calling runs code inside scope or till "return;"
-    printf("Hello, mama!\n");
+    printf("Hello, mama!\n");       //Easy to change output in function. Text changed in one please, output changed everyware
 }
 
 /*
@@ -27,7 +27,7 @@ void ICPrintHelloWorld () {
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
+  return 0;
     printf("Hello, World!\n");
     printf("Nice to meet you\n");
     printf("My name is: ");
@@ -38,7 +38,7 @@ int main(int argc, const char * argv[]) {
     ICPrintHelloWorld();
     ICPrintHelloWorld();
     
-    return 0;
+    
     
 //    ICPrintHelloWorld();    //Code after "return" will not run. "Return" ends the function
 }
