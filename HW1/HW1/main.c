@@ -7,12 +7,9 @@
 //
 
 #include <stdio.h>
+#include "ICPrint.h"
 
-void ICPrintHelloW () {
-    printf("Hello, World!\n");
-}
-
-//  ICPrintHelloW ();       // out of function "main" scope and out of stack. "Conflicting types"
+//  ICPrintHelloWorld ();       // out of function "main" scope and out of stack. "Conflicting types"
 
 
 int main(int argc, const char * argv[]) {
@@ -22,11 +19,11 @@ int main(int argc, const char * argv[]) {
     printf("My name is: ");
     printf("Pasha\n");
     
-    ICPrintHelloW();      //Calls function ICPrintHelloW
+    ICPrintHelloWorld();      //Calls function ICPrintHelloW
     
     return 0;
     
-//    ICPrintHelloW();    //Code after "return" will not run. "Return" ends the function
+//    ICPrintHelloWorld();    //Code after "return" will not run. "Return" ends the function
 }
 
-//  ICPrintHelloW();      // out of function "main" scope and out of stack. "Conflicting types"
+//  ICPrintHelloWorld();      // out of function "main" scope and out of stack. "Conflicting types"
