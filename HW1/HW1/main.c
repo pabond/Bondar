@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "ICPrint.h"
 
+
 //  ICPrintHelloWorld ();       // out of function "main" scope and out of stack. "Conflicting types"
 
 
@@ -27,3 +28,9 @@ int main(int argc, const char * argv[]) {
 }
 
 //  ICPrintHelloWorld();      // out of function "main" scope and out of stack. "Conflicting types"
+
+/*
+void ICPrintHelloWorld () {    // program not working, not comiling
+printf("Hello, World!\n");
+}
+*/
