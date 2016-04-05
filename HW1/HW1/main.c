@@ -7,8 +7,21 @@
 //
 
 #include <stdio.h>
-#include "ICPrint.h"
+//#include "ICPrint.h"
 
+void ICPrintHelloWorld () {
+    printf("Hello, World!\n");
+}
+
+/*
+void ICPrintHelloWorld () {     // redefinition of function. Can't compile
+    printf("Hello, World!\n");
+}
+
+void ICPrintHelloWorld () {
+    printf("Hello, World!\n");
+}
+*/
 
 //  ICPrintHelloWorld ();       // out of function "main" scope and out of stack. "Conflicting types"
 
