@@ -41,6 +41,7 @@
 		2DDEB7951CB3CD3D000719FF = {
 			isa = PBXGroup;
 			children = (
+				2DDEB7A91CB3D0AB000719FF /* Sources */,
 				2DDEB7A01CB3CD3D000719FF /* HW1 */,
 				2DDEB79F1CB3CD3D000719FF /* Products */,
 			);
@@ -60,6 +61,13 @@
 				2DDEB7A11CB3CD3D000719FF /* main.c */,
 			);
 			path = HW1;
+			sourceTree = "<group>";
+		};
+		2DDEB7A91CB3D0AB000719FF /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
