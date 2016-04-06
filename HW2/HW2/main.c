@@ -8,8 +8,10 @@
 
 #include <stdio.h>
 
+#include "BPVPrint.h"
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+    BPVPrintHelloWorld();
+    BPVPrintHelloParents();
     return 0;
 }
