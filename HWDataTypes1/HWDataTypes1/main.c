@@ -10,6 +10,8 @@
 
 #include "BPVRangeOfNumber.h"
 
+#include "BPVPrintDataType.h"
+
 int main(int argc, const char * argv[]) {
     
     printf("%u\n", BPVRangeOfNumber(57, -250));
@@ -27,6 +29,11 @@ int main(int argc, const char * argv[]) {
            longLongNumber, longNumber, intNumber, floatNumber, doubleNumber, charType, shortNumbe, unsignedIntNumber);
     
     printf("%f\n", 3 * 3 / 4 % 7 + 4 * 3 - 1.5 + 65);
+    
+    BPVPrintInt(5);
+    BPVPrintChar('&');
+    BPVPrintFloat(3.55f);
+    BPVPrintString("Hello, World");
     
     return 0;
 }
