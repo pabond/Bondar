@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2DDEB7BD1CB53CE1000719FF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7BC1CB53CE1000719FF /* main.c */; };
 		2DDEB7CA1CB54A50000719FF /* BPVPrint.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7C81CB54A50000719FF /* BPVPrint.c */; };
+		2DDEB7CD1CB67C3D000719FF /* BPVPrintNumbers.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7CB1CB67C3D000719FF /* BPVPrintNumbers.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		2DDEB7BC1CB53CE1000719FF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		2DDEB7C81CB54A50000719FF /* BPVPrint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVPrint.c; sourceTree = "<group>"; };
 		2DDEB7C91CB54A50000719FF /* BPVPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPrint.h; sourceTree = "<group>"; };
+		2DDEB7CB1CB67C3D000719FF /* BPVPrintNumbers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVPrintNumbers.c; sourceTree = "<group>"; };
+		2DDEB7CC1CB67C3D000719FF /* BPVPrintNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPrintNumbers.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +72,10 @@
 		2DDEB7C71CB54A50000719FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2DDEB7C81CB54A50000719FF /* BPVPrint.c */,
 				2DDEB7C91CB54A50000719FF /* BPVPrint.h */,
+				2DDEB7C81CB54A50000719FF /* BPVPrint.c */,
+				2DDEB7CB1CB67C3D000719FF /* BPVPrintNumbers.c */,
+				2DDEB7CC1CB67C3D000719FF /* BPVPrintNumbers.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DDEB7CA1CB54A50000719FF /* BPVPrint.c in Sources */,
+				2DDEB7CD1CB67C3D000719FF /* BPVPrintNumbers.c in Sources */,
 				2DDEB7BD1CB53CE1000719FF /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
