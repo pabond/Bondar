@@ -74,8 +74,8 @@
 			children = (
 				2DDEB7C91CB54A50000719FF /* BPVPrint.h */,
 				2DDEB7C81CB54A50000719FF /* BPVPrint.c */,
-				2DDEB7CB1CB67C3D000719FF /* BPVPrintNumbers.c */,
 				2DDEB7CC1CB67C3D000719FF /* BPVPrintNumbers.h */,
+				2DDEB7CB1CB67C3D000719FF /* BPVPrintNumbers.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

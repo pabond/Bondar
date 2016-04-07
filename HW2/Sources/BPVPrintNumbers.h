@@ -9,6 +9,8 @@
 #ifndef BPVPrintNumbers_h
 #define BPVPrintNumbers_h
 
-#include <stdio.h>
+void BPVPrintIncreasingNumbers();
 
 #endif /* BPVPrintNumbers_h */
+
+void BPVPrintDecreasingNumbers();

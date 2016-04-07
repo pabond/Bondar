@@ -6,6 +6,8 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
+#include <stdio.h>
+
 #include "BPVPrint.h"
 
 void BPVPrintHelloWorld() {

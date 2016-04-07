@@ -11,9 +11,13 @@
 #include "BPVPrint.h"
 //#include "BPVPrint.h"
 
+#include "BPVPrintNumbers.h"
+
 int main(int argc, const char * argv[]) {
     BPVPrintHelloWorld();
     BPVPrintHelloParents();
+    BPVPrintIncreasingNumbers();
+    BPVPrintDecreasingNumbers();
     
     return 0;
 }

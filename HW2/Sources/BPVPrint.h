@@ -10,8 +10,6 @@
 #ifndef BPVPrint_h
 #define BPVPrint_h
 
-#include <stdio.h>
-
 void BPVPrintHelloWorld();
 void BPVPrintHelloParents();
 void BPVPrintHelloMama();
