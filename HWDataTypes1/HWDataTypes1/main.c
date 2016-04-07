@@ -12,6 +12,9 @@
 
 #include "BPVPrintDataType.h"
 
+#include "BPVPlusMinusOne.h"
+
+
 int main(int argc, const char * argv[]) {
     
     printf("%u\n", BPVRangeOfNumber(57, -250));
@@ -34,6 +37,9 @@ int main(int argc, const char * argv[]) {
     BPVPrintChar('&');
     BPVPrintFloat(3.55f);
     BPVPrintString("Hello, World");
+    
+    BPVPrintInt(BPVDecrement(5));
+    BPVPrintInt(BPVIncrement(10));
     
     return 0;
 }

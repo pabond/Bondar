@@ -10,6 +10,7 @@
 		2DDEB7DB1CB681D4000719FF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7DA1CB681D4000719FF /* main.c */; };
 		2DDEB7E41CB68ABD000719FF /* BPVRangeOfNumber.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7E21CB68ABD000719FF /* BPVRangeOfNumber.c */; };
 		2DDEB7E71CB69E58000719FF /* BPVPrintDataType.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7E51CB69E58000719FF /* BPVPrintDataType.c */; };
+		2DDEB7EA1CB6B113000719FF /* BPVPlusMinusOne.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7E81CB6B113000719FF /* BPVPlusMinusOne.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		2DDEB7E31CB68ABD000719FF /* BPVRangeOfNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVRangeOfNumber.h; sourceTree = "<group>"; };
 		2DDEB7E51CB69E58000719FF /* BPVPrintDataType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVPrintDataType.c; sourceTree = "<group>"; };
 		2DDEB7E61CB69E58000719FF /* BPVPrintDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPrintDataType.h; sourceTree = "<group>"; };
+		2DDEB7E81CB6B113000719FF /* BPVPlusMinusOne.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVPlusMinusOne.c; sourceTree = "<group>"; };
+		2DDEB7E91CB6B113000719FF /* BPVPlusMinusOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPlusMinusOne.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,8 @@
 				2DDEB7E21CB68ABD000719FF /* BPVRangeOfNumber.c */,
 				2DDEB7E61CB69E58000719FF /* BPVPrintDataType.h */,
 				2DDEB7E51CB69E58000719FF /* BPVPrintDataType.c */,
+				2DDEB7E91CB6B113000719FF /* BPVPlusMinusOne.h */,
+				2DDEB7E81CB6B113000719FF /* BPVPlusMinusOne.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DDEB7EA1CB6B113000719FF /* BPVPlusMinusOne.c in Sources */,
 				2DDEB7E41CB68ABD000719FF /* BPVRangeOfNumber.c in Sources */,
 				2DDEB7E71CB69E58000719FF /* BPVPrintDataType.c in Sources */,
 				2DDEB7DB1CB681D4000719FF /* main.c in Sources */,
