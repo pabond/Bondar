@@ -99,8 +99,8 @@
 				2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */,
 				2DDEB7F21CB7C9DC000719FF /* BPVBoolFunctions.h */,
 				2DDEB7F11CB7C9DC000719FF /* BPVBoolFunctions.c */,
-				2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */,
 				2DDEB7F51CB7E3E6000719FF /* BPVDeputy.h */,
+				2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

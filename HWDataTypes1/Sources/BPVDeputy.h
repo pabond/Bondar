@@ -9,6 +9,6 @@
 #ifndef BPVDeputy_h
 #define BPVDeputy_h
 
-#include <stdio.h>
+void BPVDeputySalary();
 
 #endif /* BPVDeputy_h */
