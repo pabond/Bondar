@@ -20,6 +20,8 @@
 
 #include "BPVDeputy.h"
 
+#include "BPVArrayInit.h"
+
 int main(int argc, const char * argv[]) {
     BPVPrintRangeOfNumber(57, -250);
     BPVPrintDataTypesMathTest();
@@ -32,6 +34,7 @@ int main(int argc, const char * argv[]) {
     BPVBoolMathOperations(5, 3);
     BPVPrintWithPuts();         // puts prints char with \n
     BPVDeputySalary();
+    BPVArrayTest();
     
     return 0;
 }

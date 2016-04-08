@@ -98,4 +98,3 @@ void BPVPrintIncrement(int value) {
     printf("Postfix increment: %i\n", value++); //do nothing. value + 1 - works
     printf("Prefix incremnt: %i\n", --value);
 }
-

@@ -15,6 +15,7 @@
 		2DDEB7F01CB7AF7A000719FF /* BPVDevideCode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */; };
 		2DDEB7F31CB7C9DC000719FF /* BPVBoolFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7F11CB7C9DC000719FF /* BPVBoolFunctions.c */; };
 		2DDEB7F61CB7E3E6000719FF /* BPVDeputy.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */; };
+		2DDEB7F91CB7F629000719FF /* BPVArrayInit.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7F71CB7F629000719FF /* BPVArrayInit.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,8 @@
 		2DDEB7F21CB7C9DC000719FF /* BPVBoolFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVBoolFunctions.h; sourceTree = "<group>"; };
 		2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVDeputy.c; sourceTree = "<group>"; };
 		2DDEB7F51CB7E3E6000719FF /* BPVDeputy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVDeputy.h; sourceTree = "<group>"; };
+		2DDEB7F71CB7F629000719FF /* BPVArrayInit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVArrayInit.c; sourceTree = "<group>"; };
+		2DDEB7F81CB7F629000719FF /* BPVArrayInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVArrayInit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,8 @@
 				2DDEB7F11CB7C9DC000719FF /* BPVBoolFunctions.c */,
 				2DDEB7F51CB7E3E6000719FF /* BPVDeputy.h */,
 				2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */,
+				2DDEB7F81CB7F629000719FF /* BPVArrayInit.h */,
+				2DDEB7F71CB7F629000719FF /* BPVArrayInit.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				2DDEB7F01CB7AF7A000719FF /* BPVDevideCode.c in Sources */,
 				2DDEB7E71CB69E58000719FF /* BPVPrintDataType.c in Sources */,
 				2DDEB7DB1CB681D4000719FF /* main.c in Sources */,
+				2DDEB7F91CB7F629000719FF /* BPVArrayInit.c in Sources */,
 				2DDEB7ED1CB796C4000719FF /* BPVMathFunctions.c in Sources */,
 				2DDEB7F61CB7E3E6000719FF /* BPVDeputy.c in Sources */,
 			);
