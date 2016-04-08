@@ -6,9 +6,9 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
-#include "BPVMathFunctions.h"
-
 #include <stdio.h>
+
+#include "BPVMathFunctions.h"
 
 int BPVMaxValue(int value1, int value2) {
     return (value1 > value2) ? value1 : value2;

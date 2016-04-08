@@ -16,6 +16,8 @@
 
 #include "BPVDevideCode.h"
 
+#include "BPVBoolFunctions.h"
+
 int main(int argc, const char * argv[]) {
     BPVPrintRangeOfNumber(57, -250);
     BPVPrintDataTypesMathTest();
@@ -24,6 +26,9 @@ int main(int argc, const char * argv[]) {
     BPVPrintInt(BPVDecrement(5));
     BPVPrintInt(BPVIncrement(10));
     BPVDevideCode();
+    BPVBoolValue(true);
+    BPVBoolMathOperations(5, 3);
+    BPVPrintWithPuts();         // puts prints char with \n
     
     return 0;
 }

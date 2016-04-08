@@ -9,11 +9,15 @@
 #ifndef BPVPrintDataType_h
 #define BPVPrintDataType_h
 
+#include <stdbool.h>
+
 void BPVPrinDataType();
 void BPVPrintInt(int intNumber);
 void BPVPrintFloat(float floatNumber);
 void BPVPrintChar(char character);
 void BPVPrintString(char string[]);
+void BPVPrintBool(bool value);
+void BPVPrintWithPuts();
 void BPVPrintDataTypesMathTest();
 void BPVPrintAllTypes(long long longLongVal, long longVal, int intVal, float floatVal,
                       double doubleVal, char charVal, short shortVal, unsigned int unsignedIntVal);

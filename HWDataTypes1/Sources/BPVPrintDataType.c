@@ -21,11 +21,15 @@ void BPVPrintFloat(float floatNumber) {
 }
 
 void BPVPrintChar(char character) {
-    printf ("Char: %c\n", character);
+    printf("Char: %c\n", character);
 }
 
 void BPVPrintString(char string[]) {
-    printf ("Sting: %s\n", string);
+    printf("Sting: %s\n", string);
+}
+
+void BPVPrintBool(bool value) {
+    printf("Bool value: %i\n", value);
 }
 
 void BPVPrinDataType() {
@@ -41,6 +45,10 @@ void BPVPrintRangeOfNumber(int value1, int value2) {
 
 void BPVPrint() {
     printf("\n");
+}
+
+void BPVPrintWithPuts() {
+    puts("I like it");
 }
 
 void BPVPrintAllTypes(long long longLongVal, long longVal, int intVal, float floatVal,
