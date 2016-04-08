@@ -9,11 +9,9 @@
 #include "BPVPlusMinusOne.h"
 
 int BPVIncrement(int number) {
-    return ++number;
+    return number + 1;
 }
 
 int BPVDecrement(int number) {
-    return --number;
+    return number - 1;
 }
-
-#include <stdio.h>

@@ -9,8 +9,6 @@
 #ifndef BPVPrintDataType_h
 #define BPVPrintDataType_h
 
-#include <string.h>
-
 void BPVPrintInt(int intNumber);
 void BPVPrintFloat(float floatNumber);
 void BPVPrintChar(char character);
