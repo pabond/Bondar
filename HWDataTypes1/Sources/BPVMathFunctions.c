@@ -17,3 +17,23 @@ int BPVMaxValue(int value1, int value2) {
 int BPVMinValue(int value1, int value2) {
     return (value1 < value2) ? value1 : value2;
 }
+
+int BPVMultiply(int value1, int value2) {
+    return value1 * value2;
+}
+
+int BPVDevide(int value1, int value2) {
+    return value1 / value2;
+}
+
+int BPVAdd(int value1, int value2) {
+    return value1 + value2;
+}
+
+int BPVMinus(int value1, int value2) {
+    return value1 - value2;
+}
+
+int BPVDevideWithoutReminder(int value1, int value2) {
+    return value1 % value2;
+}

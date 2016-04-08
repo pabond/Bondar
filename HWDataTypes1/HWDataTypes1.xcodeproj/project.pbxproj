@@ -12,6 +12,7 @@
 		2DDEB7E71CB69E58000719FF /* BPVPrintDataType.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7E51CB69E58000719FF /* BPVPrintDataType.c */; };
 		2DDEB7EA1CB6B113000719FF /* BPVPlusMinusOne.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7E81CB6B113000719FF /* BPVPlusMinusOne.c */; };
 		2DDEB7ED1CB796C4000719FF /* BPVMathFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7EB1CB796C4000719FF /* BPVMathFunctions.c */; };
+		2DDEB7F01CB7AF7A000719FF /* BPVDevideCode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		2DDEB7E91CB6B113000719FF /* BPVPlusMinusOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPlusMinusOne.h; sourceTree = "<group>"; };
 		2DDEB7EB1CB796C4000719FF /* BPVMathFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVMathFunctions.c; sourceTree = "<group>"; };
 		2DDEB7EC1CB796C4000719FF /* BPVMathFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVMathFunctions.h; sourceTree = "<group>"; };
+		2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVDevideCode.c; sourceTree = "<group>"; };
+		2DDEB7EF1CB7AF7A000719FF /* BPVDevideCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVDevideCode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				2DDEB7E81CB6B113000719FF /* BPVPlusMinusOne.c */,
 				2DDEB7EC1CB796C4000719FF /* BPVMathFunctions.h */,
 				2DDEB7EB1CB796C4000719FF /* BPVMathFunctions.c */,
+				2DDEB7EF1CB7AF7A000719FF /* BPVDevideCode.h */,
+				2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			files = (
 				2DDEB7EA1CB6B113000719FF /* BPVPlusMinusOne.c in Sources */,
 				2DDEB7E41CB68ABD000719FF /* BPVRangeOfNumber.c in Sources */,
+				2DDEB7F01CB7AF7A000719FF /* BPVDevideCode.c in Sources */,
 				2DDEB7E71CB69E58000719FF /* BPVPrintDataType.c in Sources */,
 				2DDEB7DB1CB681D4000719FF /* main.c in Sources */,
 				2DDEB7ED1CB796C4000719FF /* BPVMathFunctions.c in Sources */,

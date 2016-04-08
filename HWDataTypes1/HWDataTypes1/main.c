@@ -14,6 +14,10 @@
 
 #include "BPVPlusMinusOne.h"
 
+#include "BPVMathFunctions.h"
+
+#include "BPVDevideCode.h"
+
 
 int main(int argc, const char * argv[]) {
     
@@ -31,7 +35,7 @@ int main(int argc, const char * argv[]) {
     printf("%lld, %ld, %i, %f, %f, %c, %i, %u\n",
            longLongNumber, longNumber, intNumber, floatNumber, doubleNumber, charType, shortNumbe, unsignedIntNumber);
     
-    printf("%f\n", 3 * 3 / 4 % 7 + 4 * 3 - 1.5 + 65);
+    BPVPrintFloat(3 * 3 / 4 % 7 + 4 * 3 - 1.5 + 65);
     
     BPVPrintInt(5);
     BPVPrintChar('&');
@@ -40,6 +44,8 @@ int main(int argc, const char * argv[]) {
     
     BPVPrintInt(BPVDecrement(5));
     BPVPrintInt(BPVIncrement(10));
+    
+    BPVDevideCode();
     
     return 0;
 }
