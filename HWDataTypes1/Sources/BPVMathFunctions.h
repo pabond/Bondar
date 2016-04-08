@@ -16,5 +16,6 @@ int BPVDevide(int value1, int value2);
 int BPVAdd(int value1, int value2);
 int BPVMinus(int value1, int valu2);
 int BPVDevideWithoutReminder(int value1, int valu2);
+int BPVAddOne(int value);
 
 #endif /* BPVMathFunctions_h */

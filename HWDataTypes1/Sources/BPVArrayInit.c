@@ -9,6 +9,8 @@
 
 #include "BPVArrayInit.h"
 
+#include "BPVMathFunctions.h"
+
 #include "BPVPrintDataType.h"
 
 void BPVArrayTest() {
@@ -26,20 +28,27 @@ void BPVArrayTest() {
     BPVPrintInt(size);
 
     for(int element = 0; element < size; element++) {
-    printf("%i\n", myArray[element]);
-    printf("%i\n", myArray2[element]);
+    BPVPrintInt(myArray[element]);
+    BPVPrintInt(myArray2[element]);
     }
     
     int element = 0;
     while(element < size) {
-        printf("%i\n", myArray[element]);
-        printf("%i\n", myArray2[element]);
+        BPVPrintInt(myArray[element]);
+        BPVPrintInt(myArray2[element]);
         element += 1;
     }
     element = 0;
     do {
-        printf("%i\n", myArray[element]);
-        printf("%i\n", myArray2[element]);
+        BPVPrintInt(myArray[element]);
+        BPVPrintInt(myArray2[element]);
         element += 1;
     } while(element < size);
+    
+    int myArray3[2];
+    myArray3[0] = 3;
+    
+    for(element = 0; element < sizeof(myArray3)/sizeof(0); element++) {
+        BPVPrintInt(myArray3[element]);                                //2nd element = 0;
+    }
 }

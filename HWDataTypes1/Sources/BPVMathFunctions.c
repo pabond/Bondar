@@ -37,3 +37,7 @@ int BPVMinus(int value1, int value2) {
 int BPVDevideWithoutReminder(int value1, int value2) {
     return value1 % value2;
 }
+
+int BPVAddOne(int value) {
+    return value += 1;
+}
