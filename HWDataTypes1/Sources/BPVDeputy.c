@@ -25,7 +25,7 @@ void BPVDeputySalary(BPVEntity entity) {
     long salary = 90000000;
     long selfProperty = 90000000000000;
     
-    if(selfProperty == salary * 1000 * 1000) {
+    if (selfProperty == salary * 1000 * 1000) {
         entity = BPVPeculator;
     } else if (selfProperty == salary * 120) {
         entity = BPVRelativelyFair;

@@ -32,28 +32,29 @@ void BPVArrayTest() {
     BPVPrintInt(size);
     //BPVForLoop(myArray);
     
-    for(int element = 0; element < size; element++) {
+    for (int element = 0; element < size; element++) {
     BPVPrintInt(myArray[element]);
     BPVPrintInt(myArray2[element]);
     }
     
     int element = 0;
-    while(element < size) {
+    while (element < size) {
         BPVPrintInt(myArray[element]);
         BPVPrintInt(myArray2[element]);
         element += 1;
     }
+    
     element = 0;
     do {
         BPVPrintInt(myArray[element]);
         BPVPrintInt(myArray2[element]);
         element += 1;
-    } while(element < size);
+    } while (element < size);
     
     int myArray3[2];
     myArray3[0] = 3;
     
-    for(element = 0; element < sizeof(myArray3)/sizeof(0); element++) {
+    for (element = 0; element < sizeof(myArray3)/sizeof(0); element++) {
         BPVPrintInt(myArray3[element]);                                //2nd element = 0;
     }
 }

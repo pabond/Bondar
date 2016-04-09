@@ -1,14 +1,14 @@
 //
-//  BPVDevideCode.h
+//  BPVDivideCode.h
 //  HWDataTypes1
 //
 //  Created by Bondar Pavel on 4/8/16.
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
-#ifndef BPVDevideCode_h
-#define BPVDevideCode_h
+#ifndef BPVDivideCode_h
+#define BPVDivideCode_h
 
-void BPVDevideCode();
+void BPVDivideCode();
 
-#endif /* BPVDevideCode_h */
+#endif /* BPVDivideCode_h */

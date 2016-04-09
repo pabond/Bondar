@@ -31,7 +31,7 @@ void BPVBoolMathOperations(int value1, int value2) {
     BPVPrintBool(result);
     result ? BPVPrintString("Mom") : BPVPrintString("Dad");
     
-    if(value1 > value2) {
+    if (value1 > value2) {
         BPVPrintString("Mom");
     } else {
         BPVPrintString("Dad");

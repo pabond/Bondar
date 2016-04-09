@@ -17,6 +17,7 @@
 		2DDEB7F61CB7E3E6000719FF /* BPVDeputy.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */; };
 		2DDEB7F91CB7F629000719FF /* BPVArrayInit.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7F71CB7F629000719FF /* BPVArrayInit.c */; };
 		2DDEB7FC1CB807F7000719FF /* BPVLoopForArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7FA1CB807F7000719FF /* BPVLoopForArray.c */; };
+		2DDEB7FF1CB96C61000719FF /* BPVRunApplication.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB7FD1CB96C61000719FF /* BPVRunApplication.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,7 +44,7 @@
 		2DDEB7EB1CB796C4000719FF /* BPVMathFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVMathFunctions.c; sourceTree = "<group>"; };
 		2DDEB7EC1CB796C4000719FF /* BPVMathFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVMathFunctions.h; sourceTree = "<group>"; };
 		2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVDevideCode.c; sourceTree = "<group>"; };
-		2DDEB7EF1CB7AF7A000719FF /* BPVDevideCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVDevideCode.h; sourceTree = "<group>"; };
+		2DDEB7EF1CB7AF7A000719FF /* BPVDivideCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVDivideCode.h; sourceTree = "<group>"; };
 		2DDEB7F11CB7C9DC000719FF /* BPVBoolFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVBoolFunctions.c; sourceTree = "<group>"; };
 		2DDEB7F21CB7C9DC000719FF /* BPVBoolFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVBoolFunctions.h; sourceTree = "<group>"; };
 		2DDEB7F41CB7E3E6000719FF /* BPVDeputy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVDeputy.c; sourceTree = "<group>"; };
@@ -52,6 +53,8 @@
 		2DDEB7F81CB7F629000719FF /* BPVArrayInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVArrayInit.h; sourceTree = "<group>"; };
 		2DDEB7FA1CB807F7000719FF /* BPVLoopForArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLoopForArray.c; sourceTree = "<group>"; };
 		2DDEB7FB1CB807F7000719FF /* BPVLoopForArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLoopForArray.h; sourceTree = "<group>"; };
+		2DDEB7FD1CB96C61000719FF /* BPVRunApplication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVRunApplication.c; sourceTree = "<group>"; };
+		2DDEB7FE1CB96C61000719FF /* BPVRunApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVRunApplication.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +104,7 @@
 				2DDEB7E81CB6B113000719FF /* BPVPlusMinusOne.c */,
 				2DDEB7EC1CB796C4000719FF /* BPVMathFunctions.h */,
 				2DDEB7EB1CB796C4000719FF /* BPVMathFunctions.c */,
-				2DDEB7EF1CB7AF7A000719FF /* BPVDevideCode.h */,
+				2DDEB7EF1CB7AF7A000719FF /* BPVDivideCode.h */,
 				2DDEB7EE1CB7AF7A000719FF /* BPVDevideCode.c */,
 				2DDEB7F21CB7C9DC000719FF /* BPVBoolFunctions.h */,
 				2DDEB7F11CB7C9DC000719FF /* BPVBoolFunctions.c */,
@@ -111,6 +114,8 @@
 				2DDEB7F71CB7F629000719FF /* BPVArrayInit.c */,
 				2DDEB7FB1CB807F7000719FF /* BPVLoopForArray.h */,
 				2DDEB7FA1CB807F7000719FF /* BPVLoopForArray.c */,
+				2DDEB7FE1CB96C61000719FF /* BPVRunApplication.h */,
+				2DDEB7FD1CB96C61000719FF /* BPVRunApplication.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DDEB7EA1CB6B113000719FF /* BPVPlusMinusOne.c in Sources */,
+				2DDEB7FF1CB96C61000719FF /* BPVRunApplication.c in Sources */,
 				2DDEB7F31CB7C9DC000719FF /* BPVBoolFunctions.c in Sources */,
 				2DDEB7E41CB68ABD000719FF /* BPVRangeOfNumber.c in Sources */,
 				2DDEB7F01CB7AF7A000719FF /* BPVDevideCode.c in Sources */,

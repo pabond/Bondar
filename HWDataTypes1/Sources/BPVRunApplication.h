@@ -9,6 +9,6 @@
 #ifndef BPVRunApplication_h
 #define BPVRunApplication_h
 
-#include <stdio.h>
+void BPVLauncher();
 
 #endif /* BPVRunApplication_h */
