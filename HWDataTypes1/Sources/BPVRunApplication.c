@@ -25,16 +25,17 @@
 #include "BPVArrayInit.h"
 
 void BPVLauncher() {
-BPVPrintNumberRange(57, -250);
-BPVPrintDataTypesMathTest();
-BPVPrintFloat(3 * 3 / 4 % 7 + 4 * 3 - 1.5 + 65);
-BPVPrinDataType();
-BPVPrintInt(BPVDecrement(5));
-BPVPrintInt(BPVIncrement(10));
-BPVDivideCode();
-BPVBoolValue(true);
-BPVBoolMathOperations(5, 3);
-BPVPrintWithPuts();         // puts prints char with \n
-BPVDeputySalary();
-BPVArrayTest();
+    BPVPrintNumberRange(57, -250);
+    BPVPrintDataTypesMathTest();
+    BPVPrintFloat(3 * 3 / 4 % 7 + 4 * 3 - 1.5 + 65);
+    BPVPrinDataType();
+    BPVPrintInt(BPVDecrement(5));
+    BPVPrintInt(BPVIncrement(10));
+    BPVDivideCode();
+    BPVBoolValue(true);
+    BPVBoolMathOperations(5, 3);
+    BPVPrintWithPuts();         // puts prints char with \n
+    BPVDeputySalary();
+    BPVArrayTest();
+    BPVPrintTypeSize();
 }
