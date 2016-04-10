@@ -12,7 +12,7 @@
 
 #include "BPVRangeOfNumber.h"
 
-unsigned int BPVRangeOfNumber(int value1, int value2) {
+unsigned int BPVNumberRange(int value1, int value2) {
     int maxValue = BPVMaxValue(value1, value2);
     int minValue = BPVMinValue(value1, value2);
     

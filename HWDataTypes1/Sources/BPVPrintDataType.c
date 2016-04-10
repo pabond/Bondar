@@ -39,8 +39,8 @@ void BPVPrinDataType() {
     BPVPrintString("Hello, World");
 }
 
-void BPVPrintRangeOfNumber(int value1, int value2) {
-    printf("%u\n", BPVRangeOfNumber(value1, value2));
+void BPVPrintNumberRange(int value1, int value2) {
+    printf("%u\n", BPVNumberRange(value1, value2));
 }
 
 void BPVPrint() {
@@ -51,10 +51,24 @@ void BPVPrintWithPuts() {
     puts("I like it");
 }
 
-void BPVPrintAllTypes(long long longLongVal, long longVal, int intVal, float floatVal,
-                      double doubleVal, char charVal, short shortVal, unsigned int unsignedIntVal) {
+void BPVPrintAllTypes(long long longLongValue,
+                      long longValue,
+                      int intValue,
+                      float floatValue,
+                      double doubleValue,
+                      char charValue,
+                      short shortValue,
+                      unsigned int unsignedIntValue)
+{
     printf("All types are: long long: %lld, long: %ld, int: %i, float: %f, double: %f, char: %c, short: %i, unsigned: %u\n",
-           longLongVal, longVal, intVal, floatVal, doubleVal, charVal, shortVal, unsignedIntVal);
+           longLongValue,
+           longValue,
+           intValue,
+           floatValue,
+           doubleValue,
+           charValue,
+           shortValue,
+           unsignedIntValue);
 }
 
 void BPVPrintDataTypesMathTest() {
@@ -67,8 +81,14 @@ void BPVPrintDataTypesMathTest() {
     char charType = 'a';
     unsigned int unsignedIntNumber = 35;
     
-    BPVPrintAllTypes (longLongNumber, longNumber, intNumber, floatNumber, doubleNumber,
-                      charType, shortNumber, unsignedIntNumber);
+    BPVPrintAllTypes (longLongNumber,
+                      longNumber,
+                      intNumber,
+                      floatNumber,
+                      doubleNumber,
+                      charType,
+                      shortNumber,
+                      unsignedIntNumber);
     
     printf("%f\n", intNumber / floatNumber);
     printf("%f\n", floatNumber * intNumber);
@@ -79,22 +99,34 @@ void BPVPrintDataTypesMathTest() {
     
     
     //trash in variable without initialisation
-    long long longLongVal;
-    long longVal;
-    int intVal;
-    float floatVal;
-    short shortVal;
-    double doubleVal;
-    char charVal;
-    unsigned int unsignedIntVal;
+    long long longLongValue;
+    long longValue;
+    int intValue;
+    float floatValue;
+    short shortValue;
+    double doubleValue;
+    char charValue;
+    unsigned int unsignedIntValue;
     
-    BPVPrintAllTypes (longLongVal, longVal, intVal, floatVal, doubleVal, charVal, shortVal, unsignedIntVal);
+    BPVPrintAllTypes (longLongValue, longValue, intValue, floatValue, doubleValue, charValue, shortValue, unsignedIntValue);
     
-    intVal = 5;
-    BPVPrintIncrement(intVal);
+    intValue = 5;
+    BPVPrintIncrement(intValue);
 }
 
 void BPVPrintIncrement(int value) {
     printf("Postfix increment: %i\n", value++); //do nothing. value + 1 - works
     printf("Prefix incremnt: %i\n", --value);
+}
+
+void BPVPrintTypeSize() {
+    printf("Size of intager = %lu bytes\n", sizeof(int));
+    printf("Size of short = %lu bytes\n", sizeof(short));
+    printf("Size of unsigned int = %lu bytes\n", sizeof(unsigned int));
+    printf("Size of float = %lu bytes\n", sizeof(float));
+    printf("Size of double = %lu bytes\n", sizeof(double));
+    printf("Size of long = %lu bytes\n", sizeof(long));
+    printf("Size of long long = %lu bytes\n", sizeof(long long));
+    printf("Size of char = %lu byte\n", sizeof(char));
+    printf("Size of bool = %lu byte\n", sizeof(bool));
 }

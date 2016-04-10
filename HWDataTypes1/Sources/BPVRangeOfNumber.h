@@ -9,6 +9,6 @@
 #ifndef BPVRangeOfNumber_h
 #define BPVRangeOfNumber_h
 
-unsigned int BPVRangeOfNumber(int value1, int value2);
+unsigned int BPVNumberRange(int value1, int value2);
 
 #endif /* BPVRangeOfNumber_h */

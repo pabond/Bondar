@@ -22,7 +22,7 @@ int BPVMultiply(int value1, int value2) {
     return value1 * value2;
 }
 
-int BPVDevide(int value1, int value2) {
+int BPVDivide(int value1, int value2) {
     return value1 / value2;
 }
 
@@ -34,7 +34,7 @@ int BPVMinus(int value1, int value2) {
     return value1 - value2;
 }
 
-int BPVDevideWithoutReminder(int value1, int value2) {
+int BPVDivideWithoutReminder(int value1, int value2) {
     return value1 % value2;
 }
 

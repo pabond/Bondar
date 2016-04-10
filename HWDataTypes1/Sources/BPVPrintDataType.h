@@ -19,9 +19,17 @@ void BPVPrintString(char string[]);
 void BPVPrintBool(bool value);
 void BPVPrintWithPuts();
 void BPVPrintDataTypesMathTest();
-void BPVPrintAllTypes(long long longLongVal, long longVal, int intVal, float floatVal,
-                      double doubleVal, char charVal, short shortVal, unsigned int unsignedIntVal);
+void BPVPrintAllTypes(long long longLongValue,
+                      long longValue,
+                      int intValue,
+                      float floatValue,
+                      double doubleValue,
+                      char charValue,
+                      short shortValue,
+                      unsigned int unsignedIntValue);
+
 void BPVPrintIncrement(int value);
-void BPVPrintRangeOfNumber(int value1, int value2);
+void BPVPrintNumberRange(int value1, int value2);
+void BPVPrintTypeSize();
 
 #endif /* BPVPrintDataType_h */
