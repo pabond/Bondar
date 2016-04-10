@@ -7,16 +7,11 @@
 //
 #include <stdio.h>
 
-#include <string.h>
-
 #include "BPVArrayInit.h"
 
 #include "BPVMathFunctions.h"
 
 #include "BPVPrintDataType.h"
-
-#include "BPVLoopForArray.h"
-
 
 void BPVArrayTest() {
     int myArray[] = {1, 2, 2, 3, 3, 5, 7, 9};
@@ -30,9 +25,10 @@ void BPVArrayTest() {
     myArray2[6] = 33;
     myArray2[7] = 22;
     
-    int size = sizeof(myArray)/sizeof(0);
+    int size = sizeof(myArray)/sizeof(*myArray);
+    int lastElementNumber = size - 1;
+    
     BPVPrintInt(size);
-    //BPVForLoop(myArray[size], size);
     
     for (int element = 0; element < size; element++) {
     BPVPrintInt(myArray[element]);
@@ -61,17 +57,4 @@ void BPVArrayTest() {
     }
 }
 
-void BPVStrings() {
-    const char string1[] = {'H', 'e', 'l', 'l', 'o', '!'};
-    const char string2[] = "My name is Paul";
-    
-    for (int symbol = 0; symbol < strlen(string1); symbol++) {
-        printf("%c", string1[symbol]);
-    }
-    puts("");
-    
-    for (int symbol = 0; symbol < strlen(string2); symbol++) {
-        printf("%c", string2[symbol]);
-    }
-    puts("");
-}
+

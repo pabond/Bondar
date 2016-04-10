@@ -24,6 +24,12 @@
 
 #include "BPVArrayInit.h"
 
+#include "BPVStringTest.h"
+
+#include "BPVLoopsTest.h"
+
+#include "BPVConditionalStatementsTest.h"
+
 void BPVLauncher() {
     BPVPrintNumberRange(57, -250);
     BPVPrintDataTypesMathTest();
@@ -39,4 +45,6 @@ void BPVLauncher() {
     BPVArrayTest();
     BPVPrintTypeSize();
     BPVStrings();
+    BPVPrintNumberRangeTimes(5, 500, 520);
+    BPVConditionFunction(120);
 }
