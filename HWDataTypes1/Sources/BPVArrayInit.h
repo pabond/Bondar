@@ -10,5 +10,6 @@
 #define BPVArrayInit_h
 
 void BPVArrayTest();
+void BPVStrings();
 
 #endif /* BPVArrayInit_h */

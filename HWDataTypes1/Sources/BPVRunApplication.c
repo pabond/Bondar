@@ -38,4 +38,5 @@ void BPVLauncher() {
     BPVDeputySalary();
     BPVArrayTest();
     BPVPrintTypeSize();
+    BPVStrings();
 }

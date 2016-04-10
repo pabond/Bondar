@@ -9,6 +9,6 @@
 #ifndef BPVLoopForArray_h
 #define BPVLoopForArray_h
 
-//void BPVForLoop(array);
+//void BPVForLoop(int array, int size);
 
 #endif /* BPVLoopForArray_h */

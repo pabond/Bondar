@@ -6,13 +6,16 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
+#include <stdio.h>
+
 #include "BPVLoopForArray.h"
 
 #include "BPVPrintDataType.h"
 /*
-void BPVForLoop(array) {
-    for(int element = 0; element < sizeof(array)/sizeof(0); element++) {
-        BPVPrintInt(array[element]);
+void BPVForLoop(int array, int size) {
+    for(int element = 0; element < size; element++) {
+        printf("Array element: %i\n", array[element]);
     }
 }
-*/
+
+ */
