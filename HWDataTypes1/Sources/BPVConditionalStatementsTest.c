@@ -27,11 +27,11 @@ void BPVPrintPapa() {
 void BPVConditionFunction(int value) {
     int numberToPrint = -1;
     
-    if (value % 15 == 0) {
+    if (0 == value % 15) {
         numberToPrint = BPVCaseMamaPapa;
-    } else if (value % 3  == 0) {
+    } else if (0 == value % 3) {
         numberToPrint = BPVCaseMama;
-    } else if (value % 5 == 0) {
+    } else if (0 == value % 5) {
         numberToPrint = BPVCasePapa;
     }
     
