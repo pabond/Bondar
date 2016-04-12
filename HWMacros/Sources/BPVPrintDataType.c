@@ -13,9 +13,9 @@
 #include "BPVPrintDataType.h"
 
 #define BPVPrintTypeSize(type, value) \
-do { \
-printf("Size of " #type " = %lu bytes\n", sizeof(value));\
-} while (0);
+    do { \
+        printf("Size of " #type " = %lu bytes\n", sizeof(value));\
+    } while (0);
 
 void BPVPrintDataType() {
     int intValue = 0;

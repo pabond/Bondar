@@ -10,6 +10,7 @@
 		2DDEB8131CBBCCF5000719FF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB8121CBBCCF5000719FF /* main.c */; };
 		2DDEB81C1CBBCDED000719FF /* BPVRunApplication.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB81A1CBBCDED000719FF /* BPVRunApplication.c */; };
 		2DDEB8231CBD0882000719FF /* BPVPrintDataType.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB8211CBD0882000719FF /* BPVPrintDataType.c */; };
+		2DDEB8261CBD1A59000719FF /* BPVMacrosTask.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB8241CBD1A59000719FF /* BPVMacrosTask.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,9 +30,10 @@
 		2DDEB8121CBBCCF5000719FF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		2DDEB81A1CBBCDED000719FF /* BPVRunApplication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVRunApplication.c; sourceTree = "<group>"; };
 		2DDEB81B1CBBCDED000719FF /* BPVRunApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVRunApplication.h; sourceTree = "<group>"; };
-		2DDEB81D1CBBD8BB000719FF /* BPVMacrosTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVMacrosTask.h; sourceTree = "<group>"; };
 		2DDEB8211CBD0882000719FF /* BPVPrintDataType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVPrintDataType.c; sourceTree = "<group>"; };
 		2DDEB8221CBD0882000719FF /* BPVPrintDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPrintDataType.h; sourceTree = "<group>"; };
+		2DDEB8241CBD1A59000719FF /* BPVMacrosTask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVMacrosTask.c; sourceTree = "<group>"; };
+		2DDEB8251CBD1A59000719FF /* BPVMacrosTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVMacrosTask.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,11 +75,12 @@
 		2DDEB8191CBBCD46000719FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2DDEB81D1CBBD8BB000719FF /* BPVMacrosTask.h */,
-				2DDEB81B1CBBCDED000719FF /* BPVRunApplication.h */,
-				2DDEB81A1CBBCDED000719FF /* BPVRunApplication.c */,
+				2DDEB8251CBD1A59000719FF /* BPVMacrosTask.h */,
+				2DDEB8241CBD1A59000719FF /* BPVMacrosTask.c */,
 				2DDEB8221CBD0882000719FF /* BPVPrintDataType.h */,
 				2DDEB8211CBD0882000719FF /* BPVPrintDataType.c */,
+				2DDEB81B1CBBCDED000719FF /* BPVRunApplication.h */,
+				2DDEB81A1CBBCDED000719FF /* BPVRunApplication.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DDEB8261CBD1A59000719FF /* BPVMacrosTask.c in Sources */,
 				2DDEB8131CBBCCF5000719FF /* main.c in Sources */,
 				2DDEB8231CBD0882000719FF /* BPVPrintDataType.c in Sources */,
 				2DDEB81C1CBBCDED000719FF /* BPVRunApplication.c in Sources */,
@@ -231,6 +235,7 @@
 		2DDEB8171CBBCCF5000719FF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -238,6 +243,7 @@
 		2DDEB8181CBBCCF5000719FF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

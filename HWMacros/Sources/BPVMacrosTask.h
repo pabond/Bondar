@@ -2,26 +2,22 @@
 //  BPVMacrosTask.h
 //  HWMacros
 //
-//  Created by Bondar Pavel on 4/11/16.
+//  Created by Bondar Pavel on 4/12/16.
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
 #ifndef BPVMacrosTask_h
 #define BPVMacrosTask_h
 
-typedef enum {
-    BPVInt,
-    BPVFloat,
-    BPVChar,
-    BPVShort,
-    BPVUnsigned,
-    BPVDouble,
-    BPVLong
-} BPVPrimitiveType;
-
-//#define BPVPrintTypeMacros (type, outputSpecifier) \
-    void output_##type(type value) { \
-    printf(#type " value = " #outputSpecifier "\n", value); \
+#define BPVPrintTypeValue(type, outputSpecifier) \
+    void output_##type (type, value) { \
+        printf(#type " value = " #outputSpecifier "\n", value)\
 }
+
+//#define BPVPrintTypeWithDefine(type, velue) { \
+            BPVPrintTypeValue(type, value) \
+    }
+
+//BPVPrintTypeValue(int, %d)
 
 #endif /* BPVMacrosTask_h */
