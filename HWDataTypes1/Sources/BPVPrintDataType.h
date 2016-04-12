@@ -30,6 +30,5 @@ void BPVPrintAllTypes(long long longLongValue,
 
 void BPVPrintIncrement(int value);
 void BPVPrintNumberRange(int value1, int value2);
-void BPVPrintTypeSize();
 
 #endif /* BPVPrintDataType_h */

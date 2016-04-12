@@ -20,14 +20,19 @@ void BPVBoolValue(bool value) {
 
 void BPVBoolMathOperations(int value1, int value2) {
     bool result = value1 < value2;
+    
     BPVPrintBool(result);
     result = value1 > value2;
+    
     BPVPrintBool(result);
     result = value1 == value2;
+    
     BPVPrintBool(result);
     result = value1 -2 <= value2;
+    
     BPVPrintBool(result);
     result = value1 -2 >= value2;
+    
     BPVPrintBool(result);
     result ? BPVPrintString("Mom") : BPVPrintString("Dad");
     
