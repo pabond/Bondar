@@ -15,6 +15,7 @@
 #include "BPVMacrosTask.h"
 
 
-void BPVRunAppliction() {
+void BPVRunApplication() {
     BPVPrintDataType();
+//    BPVPrintInfo();
 }

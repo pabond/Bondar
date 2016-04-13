@@ -9,15 +9,17 @@
 #ifndef BPVMacrosTask_h
 #define BPVMacrosTask_h
 
+
 #define BPVPrintTypeValue(type, outputSpecifier) \
-    void output_##type (type, value) { \
-        printf(#type " value = " #outputSpecifier "\n", value)\
+    void output_##type(type value) { \
+        printf(#type " value = " #outputSpecifier "\n", value); \
 }
 
-//#define BPVPrintTypeWithDefine(type, velue) { \
-            BPVPrintTypeValue(type, value) \
-    }
+#define BPVPrintTypeWithDefine(type, velue) { \
+            BPVPrintTypeValue(type, value) 
 
-//BPVPrintTypeValue(int, %d)
+
+//    }
+
 
 #endif /* BPVMacrosTask_h */

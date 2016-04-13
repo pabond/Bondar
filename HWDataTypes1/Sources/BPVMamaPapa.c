@@ -10,11 +10,6 @@
 
 #include <stdio.h>
 
-typedef enum {
-    BPVCaseMama = 3,
-    BPVCasePapa = 5
-} BPVNumberToPrint;
-
 void BPVPrintMama() {
     printf("Mama");
 }
@@ -23,29 +18,27 @@ void BPVPrintPapa() {
     printf("Papa");
 }
 
-void BPVConditionFunction(int value) {
-    int numberToPrint = 0;
-    
-    if (0 == value % (BPVCasePapa * BPVCaseMama)) {
-        numberToPrint = 1;
-    } else if (0 == value % BPVCaseMama) {
-        numberToPrint = BPVCaseMama;
-    } else if (0 == value % BPVCasePapa) {
-        numberToPrint = BPVCasePapa;
-    }
-    
-    if (1 == numberToPrint
-        || numberToPrint == BPVCaseMama
-            || numberToPrint == BPVCasePapa)
-    {
-        if (numberToPrint == BPVCaseMama) {
+BPVTypeToPrint BPVPrintType(int value) {
+    if (0 == value % 3 || 0 == value % 5) {
+        int printType = BPVCaseDoNothing;
+        
+        if (0 == value % 3) {
+            printType = BPVCaseMama;
             BPVPrintMama();
-        } else if (numberToPrint == BPVCasePapa) {
-            BPVPrintPapa();
-        } else {
-            BPVPrintMama();
+        }
+        
+        if (0 == value % 5) {
+            printType += BPVCasePapa;
             BPVPrintPapa();
         }
+        
         printf("\n");
+        printf("Type to print is %d\n", printType);
+        return (BPVTypeToPrint)printType;
     }
+    
+    return BPVCaseDoNothing;
 }
+
+
+

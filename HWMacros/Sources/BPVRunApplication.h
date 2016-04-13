@@ -9,6 +9,6 @@
 #ifndef BPVRunApplication_h
 #define BPVRunApplication_h
 
-void BPVRunAppliction();
+void BPVRunApplication();
 
 #endif /* BPVRunApplication_h */

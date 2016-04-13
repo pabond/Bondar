@@ -7,9 +7,10 @@
 //
 
 #include "BPVRunApplication.h"
+#include "BPVMacrosTask.h"
 
 int main(int argc, const char * argv[]) {
-    BPVRunAppliction();
+    BPVRunApplication();
     
     return 0;
 }

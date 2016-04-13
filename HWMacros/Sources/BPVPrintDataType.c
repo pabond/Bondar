@@ -12,12 +12,14 @@
 
 #include "BPVPrintDataType.h"
 
-#define BPVPrintTypeSize(type, value) \
+#define BPVPrintTypeSize(type) \
     do { \
+        type value; \
         printf("Size of " #type " = %lu bytes\n", sizeof(value));\
-    } while (0);
+    } while (0)
 
 void BPVPrintDataType() {
+/*
     int intValue = 0;
     short ShortValue = 0;
     double doubleValue = 0;
@@ -28,15 +30,15 @@ void BPVPrintDataType() {
     const char charValue = 'c';
     bool boolValue = true;
     unsigned int unsignedIntValue = 0;
-    
-    BPVPrintTypeSize(int, intValue)
-    BPVPrintTypeSize(short, ShortValue)
-    BPVPrintTypeSize(double, doubleValue)
-    BPVPrintTypeSize(float, floatValue)
-    BPVPrintTypeSize(long, longValue)
-    BPVPrintTypeSize(long long, longLongValue)
-    BPVPrintTypeSize(long double, longDoubleValue)
-    BPVPrintTypeSize(const char, charValue)
-    BPVPrintTypeSize(bool, boolValue)
-    BPVPrintTypeSize(unsigned int, unsignedIntValue)
+ */
+    BPVPrintTypeSize(int);
+    BPVPrintTypeSize(short);
+    BPVPrintTypeSize(double);
+    BPVPrintTypeSize(float);
+    BPVPrintTypeSize(long);
+    BPVPrintTypeSize(long long);
+    BPVPrintTypeSize(long double);
+    BPVPrintTypeSize(const char);
+    BPVPrintTypeSize(bool);
+    BPVPrintTypeSize(unsigned int);
 }

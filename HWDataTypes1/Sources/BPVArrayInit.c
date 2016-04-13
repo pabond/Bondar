@@ -27,8 +27,8 @@ void BPVArrayTest() {
     myArray2[6] = 33;
     myArray2[7] = 22;
     
-    int size = sizeof(myArray)/sizeof(*myArray);
-    int size2 = sizeof(myArray2)/sizeof(*myArray2);
+    int size = sizeof(myArray) / sizeof(*myArray);
+    int size2 = sizeof(myArray2) / sizeof(*myArray2);
 //    int lastElementNumber = size - 1;
     
     BPVPrintInt(size);
@@ -53,7 +53,7 @@ void BPVArrayTest() {
     int myArray3[2];
     myArray3[0] = 3;
     
-    for (element = 0; element < sizeof(myArray3)/sizeof(*myArray3); element++) {
+    for (element = 0; element < sizeof(myArray3) / sizeof(*myArray3); element++) {
         BPVPrintInt(myArray3[element]);                                //2nd element = 0;
     }
 }

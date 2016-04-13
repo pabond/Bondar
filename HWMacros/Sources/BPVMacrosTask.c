@@ -10,3 +10,7 @@
 
 #include "BPVMacrosTask.h"
 
+void BPVPrintInfo() {
+//    BPVPrintTypeValue(int, 50, %lu)
+}
+

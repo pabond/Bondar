@@ -9,6 +9,12 @@
 #ifndef BPVMamaPapa_h
 #define BPVMamaPapa_h
 
-void BPVConditionFunction(int value);
+typedef enum {
+    BPVCaseDoNothing,
+    BPVCaseMama,
+    BPVCasePapa
+} BPVTypeToPrint;
+
+BPVTypeToPrint BPVPrintType(int value);
 
 #endif /* BPVMamaPapa_h */

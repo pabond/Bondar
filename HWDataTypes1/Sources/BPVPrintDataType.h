@@ -19,6 +19,7 @@ void BPVPrintString(char string[]);
 void BPVPrintBool(bool value);
 void BPVPrintWithPuts();
 void BPVPrintDataTypesMathTest();
+
 void BPVPrintAllTypes(long long longLongValue,
                       long longValue,
                       int intValue,
