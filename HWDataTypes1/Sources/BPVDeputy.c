@@ -39,15 +39,19 @@ void BPVDeputySalary(BPVDeputyEntity entity) {
         case BPVDetupyPeculator:
             puts("This deputy is a peculator");
             break;
+            
         case BPVDeputyRelativelyFair:
             puts("This deputy is relatively fair");
             break;
+            
         case BPVDeputyAngel:
             puts("This deputy is an angel");
             break;
+            
         case BPVDeputyDead:
         default:
             puts("This deputy is dead");
             break;
+
     }
 }

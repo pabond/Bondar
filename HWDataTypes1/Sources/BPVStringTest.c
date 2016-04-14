@@ -34,4 +34,7 @@ void BPVStrings() {
     
     unsigned long charArraySize = strlen(string1) + 1;
     printf("String size %lu\n", charArraySize);
+    
+    const char noneNullTerminatedString [] = {'n', 'o', 'n', 'o', 'N', 'u', 'l', 'l'};
+    
 }

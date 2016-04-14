@@ -33,7 +33,7 @@ BPVTypeToPrint BPVPrintType(int value) {
         }
         
         printf("\n");
-        printf("Type to print is %d\n", printType);
+        
         return (BPVTypeToPrint)printType;
     }
     

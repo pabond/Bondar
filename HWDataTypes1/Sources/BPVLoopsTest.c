@@ -87,13 +87,9 @@ void BPVPrintStringLoop(const char string[], unsigned long length) {
 }
 
 void BPVPrintNullTerminatedString(const char string[], int size, unsigned long length) {
-    for (int index = 0; index < size; index++) {
-        if (string[index] == '\0') {
             printf("%s - is null-terminated string. It's length is %lu, and size is %d\n", string, length, size);
-            break;
-        }
-    }
 }
+
 
 void BPVPrintIntArray(int array[], int size) {
     for (int index = 0; index < size; index++) {
