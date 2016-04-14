@@ -11,12 +11,12 @@
 
 
 #define BPVPrintTypeValue(type, outputSpecifier) \
-    void output_##type(type value) { \
+    void BPVOutput_##type(type value) { \
         printf(#type " value = " #outputSpecifier "\n", value); \
 }
 
-#define BPVPrintTypeWithDefine(type, velue) { \
-            BPVPrintTypeValue(type, value) 
+//#define BPVPrintTypeWithDefine(type, velue) { \
+//            BPVPrintTypeValue(type, value) 
 
 
 //    }
