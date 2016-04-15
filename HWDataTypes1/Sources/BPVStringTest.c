@@ -18,11 +18,8 @@ void BPVStrings() {
     const char string1[] = "Hello!";
     const char string2[] = "My name is Paul\0";
     
-    BPVPrintStringLoop(string1, strlen(string1));
-    BPVPrintStringLoop(string2, strlen(string2));
-    
-    BPVPrintNullTerminatedString(string1, sizeof(string1), strlen(string1));
-    BPVPrintNullTerminatedString(string2, sizeof(string2), strlen(string2)); //All strrings are null-terminated
+    BPVPrintNonNullTerminatedString(string1, 0);
+    BPVPrintNonNullTerminatedString(string2, 0);
 
     const char string3[7] = "I'm a student at IDAP college.";   //Prints only 7 symbols and \n not printing in this case
     const char string4[15] = "We learn C"; // Why prints twice
@@ -35,7 +32,7 @@ void BPVStrings() {
     unsigned long charArraySize = strlen(string1) + 1;
     printf("String size %lu\n", charArraySize);
     
-    const char noNullTerminatedString[] = {'n', 'o', 'n', 'o', 'N', 'u', 'l', 'l'};
-    BPVPrintNullTerminatedString(noNullTerminatedString, sizeof(noNullTerminatedString), strlen(noNullTerminatedString));
+    const char noNullTerminatedString[] = {'n', 'o', 'n', 'N', 'u', 'l', 'l'};
+    BPVPrintNonNullTerminatedString(noNullTerminatedString, strlen(noNullTerminatedString));
     
 }

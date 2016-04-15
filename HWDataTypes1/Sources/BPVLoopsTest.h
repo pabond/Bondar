@@ -11,8 +11,7 @@
 
 //18
 void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumber);
-void BPVPrintStringLoop(const char[], unsigned long length);
-void BPVPrintNullTerminatedString(const char string[], int size, unsigned long length);
+void BPVPrintNonNullTerminatedString(const char[], unsigned long length);
 void BPVPrintIntArray(int array[], int size);
 
 #endif /* BPVLoopsTest_h */

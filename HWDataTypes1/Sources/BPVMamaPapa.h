@@ -10,11 +10,12 @@
 #define BPVMamaPapa_h
 
 typedef enum {
-    BPVCaseDoNothing,
-    BPVCaseMama,
-    BPVCasePapa
-} BPVTypeToPrint;
+    BPVTypeDoNothing,
+    BPVTypeMama,
+    BPVTypePapa,
+    BPVTypeMamaPapa
+} BPVPrintType;
 
-BPVTypeToPrint BPVPrintType(int value);
+BPVPrintType BPVPrintTextType(int value);
 
 #endif /* BPVMamaPapa_h */

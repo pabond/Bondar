@@ -19,18 +19,6 @@
     } while (0)
 
 void BPVPrintDataType() {
-/*
-    int intValue = 0;
-    short ShortValue = 0;
-    double doubleValue = 0;
-    float floatValue = 0.f;
-    long longValue = 0;
-    long long longLongValue = 0;
-    long double longDoubleValue = 0;
-    const char charValue = 'c';
-    bool boolValue = true;
-    unsigned int unsignedIntValue = 0;
- */
     BPVPrintTypeSize(int);
     BPVPrintTypeSize(short);
     BPVPrintTypeSize(double);

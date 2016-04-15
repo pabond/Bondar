@@ -18,27 +18,24 @@ void BPVPrintPapa() {
     printf("Papa");
 }
 
-BPVTypeToPrint BPVPrintType(int value) {
-    if (0 == value % 3 || 0 == value % 5) {
-        int printType = BPVCaseDoNothing;
+BPVPrintType BPVPrintTextType(int value) {
+    BPVPrintType printType = BPVTypeDoNothing;
         
-        if (0 == value % 3) {
-            printType = BPVCaseMama;
-            BPVPrintMama();
-        }
+    if (0 == value % 3) {
+        printType += BPVTypeMama;
+        BPVPrintMama();
+    }
         
-        if (0 == value % 5) {
-            printType += BPVCasePapa;
-            BPVPrintPapa();
-        }
-        
-        printf("\n");
-        
-        return (BPVTypeToPrint)printType;
+    if (0 == value % 5) {
+        printType += BPVTypePapa;
+        BPVPrintPapa();
     }
     
-    return BPVCaseDoNothing;
+    if (BPVTypeDoNothing != printType) {
+        printf("\n");
+    }
+    
+    return (BPVPrintType)printType;
 }
-
 
 

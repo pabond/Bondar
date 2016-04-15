@@ -41,5 +41,5 @@ void BPVLauncher() {
     BPVArrayTest();
     BPVStrings();
     BPVPrintNumberRangeTimes(5, 500, 520);
-    BPVPrintType(330);
+    BPVPrintTextType(330);
 }
