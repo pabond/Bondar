@@ -21,9 +21,11 @@ typedef enum {
     BPVDeputyDead,
 } BPVDeputyType;
 
+static long salary = 100000000;
+static long selfProperty = 100000000000000;
+
 static
 void BPVPrintDeputyType(deputyType) {
-    
     switch (deputyType) {
         case BPVDetupyPeculator:
             puts("This deputy is a peculator");
@@ -41,13 +43,11 @@ void BPVPrintDeputyType(deputyType) {
         default:
             puts("This deputy is dead");
             break;
-            
     }
 }
 
-void BPVDeputySalary(BPVDeputyType deputyType) {
-    long salary = 100000000;
-    long selfProperty = 100000000000000;
+void BPVDeputySalary() {
+    BPVDeputyType deputyType;
     
     if (selfProperty >= salary * 1000 * 1000) {
         deputyType = BPVDetupyPeculator;

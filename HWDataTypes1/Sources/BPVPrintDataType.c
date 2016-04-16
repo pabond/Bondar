@@ -25,7 +25,7 @@ void BPVPrintChar(char character) {
 }
 
 void BPVPrintString(char string[]) {
-    printf("Sting: %s\n", string);
+    printf("String: %s\n", string);
 }
 
 void BPVPrintBool(bool value) {

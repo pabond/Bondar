@@ -18,8 +18,8 @@ void BPVStrings() {
     const char string1[] = "Hello!";
     const char string2[] = "My name is Paul\0";
     
-    BPVPrintNonNullTerminatedString(string1, 0);
-    BPVPrintNonNullTerminatedString(string2, 0);
+    BPVPrintNullTerminatedString(string1);
+    BPVPrintNullTerminatedString(string2);
 
     const char string3[7] = "I'm a student at IDAP college.";   //Prints only 7 symbols and \n not printing in this case
     const char string4[15] = "We learn C"; // Why prints twice

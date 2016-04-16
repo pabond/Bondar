@@ -22,7 +22,6 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
     for (int iteration = 1; iteration < biggerNumber - smallerNumber + 1; iteration++) {
         int number = smallerNumber + iteration - 1;
         if (50 == number) {
-            
         return;
         }
 
@@ -79,20 +78,16 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
     } while (iteration < biggerNumber - smallerNumber + 1);
 }
 
-static
-void BPVPrintNullTerminatedString(const char string[]) {
-        printf("%s", string);
+void BPVPrintNonNullTerminatedString(const char string[], unsigned long length) {
+    for (unsigned long index = 0; index < length; index++) {
+        printf("%c", string[index]);
+    }
+    
+    printf("\n");
 }
 
-void BPVPrintNonNullTerminatedString(const char string[], unsigned long length) {
-    if (length) {
-        for (unsigned long index = 0; index < length; index++) {
-            printf("%c", string[index]);
-        }
-    } else {
-        BPVPrintNullTerminatedString(string);
-    }
-    printf("\n");
+void BPVPrintNullTerminatedString(const char string[]) {
+    BPVPrintNonNullTerminatedString(string, strlen(string));
 }
 
 void BPVPrintIntArray(int array[], int size) {
