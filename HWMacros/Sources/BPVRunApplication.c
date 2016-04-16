@@ -17,5 +17,5 @@
 
 void BPVRunApplication() {
     BPVPrintDataType();
-//    BPVPrintInfo();
+    BPVPrintTypeUsingMacros();
 }
