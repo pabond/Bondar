@@ -14,8 +14,11 @@
 
 #include "BPVMacrosTask.h"
 
+#include "BPVStructureTask.h"
+
 
 void BPVRunApplication() {
     BPVPrintDataType();
     BPVPrintTypeUsingMacros();
+    BPVPrintOffsetofValue();
 }

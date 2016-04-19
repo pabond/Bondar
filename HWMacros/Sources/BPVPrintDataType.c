@@ -29,4 +29,5 @@ void BPVPrintDataType() {
     BPVPrintTypeSize(const char);
     BPVPrintTypeSize(bool);
     BPVPrintTypeSize(unsigned int);
+    BPVPrintTypeSize(uint8_t);
 }

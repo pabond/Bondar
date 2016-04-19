@@ -12,7 +12,6 @@
 		2DDEB8231CBD0882000719FF /* BPVPrintDataType.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB8211CBD0882000719FF /* BPVPrintDataType.c */; };
 		2DDEB8261CBD1A59000719FF /* BPVMacrosTask.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB8241CBD1A59000719FF /* BPVMacrosTask.c */; };
 		2DDEB8291CC4C28F000719FF /* BPVStructureTask.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB8271CC4C28F000719FF /* BPVStructureTask.c */; };
-		2DDEB82C1CC65932000719FF /* BPVPrintingFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DDEB82A1CC65932000719FF /* BPVPrintingFunctions.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,8 +37,6 @@
 		2DDEB8251CBD1A59000719FF /* BPVMacrosTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVMacrosTask.h; sourceTree = "<group>"; };
 		2DDEB8271CC4C28F000719FF /* BPVStructureTask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVStructureTask.c; sourceTree = "<group>"; };
 		2DDEB8281CC4C28F000719FF /* BPVStructureTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVStructureTask.h; sourceTree = "<group>"; };
-		2DDEB82A1CC65932000719FF /* BPVPrintingFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVPrintingFunctions.c; sourceTree = "<group>"; };
-		2DDEB82B1CC65932000719FF /* BPVPrintingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVPrintingFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +78,6 @@
 		2DDEB8191CBBCD46000719FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2DDEB82B1CC65932000719FF /* BPVPrintingFunctions.h */,
-				2DDEB82A1CC65932000719FF /* BPVPrintingFunctions.c */,
 				2DDEB8281CC4C28F000719FF /* BPVStructureTask.h */,
 				2DDEB8271CC4C28F000719FF /* BPVStructureTask.c */,
 				2DDEB8251CBD1A59000719FF /* BPVMacrosTask.h */,
@@ -152,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DDEB8261CBD1A59000719FF /* BPVMacrosTask.c in Sources */,
-				2DDEB82C1CC65932000719FF /* BPVPrintingFunctions.c in Sources */,
 				2DDEB8131CBBCCF5000719FF /* main.c in Sources */,
 				2DDEB8291CC4C28F000719FF /* BPVStructureTask.c in Sources */,
 				2DDEB8231CBD0882000719FF /* BPVPrintDataType.c in Sources */,
