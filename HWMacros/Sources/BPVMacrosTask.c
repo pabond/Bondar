@@ -17,14 +17,14 @@ BPVPrintTypeValue(long, ld)
 BPVPrintTypeValue(double, f)
 BPVPrintTypeValue(char, c)
 
-int intValue = 5;
-float floatValue = 33.3f;
-short shortValue = 3;
-long longValue = 55;
-double doubleValue = 55.33;
-const char charValue = '@';
-
 void BPVPrintTypeUsingMacros() {
+    int intValue = 5;
+    float floatValue = 33.3f;
+    short shortValue = 3;
+    long longValue = 55;
+    double doubleValue = 55.33;
+    const char charValue = '@';
+    
     BPVOutput_int(intValue);
     BPVOutput_float(floatValue);
     BPVOutput_short(shortValue);

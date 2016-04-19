@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 
+#include <string.h>
+
 #include "BPVLoopsTest.h"
 
 #include "BPVPrintDataType.h"
@@ -73,6 +75,7 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
                 printIteration++;
                 printf("%i_", number);
              } while (printIteration < printTimes);
+            
             printf("\n");
         }
     } while (iteration < biggerNumber - smallerNumber + 1);
@@ -94,5 +97,6 @@ void BPVPrintIntArray(int array[], int size) {
     for (int index = 0; index < size; index++) {
         BPVPrintInt(array[index]);
     }
+    
     printf("\n");
 }

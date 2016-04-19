@@ -37,7 +37,7 @@ void BPVLauncher() {
     BPVBoolValue(true);
     BPVBoolMathOperations(5, 3);
     BPVPrintWithPuts();         // puts prints char with \n
-    BPVDeputySalary();
+    BPVDeputySalary(100000000, 100000000000000);
     BPVArrayTest();
     BPVStrings();
     BPVPrintNumberRangeTimes(5, 500, 520);

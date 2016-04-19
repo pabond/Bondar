@@ -19,7 +19,7 @@ Lecture 2
 #define BPVPrintTypeValue(type, outputSpecifier) \
     void BPVOutput_##type(type value) { \
         printf(#type " value = %" #outputSpecifier "\n", value); \
-}
+    }
 
 #define BPVPrintTypeWithMacros(type, value) \
     BPVOutput_##type(value)

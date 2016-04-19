@@ -11,6 +11,8 @@
 
 #include <stdbool.h>
 
+#include <stdio.h>
+
 #include <stddef.h>
 
 typedef struct {
@@ -32,6 +34,8 @@ typedef struct {
 #pragma mark -
 #pragma mark Functions for structures
 
-
+void BPVPrintOffcetofValue() {
+    printf("", );
+}
 
 #endif /* BPVStructureTask_h */
