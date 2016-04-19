@@ -21,4 +21,5 @@ void BPVRunApplication() {
     BPVPrintDataType();
     BPVPrintTypeUsingMacros();
     BPVPrintOffsetofValue();
+    BPVBitOutputFunctions();
 }

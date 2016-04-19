@@ -12,9 +12,16 @@
 
 void BPVPrintBits(uint8_t value) {
     const uint8_t bitsInByte = 8;
-    printf("|");
+    printf("[");
     
     for (uint8_t iterator; iterator < bitsInByte; iterator++) {
-        printf("");
+        size_t offsetBit = value >> (bitsInByte - iterator - 1);
+        printf(" %lu", offsetBit & 1);
     }
+    printf("]\n");
 }
+
+void BPVBitOutputFunctions() {
+    BPVPrintBits(255);
+}
+

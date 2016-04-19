@@ -10,6 +10,7 @@
 #define BPVBitOutputFunctions_h
 
 void BPVPrintBits(uint8_t value);
+void BPVBitOutputFunctions();
 
 
 #endif /* BPVBitOutputFunctions_h */
