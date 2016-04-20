@@ -11,7 +11,13 @@
 #include "BPVBitOutputFunctions.h"
 
 #pragma mark -
-#pragma mark
+#pragma mark Privat method declaration
+
+BPVEndianType BPVEdiannes();
+
+#pragma mark -
+#pragma mark Public method implementation
+
 
 void BPVPrintBits(uint8_t value) {
     const uint8_t bitsInByte = 8;
@@ -22,13 +28,22 @@ void BPVPrintBits(uint8_t value) {
         printf(" %lu", offsetBit & 1);
     }
     printf("]\n");
+    
 }
 
-void BPVPrintByteBits() {
-
+void BPVPrintByteBits(void *address, size_t size) {
+    uint8_t *value = (unsigned char *)address;
+    
 }
 
 void BPVBitOutputFunctions() {
-    BPVPrintBits(255);
+    BPVPrintBits(7);
 }
 
+#pragma mark -
+#pragma mark Privat method implementation
+
+BPVEndianType BPVEdiannes() {
+    uint16_t chackNuber = 7;
+    return (((char *)&chackNuber)[0]) ? BPVBigEndianType : BPVLittleEndianType;
+}

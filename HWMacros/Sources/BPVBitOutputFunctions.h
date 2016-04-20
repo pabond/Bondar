@@ -9,6 +9,11 @@
 #ifndef BPVBitOutputFunctions_h
 #define BPVBitOutputFunctions_h
 
+typedef enum {
+    BPVBigEndianType,
+    BPVLittleEndianType
+} BPVEndianType;
+
 void BPVPrintBits(uint8_t value);
 void BPVBitOutputFunctions();
 
