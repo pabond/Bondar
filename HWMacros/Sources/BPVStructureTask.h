@@ -38,21 +38,23 @@ void BPVPrintOffsetofValue();
 typedef struct {
     long long longLongValue;    //8
     double doubleValue;         //8
+    const char *string;         //8
     int intValue;               //4
     float floatValue;           //4
     short shortValue1;          //2
     short shortValue2;          //2
     short shortValue3;          //2
-    uint8_t bitfield;           //1
     union {
-        bool boolValue1:1;      //1
-        bool boolValue2:1;      //1
-        bool boolValue3:1;      //1
-        bool boolValue4:1;      //1
-        bool boolValue5:1;      //1
-        bool boolValue6:1;      //1
-    } booleans;
-    const char *string;         //1
+        struct {
+            bool boolValue1 : 1;
+            bool boolValue2 : 1;
+            bool boolValue3 : 1;
+            bool boolValue4 : 1;
+            bool boolValue5 : 1;
+            bool boolValue6 : 1;
+            } booleans;
+        uint8_t bitfield : 1;
+    };                           //1
                                         //expected size 40 bytes
 } BPVSortedTypesStructure;
 
