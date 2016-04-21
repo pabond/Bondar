@@ -14,9 +14,6 @@ typedef enum {
     BPVLittleEndianType
 } BPVEndianType;
 
-void BPVPrintBits(uint8_t value);
 void BPVBitOutputFunctions();
-void BPVPrintByteBits(void *address, size_t size);
-
 
 #endif /* BPVBitOutputFunctions_h */
