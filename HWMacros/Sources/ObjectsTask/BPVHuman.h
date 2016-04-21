@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 
+#define MaxHumanChildren 20
+
 /*
 1. Создать объектную структуру данных человек, имеющую поля имя, возраст, пол, количество детей, женат или нет, указатель на партнера, на родителей и на массив с детьми, где могло бы быть, максимум, 20 детей.
 Требования:
@@ -22,7 +24,32 @@
 - создать тесты на все поведение человека.
 */
 
+typedef enum {
+    BPVHumanGenderMale,
+    BPVHumanGenderFemale
+} BPVHumanGender;
 
+struct BPVHuman {
+    char *_name;
+    uint8_t _age;
+    uint8_t _children[MaxHumanChildren];
+    BPVHumanGender _gender;
+            // кто тут родитель?
+};
 
+typedef struct BPVHuman BPVHuman;
+
+//methods
+BPVHuman *BPVHumanCreateObject();
+void _BPVHumanDeallocateObject(BPVHuman *object);
+
+char BPVHumanName(BPVHuman *object);
+void BPVHumanSetName(BPVHuman *object, char *name);
+
+int BPVHumanAge(BPVHuman *object);
+void BPVHumanSetAge(BPVHuman *object, char *age);
+
+BPVHuman BPVHumanPartner(BPVHuman *object, BPVHuman *partner);
+void BPVHumanSetPartner(BPVHuman *object, char *age);
 
 #endif /* BPVHuman_h */
