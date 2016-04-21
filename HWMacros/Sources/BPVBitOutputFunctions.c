@@ -27,23 +27,29 @@ void BPVPrintBits(uint8_t value) {
         size_t offsetBit = value >> (bitsInByte - iterator - 1);
         printf(" %lu", offsetBit & 1);
     }
-    printf("]\n");
     
+    printf("]\n");
 }
 
 void BPVPrintByteBits(void *address, size_t size) {
-    uint8_t *value = (unsigned char *)address;
-    
+    for (size_t iterator = 0; iterator < size; iterator++) {
+        uint8_t index = (BPVEdiannes() == BPVBigEndianType) ? iterator : size - iterator - 1;
+        BPVPrintBits(((uint8_t *)address)[index]);
+    }
 }
 
 void BPVBitOutputFunctions() {
+    int intValue = 245476786756345243;
+    
     BPVPrintBits(7);
+    BPVPrintByteBits(&intValue, sizeof(intValue));
 }
 
 #pragma mark -
 #pragma mark Privat method implementation
 
 BPVEndianType BPVEdiannes() {
-    uint16_t chackNuber = 7;
-    return (((char *)&chackNuber)[0]) ? BPVBigEndianType : BPVLittleEndianType;
+    uint16_t value = 1;
+    
+    return (((char *)&value)[0]) ? BPVBigEndianType : BPVLittleEndianType;
 }

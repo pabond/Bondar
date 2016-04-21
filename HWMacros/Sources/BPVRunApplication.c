@@ -16,6 +16,8 @@
 
 #include "BPVStructureTask.h"
 
+#include "BPVBitOutputFunctions.h"
+
 
 void BPVRunApplication() {
     BPVPrintDataType();

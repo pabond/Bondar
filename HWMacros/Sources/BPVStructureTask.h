@@ -53,7 +53,7 @@ typedef struct {
             bool boolValue5 : 1;
             bool boolValue6 : 1;
             } booleans;
-        uint8_t bitfield : 1;
+        uint8_t bitfield;
     };                           //1
                                         //expected size 40 bytes
 } BPVSortedTypesStructure;
