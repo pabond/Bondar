@@ -19,6 +19,7 @@ void BPVPrintString(char string[]);
 void BPVPrintBool(bool value);
 void BPVPrintWithPuts();
 void BPVPrintDataTypesMathTest();
+
 void BPVPrintAllTypes(long long longLongValue,
                       long longValue,
                       int intValue,
@@ -30,6 +31,5 @@ void BPVPrintAllTypes(long long longLongValue,
 
 void BPVPrintIncrement(int value);
 void BPVPrintNumberRange(int value1, int value2);
-void BPVPrintTypeSize();
 
 #endif /* BPVPrintDataType_h */

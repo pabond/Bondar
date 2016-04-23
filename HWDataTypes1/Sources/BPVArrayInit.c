@@ -13,6 +13,8 @@
 
 #include "BPVPrintDataType.h"
 
+#include "BPVLoopsTest.h"
+
 void BPVArrayTest() {
     int myArray[] = {1, 2, 2, 3, 3, 5, 7, 9};
     int myArray2[7];
@@ -25,16 +27,15 @@ void BPVArrayTest() {
     myArray2[6] = 33;
     myArray2[7] = 22;
     
-    int size = sizeof(myArray)/sizeof(*myArray);
-    int lastElementNumber = size - 1;
+    int size = sizeof(myArray) / sizeof(*myArray);
+    int size2 = sizeof(myArray2) / sizeof(*myArray2);
+//    int lastElementNumber = size - 1;
     
     BPVPrintInt(size);
     
-    for (int element = 0; element < size; element++) {
-    BPVPrintInt(myArray[element]);
-    BPVPrintInt(myArray2[element]);
-    }
-    
+    BPVPrintIntArray(myArray, size);
+    BPVPrintIntArray(myArray2, size2);
+
     int element = 0;
     while (element < size) {
         BPVPrintInt(myArray[element]);
@@ -52,7 +53,7 @@ void BPVArrayTest() {
     int myArray3[2];
     myArray3[0] = 3;
     
-    for (element = 0; element < sizeof(myArray3)/sizeof(0); element++) {
+    for (element = 0; element < sizeof(myArray3) / sizeof(*myArray3); element++) {
         BPVPrintInt(myArray3[element]);                                //2nd element = 0;
     }
 }

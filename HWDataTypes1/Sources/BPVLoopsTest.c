@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 
+#include <string.h>
+
 #include "BPVLoopsTest.h"
 
 #include "BPVPrintDataType.h"
@@ -22,9 +24,9 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
     for (int iteration = 1; iteration < biggerNumber - smallerNumber + 1; iteration++) {
         int number = smallerNumber + iteration - 1;
         if (50 == number) {
-            return;
+        return;
         }
-        
+
         if (0 == number % 3) {
             continue;
         } else {
@@ -32,10 +34,9 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
                 printf("%i_", number);
             }
      
-            puts("");
+            printf("\n");
         }
     }
-     
     
     int iteration = 1;
     while (iteration < biggerNumber - smallerNumber + 1) {
@@ -54,7 +55,7 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
                 printf("%i_", number);
             }
             
-            puts("");
+            printf("\n");
         }
     }
     
@@ -74,8 +75,28 @@ void BPVPrintNumberRangeTimes(int printTimes, int smallerNumber, int biggerNumbe
                 printIteration++;
                 printf("%i_", number);
              } while (printIteration < printTimes);
-            puts("");
+            
+            printf("\n");
         }
     } while (iteration < biggerNumber - smallerNumber + 1);
 }
 
+void BPVPrintNonNullTerminatedString(const char string[], unsigned long length) {
+    for (unsigned long index = 0; index < length; index++) {
+        printf("%c", string[index]);
+    }
+    
+    printf("\n");
+}
+
+void BPVPrintNullTerminatedString(const char string[]) {
+    BPVPrintNonNullTerminatedString(string, strlen(string));
+}
+
+void BPVPrintIntArray(int array[], int size) {
+    for (int index = 0; index < size; index++) {
+        BPVPrintInt(array[index]);
+    }
+    
+    printf("\n");
+}

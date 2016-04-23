@@ -9,6 +9,6 @@
 #ifndef BPVDeputy_h
 #define BPVDeputy_h
 
-void BPVDeputySalary();
+void BPVDeputySalary(long salary, long selfProperty);
 
 #endif /* BPVDeputy_h */

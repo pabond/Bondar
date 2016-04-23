@@ -15,39 +15,47 @@
 
 
 typedef enum {
-    BPVPeculator,
-    BPVRelativelyFair,
-    BPVAngel,
-    BPVDead,
-} BPVEntity;
+    BPVDetupyPeculator,
+    BPVDeputyRelativelyFair,
+    BPVDeputyAngel,
+    BPVDeputyDead,
+} BPVDeputyType;
 
-void BPVDeputySalary(BPVEntity entity) {
-    long salary = 90000000;
-    long selfProperty = 90000000000000;
-    
-    if (selfProperty == salary * 1000 * 1000) {
-        entity = BPVPeculator;
-    } else if (selfProperty == salary * 120) {
-        entity = BPVRelativelyFair;
-    } else if (selfProperty == salary * 120) {
-        entity = BPVAngel;
-    } else {
-        entity = BPVDead;
-    }
-    
-    switch (entity) {
-        case BPVPeculator:
-            puts("This deputy is peculator");
+static
+void BPVPrintDeputyType(deputyType) {
+    switch (deputyType) {
+        case BPVDetupyPeculator:
+            puts("This deputy is a peculator");
             break;
-        case BPVRelativelyFair:
+            
+        case BPVDeputyRelativelyFair:
             puts("This deputy is relatively fair");
             break;
-        case BPVAngel:
-            puts("This deputy is angel");
+            
+        case BPVDeputyAngel:
+            puts("This deputy is an angel");
             break;
-        case BPVDead:
+            
+        case BPVDeputyDead:
         default:
-            puts("This deputy die");
+            puts("This deputy is dead");
             break;
     }
 }
+
+void BPVDeputySalary(long salary, long selfProperty) {
+    BPVDeputyType deputyType = 0;
+    
+    if (selfProperty >= salary * 1000 * 1000) {
+        deputyType = BPVDetupyPeculator;
+    } else if (selfProperty >= salary * 120) {
+        deputyType = BPVDeputyRelativelyFair;
+    } else if (selfProperty >= salary * 12) {
+        deputyType = BPVDeputyAngel;
+    } else {
+        deputyType = BPVDeputyDead;
+    }
+    
+    BPVPrintDeputyType(deputyType);
+}
+

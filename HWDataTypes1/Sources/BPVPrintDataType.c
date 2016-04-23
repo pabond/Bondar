@@ -25,7 +25,7 @@ void BPVPrintChar(char character) {
 }
 
 void BPVPrintString(char string[]) {
-    printf("Sting: %s\n", string);
+    printf("String: %s\n", string);
 }
 
 void BPVPrintBool(bool value) {
@@ -97,7 +97,6 @@ void BPVPrintDataTypesMathTest() {
     printf("%i\n", shortNumber + intNumber);
     printf("%c\n", intNumber);   // prints nothing
     
-    
     //trash in variable without initialisation
     long long longLongValue;
     long longValue;
@@ -117,16 +116,4 @@ void BPVPrintDataTypesMathTest() {
 void BPVPrintIncrement(int value) {
     printf("Postfix increment: %i\n", value++); //do nothing. value + 1 - works
     printf("Prefix incremnt: %i\n", --value);
-}
-
-void BPVPrintTypeSize() {
-    printf("Size of intager = %lu bytes\n", sizeof(int));
-    printf("Size of short = %lu bytes\n", sizeof(short));
-    printf("Size of unsigned int = %lu bytes\n", sizeof(unsigned int));
-    printf("Size of float = %lu bytes\n", sizeof(float));
-    printf("Size of double = %lu bytes\n", sizeof(double));
-    printf("Size of long = %lu bytes\n", sizeof(long));
-    printf("Size of long long = %lu bytes\n", sizeof(long long));
-    printf("Size of char = %lu byte\n", sizeof(char));
-    printf("Size of bool = %lu byte\n", sizeof(bool));
 }

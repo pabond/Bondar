@@ -20,14 +20,19 @@ void BPVBoolValue(bool value) {
 
 void BPVBoolMathOperations(int value1, int value2) {
     bool result = value1 < value2;
+    
     BPVPrintBool(result);
     result = value1 > value2;
+    
     BPVPrintBool(result);
     result = value1 == value2;
+    
     BPVPrintBool(result);
-    result = value1 -2 <= value2;
+    result = value1 - 2 <= value2;
+    
     BPVPrintBool(result);
-    result = value1 -2 >= value2;
+    result = value1 - 2 >= value2;
+    
     BPVPrintBool(result);
     result ? BPVPrintString("Mom") : BPVPrintString("Dad");
     
@@ -37,9 +42,10 @@ void BPVBoolMathOperations(int value1, int value2) {
         BPVPrintString("Dad");
     }
    /*
-    when we write if(value1 = 5) we can see tip fow to fix it, when we write if(5 = value1) proram will not build
+    when we write if (value1 = 5) we can see tip fow to fix it, when we write 
+    if (5 = value1) proram will not build
     
-    if(value1 = 5) {
+    if (value1 = 5) {
         BPVPrintBool(result);
     }
     */
