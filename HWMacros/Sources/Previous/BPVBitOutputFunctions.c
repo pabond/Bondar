@@ -20,10 +20,10 @@ static
 BPVEndianType BPVEdianness();
 
 static
-void BPVPrintByteBits(void *address, size_t size);
+void BPVPrintBytesWithSize(void *address, size_t size);
 
 static
-void BPVPrintByte(void *address, size_t size, BPVEndianType);
+void BPVPrintBytesWithSizeAndEndianness(void *address, size_t size, BPVEndianType);
 
 #pragma mark -
 #pragma mark Public method implementation
@@ -34,8 +34,8 @@ void BPVBitOutputFunctions() {
     float floatValue = 543.6f;
     
     BPVPrintBits(7);
-    BPVPrintByteBits(&intValue, sizeof(intValue));
-    BPVPrintByte(&floatValue, sizeof(floatValue), BPVLittleEndianType);
+    BPVPrintBytesWithSize(&intValue, sizeof(intValue));
+    BPVPrintBytesWithSizeAndEndianness(&floatValue, sizeof(floatValue), BPVLittleEndianType);
 }
 
 #pragma mark -
@@ -47,7 +47,7 @@ BPVEndianType BPVEdianness() {
     return (((char *)&value)[0]) ? BPVBigEndianType : BPVLittleEndianType;
 }
 
-void BPVPrintByte(void *address, size_t size, BPVEndianType endianness) {
+void BPVPrintBytesWithSizeAndEndianness(void *address, size_t size, BPVEndianType endianness) {
     printf("\n");
     for (size_t iterator = 0; iterator < size; iterator++) {
         uint8_t index = (endianness == BPVBigEndianType) ? iterator : size - iterator - 1;
@@ -68,7 +68,7 @@ void BPVPrintBits(uint8_t value) {
     printf("]\n");
 }
 
-void BPVPrintByteBits(void *address, size_t size) {
+void BPVPrintBytesWithSize(void *address, size_t size) {
     BPVEndianType endianness = BPVEdianness();
-    BPVPrintByte(address, size, endianness);
+    BPVPrintBytesWithSizeAndEndianness(address, size, endianness);
 }
