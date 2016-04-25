@@ -25,7 +25,6 @@ const uint8_t BPVMaxHumanChildren = 20;
 */
 
 typedef enum {
-    BPVHumanGenderUndefined,
     BPVHumanGenderMale,
     BPVHumanGenderFemale
 } BPVHumanGender;
@@ -36,23 +35,18 @@ typedef struct BPVHuman BPVHuman;
 #pragma mark Accessors Declarations
 
 char BPVHumanName(BPVHuman *object);
-
 void BPVHumanSetName(BPVHuman *object, char *name);
 
 int BPVHumanAge(BPVHuman *object);
-
 void BPVHumanSetAge(BPVHuman *object, uint8_t age);
 
-BPVHuman BPVHumanPartner(BPVHuman *object, BPVHuman *partner);
-
+BPVHuman BPVHumanPartner(BPVHuman *object);
 void BPVHumanSetPartner(BPVHuman *object, BPVHuman *partner);
 
-BPVHuman BPVHumanParent(BPVHuman *object, BPVHuman *parent);
-
+BPVHuman BPVHumanParent(BPVHuman *object);
 void BPVHumanSetParent(BPVHuman *object, BPVHuman *parent);
 
 void BPVObjectRetain(BPVHuman *object);
-
 void BPVObjectRelease(BPVHuman *object);
 
 
