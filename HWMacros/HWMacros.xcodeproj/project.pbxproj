@@ -104,14 +104,14 @@
 		2DDEB8311CC9197B000719FF /* Previous */ = {
 			isa = PBXGroup;
 			children = (
-				2DDEB8321CC9197B000719FF /* BPVBitOutputFunctions.c */,
 				2DDEB8331CC9197B000719FF /* BPVBitOutputFunctions.h */,
-				2DDEB8341CC9197B000719FF /* BPVMacrosTask.c */,
+				2DDEB8321CC9197B000719FF /* BPVBitOutputFunctions.c */,
 				2DDEB8351CC9197B000719FF /* BPVMacrosTask.h */,
-				2DDEB8361CC9197B000719FF /* BPVPrintDataType.c */,
+				2DDEB8341CC9197B000719FF /* BPVMacrosTask.c */,
 				2DDEB8371CC9197B000719FF /* BPVPrintDataType.h */,
-				2DDEB8381CC9197B000719FF /* BPVStructureTask.c */,
+				2DDEB8361CC9197B000719FF /* BPVPrintDataType.c */,
 				2DDEB8391CC9197B000719FF /* BPVStructureTask.h */,
+				2DDEB8381CC9197B000719FF /* BPVStructureTask.c */,
 			);
 			path = Previous;
 			sourceTree = "<group>";
@@ -301,6 +301,7 @@
 				2DDEB8181CBBCCF5000719FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
