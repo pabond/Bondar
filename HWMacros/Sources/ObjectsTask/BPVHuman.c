@@ -41,8 +41,12 @@ BPVHumanGender BPVGetGender(BPVHuman *object);
 bool BPVHumansCanGetMarriage(BPVHuman *partner1, BPVHuman *partner2);
 void BPVHumanSetPartners(BPVHuman *partner1, BPVHuman *partner2);
 BPVHuman *BPVDefineStrongPartner(BPVHuman *partner1, BPVHuman *partner2);
-void BPVHumanSetStrongAndWeakPartner(BPVHuman *strongPartner, BPVHuman *weakPartner);
-
+//void BPVHumanRemoveAllChildren (BPVHuman *parent, uint8_t index);
+//void BPVHumanRemoveChildrenAtIndex (BPVHuman *parent, uint8_t index);
+void BPVHumanAddChildeAtIndex (BPVHuman *parent, BPVHuman *child, uint8_t index);
+//void BPVHumanSetChildIndex (BPVHuman *parent, uint8_t index);
+//BPVHuman *BPVHumanGetChildAtIndex (BPVHuman *parent, uint8_t index);
+//void BPVHumanRemoveFromParents (BPVHuman *parent, uint8_t index);
 
 
 #pragma mark -
@@ -88,7 +92,7 @@ int BPVHumanAge(BPVHuman *object) {
 
 void BPVHumanSetAge(BPVHuman *object, uint8_t age) {
     if (object) {
-    object->_age = age;
+        object->_age = age;
     }
 }
 
@@ -110,7 +114,6 @@ void BPVHumanSetWeakPartner(BPVHuman *partner2, BPVHuman *partner1) {
         partner2->_partner = partner1;
     }
 }
-
 
 BPVHuman *BPVHumanFather(BPVHuman *object) {
     return object->_father;
@@ -175,6 +178,7 @@ BPVHuman *BPVDefineStrongPartner(BPVHuman *partner1, BPVHuman *partner2) {
 void BPVHumanSetPartners(BPVHuman *partner1, BPVHuman *partner2) {
     BPVHumanDevorce(partner1);
     BPVHumanDevorce(partner2);
+    
     BPVHuman *strongPartner = BPVDefineStrongPartner(partner1, partner2);
     BPVHumanSetStrongAndWeakPartner(strongPartner, BPVHumanPartner(strongPartner));
     
@@ -185,6 +189,7 @@ void BPVHumanMarriage(BPVHuman *partner1, BPVHuman *partner2) {
     if (partner1 && partner2) {
         if (BPVHumansCanGetMarriage(partner1, partner2)) {
             BPVHumanSetPartners(partner1, partner2);
+            
             printf("Congratulations! You get married");
         }
     }
@@ -196,10 +201,8 @@ void BPVHumanMarriage(BPVHuman *partner1, BPVHuman *partner2) {
 void BPVHumanSetChild(BPVHuman *parent, BPVHuman *child) {
     if (parent) {
         BPVObjectRetain(child);
-        
-//        parent->_children = ;
+        BPVHumanAddChildeAtIndex(parent, child, parent->childrenCount);
     }
-
 }
 
 void BPVChildBirth(BPVHuman *parent1) {
@@ -211,3 +214,17 @@ void BPVChildBirth(BPVHuman *parent1) {
     
     BPVObjectRelease(newborn);
 }
+
+void BPVHumanRemoveAllChildren (BPVHuman *parent, uint8_t index) {
+
+}
+
+void BPVHumanRemoveChildrenAtIndex (BPVHuman *parent, uint8_t index) {}
+void BPVHumanAddChildeAtIndex (BPVHuman *parent, BPVHuman *child, uint8_t index) {}
+void BPVHumanSetChildIndex (BPVHuman *parent, uint8_t index) {}
+
+BPVHuman *BPVHumanGetChildAtIndex (BPVHuman *parent, uint8_t index) {
+    return parent->_children[index];
+}
+
+void BPVHumanRemoveFromParents (BPVHuman *parent, uint8_t index) {}
