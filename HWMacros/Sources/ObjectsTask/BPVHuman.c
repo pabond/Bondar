@@ -40,7 +40,7 @@ void BPVHumanMarriage(BPVHuman *partner1, BPVHuman *partner2);
 BPVHumanGender BPVGetGender(BPVHuman *object);
 bool BPVHumansCanGetMarriage(BPVHuman *partner1, BPVHuman *partner2);
 void BPVHumanSetPartners(BPVHuman *partner1, BPVHuman *partner2);
-void BPVDefineStrongWeakPartner(BPVHuman *partner1, BPVHuman *partner2);
+BPVHuman *BPVDefineStrongPartner(BPVHuman *partner1, BPVHuman *partner2);
 void BPVHumanSetStrongAndWeakPartner(BPVHuman *strongPartner, BPVHuman *weakPartner);
 
 
@@ -61,7 +61,7 @@ BPVHuman *BPVHumanCreateObject() {
 
 void __BPVHumanDeallocateObject(BPVHuman *object) {
     BPVHumanSetName(object, NULL);
-    BPVHumanSetParent(object, NULL);
+    BPVHumanSetParents(object, NULL);
     BPVHumanSetPartner(object, NULL);
     
     free(object);
@@ -92,8 +92,8 @@ void BPVHumanSetAge(BPVHuman *object, uint8_t age) {
     }
 }
 
-BPVHuman BPVHumanPartner(BPVHuman *object) {
-    return *(object ? object->_partner : NULL);
+BPVHuman *BPVHumanPartner(BPVHuman *object) {
+    return object ? object->_partner : NULL;
 }
 
 void BPVHumanSetPartner(BPVHuman *object, BPVHuman *partner) {
@@ -112,17 +112,21 @@ void BPVHumanSetWeakPartner(BPVHuman *partner2, BPVHuman *partner1) {
 }
 
 
-BPVHuman BPVHumanFather(BPVHuman *object) {
-    return object ? object->_father : ;
+BPVHuman *BPVHumanFather(BPVHuman *object) {
+    return object->_father;
 }
 
-BPVHuman BPVHumanMother(BPVHuman *object) {
-    return ;
+BPVHuman *BPVHumanMother(BPVHuman *object) {
+    return object->_mother;
 }
 
 void BPVHumanSetParents(BPVHuman *child, BPVHuman *parent) {    //weak
     if (child) {
-        child->_mother = parent;
+        BPVHuman *strongPartner = BPVDefineStrongPartner(parent, parent->_partner);
+        child->_mother = BPVHumanPartner(strongPartner);
+        child->_father = strongPartner;
+        
+        BPVObjectRelease(strongPartner);
     }
 }
 
@@ -149,7 +153,7 @@ BPVHumanGender BPVGetGender(BPVHuman *object) {
 }
 
 #pragma mark -
-#pragma mark Merrage
+#pragma mark Marriage
 
 void BPVHumanDevorce(BPVHuman *object) {
     BPVHumanSetPartner(object, NULL);
@@ -164,16 +168,17 @@ void BPVHumanSetStrongAndWeakPartner(BPVHuman *strongPartner, BPVHuman *weakPart
     BPVHumanSetWeakPartner(weakPartner, strongPartner);
 }
 
-void BPVDefineStrongPartner(BPVHuman *partner1, BPVHuman *partner2) {
-    BPVHumanGenderMale == BPVGetGender(partner1)
-        ? BPVHumanSetStrongAndWeakPartner(partner1, partner2)
-            : BPVHumanSetStrongAndWeakPartner(partner2, partner1);
+BPVHuman *BPVDefineStrongPartner(BPVHuman *partner1, BPVHuman *partner2) {
+    return BPVHumanGenderMale == BPVGetGender(partner1) ? partner1 : partner2;
 }
 
 void BPVHumanSetPartners(BPVHuman *partner1, BPVHuman *partner2) {
     BPVHumanDevorce(partner1);
     BPVHumanDevorce(partner2);
-    BPVDefineStrongWeakPartner(partner1, partner2);
+    BPVHuman *strongPartner = BPVDefineStrongPartner(partner1, partner2);
+    BPVHumanSetStrongAndWeakPartner(strongPartner, BPVHumanPartner(strongPartner));
+    
+    BPVObjectRelease(strongPartner);
 }
 
 void BPVHumanMarriage(BPVHuman *partner1, BPVHuman *partner2) {
@@ -202,7 +207,7 @@ void BPVChildBirth(BPVHuman *parent1) {
     
     BPVHumanSetChild(parent1, newborn);
     BPVHumanSetChild(parent1->_partner, newborn);
-    BPVHumanSetParents(newborn, parent1, parent1->_partner);
+    BPVHumanSetParents(newborn, parent1);
     
     BPVObjectRelease(newborn);
 }

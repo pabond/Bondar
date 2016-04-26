@@ -38,11 +38,11 @@ void BPVHumanSetName(BPVHuman *object, char *name);
 int BPVHumanAge(BPVHuman *object);
 void BPVHumanSetAge(BPVHuman *object, uint8_t age);
 
-BPVHuman BPVHumanPartner(BPVHuman *object);
+BPVHuman *BPVHumanPartner(BPVHuman *object);
 void BPVHumanSetPartner(BPVHuman *object, BPVHuman *partner);
 
-BPVHuman BPVHumanFather(BPVHuman *object);
-BPVHuman BPVHumanMother(BPVHuman *object);
+BPVHuman *BPVHumanFather(BPVHuman *object);
+BPVHuman *BPVHumanMother(BPVHuman *object);
 void BPVHumanSetParents(BPVHuman *child, BPVHuman *parent);
 
 void BPVObjectRetain(BPVHuman *object);
