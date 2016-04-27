@@ -34,8 +34,14 @@ void BPVBitOutputFunctions() {
     float floatValue = 543.6f;
     
     BPVPrintBits(7);
-    BPVPrintBytesWithSize(&intValue, sizeof(intValue));
-    BPVPrintBytesWithSizeAndEndianness(&floatValue, sizeof(floatValue), BPVLittleEndianType);
+    
+    #define BPVMacroPrintBytes(value) BPVPrintBytesWithSize(&value, sizeof(value))
+    BPVMacroPrintBytes(intValue);
+    
+    #define BPVMacroPrintBytesWithEndianness(value, endianType) \
+        BPVPrintBytesWithSizeAndEndianness(&value, sizeof(value), endianType)
+    
+    BPVMacroPrintBytesWithEndianness(floatValue, BPVLittleEndianType);
 }
 
 #pragma mark -

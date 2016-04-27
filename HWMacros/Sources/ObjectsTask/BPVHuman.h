@@ -11,8 +11,6 @@
 
 #include <stdio.h>
 
-const uint8_t BPVMaxHumanChildren = 20;
-
 /*
 1. Создать объектную структуру данных человек, имеющую поля имя, возраст, пол, количество детей, женат или нет, указатель на партнера, на родителей и на массив с детьми, где могло бы быть, максимум, 20 детей.
 Требования:
@@ -31,26 +29,25 @@ typedef enum {
 
 typedef struct BPVHuman BPVHuman;
 
-struct BPVHuman {
-    char *_name;
-    uint8_t _age;
-    uint8_t _children[BPVMaxHumanChildren];
-    BPVHumanGender _gender;
-    BPVHuman *partner;
-            // кто тут родитель?
-};
+#pragma mark -
+#pragma mark Accessors Declarations
 
-//methods
-BPVHuman *BPVHumanCreateObject();
-void _BPVHumanDeallocateObject(BPVHuman *object);
-
-char BPVHumanName(BPVHuman *object);
+char BPVHumanGetName(BPVHuman *object);
 void BPVHumanSetName(BPVHuman *object, char *name);
 
-int BPVHumanAge(BPVHuman *object);
-void BPVHumanSetAge(BPVHuman *object, char *age);
+uint8_t BPVHumanGetAge(BPVHuman *object);
+void BPVHumanSetAge(BPVHuman *object, uint8_t age);
 
-BPVHuman BPVHumanPartner(BPVHuman *object, BPVHuman *partner);
-void BPVHumanSetPartner(BPVHuman *object, char *age);
+BPVHuman *BPVHumanGetPartner(BPVHuman *object);
+void BPVHumanSetPartner(BPVHuman *object, BPVHuman *partner);
+
+BPVHuman *BPVHumanGetFather(BPVHuman *object);
+BPVHuman *BPVHumanGetMother(BPVHuman *object);
+void BPVHumanSetFather(BPVHuman *child, BPVHuman *father);
+void BPVHumanSetMother(BPVHuman *child, BPVHuman *father);
+
+void BPVObjectRetain(BPVHuman *object);
+void BPVObjectRelease(BPVHuman *object);
+
 
 #endif /* BPVHuman_h */
