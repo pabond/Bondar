@@ -32,18 +32,19 @@ typedef struct BPVHuman BPVHuman;
 #pragma mark -
 #pragma mark Accessors Declarations
 
-char BPVHumanName(BPVHuman *object);
+char BPVHumanGetName(BPVHuman *object);
 void BPVHumanSetName(BPVHuman *object, char *name);
 
-int BPVHumanAge(BPVHuman *object);
+uint8_t BPVHumanGetAge(BPVHuman *object);
 void BPVHumanSetAge(BPVHuman *object, uint8_t age);
 
-BPVHuman *BPVHumanPartner(BPVHuman *object);
+BPVHuman *BPVHumanGetPartner(BPVHuman *object);
 void BPVHumanSetPartner(BPVHuman *object, BPVHuman *partner);
 
-BPVHuman *BPVHumanFather(BPVHuman *object);
-BPVHuman *BPVHumanMother(BPVHuman *object);
-void BPVHumanSetParents(BPVHuman *child, BPVHuman *parent);
+BPVHuman *BPVHumanGetFather(BPVHuman *object);
+BPVHuman *BPVHumanGetMother(BPVHuman *object);
+void BPVHumanSetFather(BPVHuman *child, BPVHuman *father);
+void BPVHumanSetMother(BPVHuman *child, BPVHuman *father);
 
 void BPVObjectRetain(BPVHuman *object);
 void BPVObjectRelease(BPVHuman *object);
