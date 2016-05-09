@@ -67,6 +67,12 @@ static
 uint8_t BPVHumanGetChildrenCount(BPVHuman *object);
 
 static
+uint8_t BPVHumanLastChild(BPVHuman *object);
+
+static
+uint8_t BPVHumanNullChild(BPVHuman *object);
+
+static
 void BPVHumanReorganizeChildrensArray(BPVHuman *object);
 
 #pragma mark -
@@ -266,24 +272,35 @@ uint8_t BPVHumanLastChild(BPVHuman *object) {
     uint8_t index = 0;
     while (index < BPVHumanChildrenCount) {
         if (object->_children[BPVHumanChildrenCount - index - 1]) {
-            return (BPVHumanChildrenCount - index - 1);
+            return BPVHumanChildrenCount - index - 1;
         }
         index++;
     }
-    return 0;
+    return BPVHumanChildrenCount;
 }
 
-
+uint8_t BPVHumanNullChild(BPVHuman *object) {
+    uint8_t index = 0;
+    while (index < BPVHumanChildrenCount) {
+        if (!(object->_children[index])) {
+            return index;
+        }
+            index++;
+    }
+    return BPVHumanChildrenCount;
+}
 
 void BPVHumanReorganizeChildrensArray(BPVHuman *object) {
     if (object && BPVHumanGetChildrenCount(object)) {
-        
-        for (uint8_t index = 0; BPVHumanChildrenCount > index; index++) {
-            if (BPVHumanGetChildAtIndex(object, index)) {
-                continue;
-            } else {
-                
-            }
+        uint8_t lastChildIndex = BPVHumanLastChild(object);
+        uint8_t nullChildrenArrayIndex = BPVHumanNullChild(object);
+        if (lastChildIndex != BPVHumanChildrenCount
+            && nullChildrenArrayIndex != BPVHumanChildrenCount
+            && nullChildrenArrayIndex < lastChildIndex)
+        {
+            BPVHuman *lastChild = BPVHumanGetChildAtIndex(object, lastChildIndex);
+            BPVHumanSetChildAtIndex(object, nullChildrenArrayIndex, lastChild);
+            BPVHumanRemoveChildAtIndex(object, lastChildIndex);
         }
     }
 }
