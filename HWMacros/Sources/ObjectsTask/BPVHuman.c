@@ -67,7 +67,7 @@ static
 uint8_t BPVHumanGetChildrenCount(BPVHuman *object);
 
 static
-void BPVHumanReorganizeChildrensArray(BPVHuman *object, uint8_t deletedIndex);
+void BPVHumanReorganizeChildrensArray(BPVHuman *object);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -254,14 +254,36 @@ BPVHuman *BPVHumanGetChildAtIndex (BPVHuman *parent, uint8_t index) {
 void BPVHumanRemoveChildFromParents (BPVHuman *parent, uint8_t index) {
     parent->_children[index] = NULL;
     BPVHumanGetPartner(parent)->_children[index] = NULL;
+    parent->childrenCount -= 1;
+    
 }
 
 uint8_t BPVHumanGetChildrenCount(BPVHuman *object) {
     return object->childrenCount;
 }
 
-void BPVHumanReorganizeChildrensArray(BPVHuman *object, uint8_t deletedIndex) {
-    if (object && BPVHumanGetChildrenCount(object) - 1 < deletedIndex) {
+uint8_t BPVHumanLastChild(BPVHuman *object) {
+    uint8_t index = 0;
+    while (index < BPVHumanChildrenCount) {
+        if (object->_children[BPVHumanChildrenCount - index - 1]) {
+            return (BPVHumanChildrenCount - index - 1);
+        }
+        index++;
+    }
+    return 0;
+}
+
+
+
+void BPVHumanReorganizeChildrensArray(BPVHuman *object) {
+    if (object && BPVHumanGetChildrenCount(object)) {
         
+        for (uint8_t index = 0; BPVHumanChildrenCount > index; index++) {
+            if (BPVHumanGetChildAtIndex(object, index)) {
+                continue;
+            } else {
+                
+            }
+        }
     }
 }
