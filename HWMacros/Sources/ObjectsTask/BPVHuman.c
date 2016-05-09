@@ -78,15 +78,14 @@ void BPVHumanReorganizeChildrensArray(BPVHuman *object);
 #pragma mark -
 #pragma mark Public Implementations
 
-BPVHuman *BPVHumanCreateObject() {
+BPVHuman *__BPVHumanCreateObject() {
     BPVHuman *result = calloc(1, sizeof(BPVHuman));
     
-    assert(NULL != result);
-    result->_referenceCount = 1;
-    
-    BPVObjectRelease(result);
-    
-    return result;
+    if (result) {
+        result->_referenceCount = 1;
+        return result;
+    }
+    return NULL;
 }
 
 void __BPVHumanDeallocateObject(BPVHuman *object) {
@@ -179,10 +178,16 @@ void BPVObjectRetain(BPVHuman *object) {
 void BPVObjectRelease(BPVHuman *object) {
     if (object) {
         object->_referenceCount -= 1;
-        if (0 == object->_referenceCount) {
+        if (0 == BPVHumanGetReferenceCount(object)) {
             __BPVHumanDeallocateObject(object);
+        } else if (1 == BPVHumanGetReferenceCount(object)) {
+            printf("Object %s has reference count 1. Don't forget to delete", object->_name);
         }
     }
+}
+
+uint64_t BPVHumanGetReferenceCount(BPVHuman *object) {
+    return object->_referenceCount;
 }
 
 #pragma mark -
@@ -247,7 +252,7 @@ void BPVHumanSetChildAtIndex (BPVHuman *parent, uint8_t index, BPVHuman *child) 
 }
 
 void BPVHumanAddChildAtIndex (BPVHuman *parent, uint8_t index) {
-    BPVHuman *newborn = BPVHumanCreateObject();
+    BPVHuman *newborn = __BPVHumanCreateObject();
     BPVHumanSetChildAtIndex(parent, parent->childrenCount, newborn);
     BPVHumanSetFather(newborn, parent);
     BPVHumanSetMother(newborn, BPVHumanGetPartner(parent));

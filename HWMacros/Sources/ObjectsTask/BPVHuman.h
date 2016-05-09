@@ -49,5 +49,7 @@ void BPVHumanSetMother(BPVHuman *child, BPVHuman *father);
 void BPVObjectRetain(BPVHuman *object);
 void BPVObjectRelease(BPVHuman *object);
 
+uint64_t BPVHumanGetReferenceCount(BPVHuman *object);
+
 
 #endif /* BPVHuman_h */
