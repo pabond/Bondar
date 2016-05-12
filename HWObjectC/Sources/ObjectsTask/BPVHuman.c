@@ -8,17 +8,16 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include <assert.h>
 #include <string.h>
 
 #include "BPVHuman.h"
+#include "BPVObject.h"
 
 static const uint8_t BPVHumanChildrenCount = 20;
 
-static const uint8_t BPVIndexNotFound = UINT8_MAX;
-
 struct BPVHuman {
-    uint64_t _referenceCount;
+    BPVObject _parentClass;
+    
     BPVHumanGender _gender;
     
     char *_name;
@@ -45,7 +44,7 @@ static
 BPVHumanGender BPVHumanGetGender(BPVHuman *object);
 
 static
-void BPVHumanDivorce(BPVHuman *object, BPVHuman *partner);
+void BPVHumanDivorce(BPVHuman *object);
 
 static
 void BPVHumanSetChildAtIndex(BPVHuman *parent, uint8_t index, BPVHuman *child);
@@ -80,22 +79,17 @@ uint8_t BPVHumanGetChildIndex(BPVHuman *parent, BPVHuman *child);
 #pragma mark -
 #pragma mark Public Implementations
 
-BPVHuman *__BPVHumanCreateObject() {
-    BPVHuman *result = calloc(1, sizeof(BPVHuman));
-    result->_referenceCount = 1;
-    
-    return result;
-}
-
-void __BPVHumanDeallocateObject(BPVHuman *object) {
+void __BPVHumanDeallocate(void *object) {
     BPVHumanSetName(object, NULL);
     BPVHumanSetFather(object, NULL);
     BPVHumanSetMother(object, NULL);
-    if (object->_partner) {
-        BPVHumanDivorce(object, object->_partner);
-    }
+    BPVHumanDivorce(object);
     
-    free(object);
+    __BPVObjectDeallocate(object);
+}
+
+BPVHuman *__BPVHumanCreate() {
+    return BPVObjectCreateWithType(BPVHuman);
 }
 
 char *BPVHumanGetName(BPVHuman *object) {
@@ -116,7 +110,7 @@ void BPVHumanSetName(BPVHuman *object, char *name) {
 }
 
 uint8_t BPVHumanGetAge(BPVHuman *object) {
-        return object ? object->_age : 0;
+    return object ? object->_age : 0;
 }
 
 void BPVHumanSetAge(BPVHuman *object, uint8_t age) {
@@ -182,27 +176,6 @@ void BPVHumanSetGender(BPVHuman *object, BPVHumanGender gender) {
     }
 }
 
-void BPVObjectRetain(BPVHuman *object) {
-    if (object) {
-        object->_referenceCount++;
-    }
-}
-
-void BPVObjectRelease(BPVHuman *object) {
-    if (object) {
-        object->_referenceCount -= 1;
-        if (0 == BPVHumanGetReferenceCount(object)) {
-            __BPVHumanDeallocateObject(object);
-        } else if (1 == BPVHumanGetReferenceCount(object)) {
-            printf("Object %s has reference count 1. Don't forget to delete", object->_name);
-        }
-    }
-}
-
-uint64_t BPVHumanGetReferenceCount(BPVHuman *object) {
-    return object->_referenceCount;
-}
-
 #pragma mark -
 #pragma mark Private Implementations
 
@@ -213,7 +186,9 @@ BPVHumanGender BPVHumanGetGender(BPVHuman *object) {
 #pragma mark -
 #pragma mark Marriage
 
-void BPVHumanDivorce(BPVHuman *object, BPVHuman *partner) {
+void BPVHumanDivorce(BPVHuman *object) {
+    
+    BPVHuman *partner = BPVHumanGetPartner(object);
     
     BPVHuman *strongPartner = BPVHumanGetGender(object) == BPVHumanGenderMale ? object : partner;
     BPVHuman *weakPartner = BPVHumanGetGender(partner) == BPVHumanGenderMale ? object : partner;
@@ -229,7 +204,7 @@ bool BPVHumansCanGetMarried(BPVHuman *object, BPVHuman *partner) {
 void BPVHumanMarriage(BPVHuman *object, BPVHuman *partner) {
     if (object && partner) {
         if (BPVHumansCanGetMarried(object, partner)) {
-            BPVHumanDivorce(object, partner);
+            BPVHumanDivorce(object);
 
             BPVHumanSetPartner(object, partner);
             BPVHumanSetPartner(partner, object);
@@ -281,7 +256,7 @@ void BPVHumanSetChildAtIndex(BPVHuman *parent, uint8_t index, BPVHuman *child) {
 }
 
 void BPVHumanAddChildAtIndex(BPVHuman *parent, uint8_t index) {
-    BPVHuman *newborn = __BPVHumanCreateObject();
+    BPVHuman *newborn = __BPVHumanCreate();
     BPVHumanSetChildAtIndex(parent, parent->childrenCount, newborn);
     if (parent->_partner) {
         BPVHumanSetChildAtIndex(parent->_partner, parent->_partner->childrenCount, newborn);
@@ -329,6 +304,7 @@ uint8_t BPVHumanNullChild(BPVHuman *object) {
         
         index++;
     }
+    
     return BPVHumanChildrenCount;
 }
 

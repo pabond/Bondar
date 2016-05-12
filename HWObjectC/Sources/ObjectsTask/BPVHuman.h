@@ -11,6 +11,9 @@
 
 #include <stdio.h>
 
+extern
+const uint8_t BPVIndexNotFound = UINT8_MAX;
+
 /*
 1. Создать объектную структуру данных человек, имеющую поля имя, возраст, пол, количество детей, женат или нет, указатель на партнера, на родителей и на массив с детьми, где могло бы быть, максимум, 20 детей.
 Требования:
@@ -47,11 +50,5 @@ void BPVHumanSetFather(BPVHuman *child, BPVHuman *father);
 void BPVHumanSetMother(BPVHuman *child, BPVHuman *father);
 
 void BPVHumanSetGender(BPVHuman *object, BPVHumanGender gender);
-
-void BPVObjectRetain(BPVHuman *object);
-void BPVObjectRelease(BPVHuman *object);
-
-uint64_t BPVHumanGetReferenceCount(BPVHuman *object);
-
 
 #endif /* BPVHuman_h */
