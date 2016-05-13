@@ -17,21 +17,20 @@ void __BPVObjectDeallocate(void *object) {
 }
 
 void *__BPVCreateObject(size_t objectSize, BPVObjectDeallocator dealocator) {
+    BPVObject *object = NULL;
+    
     if (objectSize && dealocator) {
         BPVObject *object = calloc(1, objectSize);
-        if (object) {
-            object->_referenceCount = 1;
-            object->_deallocatorFunctionPointer = dealocator;
-            
-            return object;
-        }
+        
+        object->_referenceCount = 1;
+        object->_deallocatorFunctionPointer = dealocator;
     }
     
-    return NULL;
+    return object;
 }
 
 uint64_t BPVObjectGetReferenceCount(void *object) {
-    return object ? ((BPVObject*)object)->_referenceCount : 0;
+    return object ? ((BPVObject *)object)->_referenceCount : 0;
 }
 
 void *BPVObjectRetain(void *object) {
