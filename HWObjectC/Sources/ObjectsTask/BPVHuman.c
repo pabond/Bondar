@@ -150,16 +150,6 @@ void BPVHumanSetPartner(BPVHuman *object, BPVHuman *partner) {
 #pragma mark -
 #pragma mark Children
 
-void BPVHumanRemoveAllChildren(BPVHuman *parent) {
-    if (parent) {
-        for (uint8_t index = 0; index < BPVHumanGetChildrenCount(parent); index++) {
-            if (BPVHumanGetChildAtIndex(parent, BPVHumanChildrenCount - index - 1)) {
-                BPVHumanRemoveChildAtIndex(parent, index);
-            }
-        }
-    }
-}
-
 BPVHuman *BPVHumanGetFather(BPVHuman *object) {
     return object ? object->_father : NULL;
 }
@@ -270,5 +260,15 @@ void BPVHumanReorderChildren(BPVHuman *object, uint8_t index) {
             BPVHuman *lastChild = BPVHumanGetChildAtIndex(object, lastChildIndex);
             BPVHumanSetChildAtIndex(object, index, lastChild);
             BPVHumanRemoveChildAtIndex(object, lastChildIndex);
+    }
+}
+
+void BPVHumanRemoveAllChildren(BPVHuman *parent) {
+    if (parent) {
+        for (uint8_t index = 0; index < BPVHumanGetChildrenCount(parent); index++) {
+            if (BPVHumanGetChildAtIndex(parent, BPVHumanChildrenCount - index - 1)) {
+                BPVHumanRemoveChildAtIndex(parent, index);
+            }
+        }
     }
 }
