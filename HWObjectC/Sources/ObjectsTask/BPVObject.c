@@ -34,10 +34,12 @@ uint64_t BPVObjectGetReferenceCount(void *object) {
     return object ? ((BPVObject*)object)->_referenceCount : 0;
 }
 
-void BPVObjectRetain(void *object) {
+void *BPVObjectRetain(void *object) {
     if (object) {
         ((BPVObject*)object)->_referenceCount += 1;
     }
+    
+    return object;
 }
 
 void BPVObjectRelease(void *object) {

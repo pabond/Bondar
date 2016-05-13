@@ -31,7 +31,7 @@ extern
 uint64_t BPVObjectGetReferenceCount(void *object);
 
 extern
-void BPVObjectRetain(void *object);
+void *BPVObjectRetain(void *object);
 
 extern
 void BPVObjectRelease(void *object);

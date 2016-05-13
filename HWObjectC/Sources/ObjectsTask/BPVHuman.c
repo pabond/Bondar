@@ -131,8 +131,7 @@ void BPVHumanSetStrongPartner(BPVHuman *human, BPVHuman *partner) {
     if (human && human->_partner != partner) {
         BPVObjectRelease(human->_partner);
     
-        human->_partner = partner;
-        BPVObjectRetain(partner);
+        human->_partner = BPVObjectRetain(partner);
     }
 }
 
@@ -153,8 +152,6 @@ BPVHuman *BPVHumanGetFather(BPVHuman *object) {
 BPVHuman *BPVHumanGetMother(BPVHuman *object) {
     return object ? object->_mother : NULL;
 }
-
-//#define BPVHumanSetParent(human, field, value) __BPVHumanSetChildParent (human, &human->_##field, value)
 
 void BPVHumanSetFather(BPVHuman *child, BPVHuman *father) {    //weak
     if (child && child->_father != father) {
@@ -241,11 +238,7 @@ void BPVHumanSetChildAtIndex(BPVHuman *parent, uint8_t index, BPVHuman *child) {
     if (parent && parent->_children[index] != child) {
         BPVObjectRelease(BPVHumanGetChildAtIndex(parent, index));
         
-        parent->_children[index] = child;
-        
-        if (child) {
-            BPVObjectRetain(child);
-        }
+        parent->_children[index] = BPVObjectRetain(child);
     }
 }
 
