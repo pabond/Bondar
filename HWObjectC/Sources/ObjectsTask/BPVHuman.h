@@ -34,6 +34,8 @@ typedef struct BPVHuman BPVHuman;
 #pragma mark -
 #pragma mark Accessors Declarations
 
+BPVHuman *BPVHumanCreate();
+
 char *BPVHumanGetName(BPVHuman *object);
 void BPVHumanSetName(BPVHuman *object, char *name);
 
@@ -53,11 +55,13 @@ void BPVHumanSetGender(BPVHuman *object, BPVHumanGender gender);
 
 void BPVHumansGetMarried(BPVHuman *partner1, BPVHuman *partner2);
 void BPVHumanDivorce(BPVHuman *object);
+bool BPVHumanIsMaried(BPVHuman *human);
 
-void BPVHumanGiveBirthToChild(BPVHuman *parent);
+BPVHuman *BPVHumanGiveBirthToChild(BPVHuman *parent);
 BPVHuman *BPVHumanGetChildAtIndex(BPVHuman *parent, uint8_t index);
 uint8_t BPVHumanGetChildIndex(BPVHuman *parent, BPVHuman *child);
 uint8_t BPVHumanGetChildrenCount(BPVHuman *object);
+void BPVHumanSetChildrenCount(BPVHuman *human, uint8_t value);
 void BPVHumanRemoveChildAtIndex(BPVHuman *parent, uint8_t index);
 
 #endif /* BPVHuman_h */
