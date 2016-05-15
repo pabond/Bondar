@@ -11,6 +11,8 @@
 		2DECEC321CE203C500FE66F3 /* BPVRunApplication.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC2D1CE203C500FE66F3 /* BPVRunApplication.c */; };
 		2DECEC331CE203C500FE66F3 /* BPVHuman.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC301CE203C500FE66F3 /* BPVHuman.c */; };
 		2DECEC361CE2043100FE66F3 /* BPVObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC341CE2043100FE66F3 /* BPVObject.c */; };
+		2DECEC391CE7B6F400FE66F3 /* BPVString.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC371CE7B6F400FE66F3 /* BPVString.c */; };
+		2DECEC3C1CE7B72A00FE66F3 /* BPVArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC3A1CE7B72A00FE66F3 /* BPVArray.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,10 @@
 		2DECEC311CE203C500FE66F3 /* BPVHuman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVHuman.h; sourceTree = "<group>"; };
 		2DECEC341CE2043100FE66F3 /* BPVObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVObject.c; sourceTree = "<group>"; };
 		2DECEC351CE2043100FE66F3 /* BPVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVObject.h; sourceTree = "<group>"; };
+		2DECEC371CE7B6F400FE66F3 /* BPVString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVString.c; sourceTree = "<group>"; };
+		2DECEC381CE7B6F400FE66F3 /* BPVString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVString.h; sourceTree = "<group>"; };
+		2DECEC3A1CE7B72A00FE66F3 /* BPVArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVArray.c; sourceTree = "<group>"; };
+		2DECEC3B1CE7B72A00FE66F3 /* BPVArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVArray.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,10 @@
 		2DECEC2F1CE203C500FE66F3 /* ObjectsTask */ = {
 			isa = PBXGroup;
 			children = (
+				2DECEC3B1CE7B72A00FE66F3 /* BPVArray.h */,
+				2DECEC3A1CE7B72A00FE66F3 /* BPVArray.c */,
+				2DECEC381CE7B6F400FE66F3 /* BPVString.h */,
+				2DECEC371CE7B6F400FE66F3 /* BPVString.c */,
 				2DECEC351CE2043100FE66F3 /* BPVObject.h */,
 				2DECEC341CE2043100FE66F3 /* BPVObject.c */,
 				2DECEC311CE203C500FE66F3 /* BPVHuman.h */,
@@ -151,7 +161,9 @@
 			files = (
 				2DECEC331CE203C500FE66F3 /* BPVHuman.c in Sources */,
 				2DECEC221CE2032E00FE66F3 /* main.c in Sources */,
+				2DECEC3C1CE7B72A00FE66F3 /* BPVArray.c in Sources */,
 				2DECEC321CE203C500FE66F3 /* BPVRunApplication.c in Sources */,
+				2DECEC391CE7B6F400FE66F3 /* BPVString.c in Sources */,
 				2DECEC361CE2043100FE66F3 /* BPVObject.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
