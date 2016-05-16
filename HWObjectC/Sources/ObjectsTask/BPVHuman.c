@@ -197,22 +197,27 @@ BPVHuman *BPVHumanGiveBirthToChild(BPVHuman *parent) {
     {
         newborn = BPVHumanCreate();
         
-        BPVHumanSetChildAtIndex(parent, BPVHumanGetChildrenCount(parent), newborn);
-        BPVHumanSetChildAtIndex(BPVHumanGetPartner(parent), BPVHumanGetChildrenCount(BPVHumanGetPartner(parent)), newborn);
-        
         BPVHuman *father = BPVHumanGetMalePartner(parent);
+        BPVHuman *mother = BPVHumanGetPartner(father);
+        
+        BPVHumanSetChildAtIndex(father, BPVHumanGetChildrenCount(father), newborn);
+        BPVHumanSetChildAtIndex(mother, BPVHumanGetChildrenCount(mother), newborn);
         
         BPVHumanSetFather(newborn, father);
-        BPVHumanSetMother(newborn, BPVHumanGetPartner(father));
+        BPVHumanSetMother(newborn, mother);
     }
     
     return newborn;
 }
 
 void BPVHumanRemoveChildAtIndex(BPVHuman *parent, uint8_t index) {
-    BPVHumanSetChildAtIndex(parent, index, NULL);
-    BPVHumanChildSetNullParent(parent, index);
-    BPVHumanReorderChildren(parent, index);
+    if (parent && index < BPVHumanGetChildrenCount(parent)) {
+        BPVHumanSetChildAtIndex(parent, index, NULL);
+        BPVHumanChildSetNullParent(parent, index);
+        BPVHumanReorderChildren(parent, index);
+        
+        parent->_childrenCount -= 1;
+    }
 }
 
 BPVHuman *BPVHumanGetChildAtIndex(BPVHuman *parent, uint8_t index) {
@@ -220,13 +225,14 @@ BPVHuman *BPVHumanGetChildAtIndex(BPVHuman *parent, uint8_t index) {
 }
 
 uint8_t BPVHumanGetChildIndex(BPVHuman *parent, BPVHuman *child) {
+    uint8_t result = BPVIndexNotFound;
     for (uint8_t index = 0; index < BPVHumanGetChildrenCount(parent); index++) {
         if (BPVHumanGetChildAtIndex(parent, index) == child) {
-            return index;
+            result = index;
         }
     }
     
-    return BPVIndexNotFound;
+    return result;
 }
 
 #pragma mark -
@@ -272,6 +278,9 @@ void BPVHumanSetChildAtIndex(BPVHuman *parent, uint8_t index, BPVHuman *child) {
         BPVObjectRelease(BPVHumanGetChildAtIndex(parent, index));
         
         parent->_children[index] = BPVObjectRetain(child);
+        if (child) {
+            parent->_childrenCount += 1;
+        }
     }
 }
 
@@ -288,8 +297,9 @@ void BPVHumanRemoveAllChildren(BPVHuman *parent) {
     if (parent) {
         uint8_t count = BPVHumanGetChildrenCount(parent);
         for (uint8_t index = 0; index < count; index++) {
-            if (BPVHumanGetChildAtIndex(parent, count - index - 1)) {
-                BPVHumanRemoveChildAtIndex(parent, index);
+            uint8_t lastChildIndex = count - index - 1;
+            if (BPVHumanGetChildAtIndex(parent, lastChildIndex)) {
+                BPVHumanRemoveChildAtIndex(parent, lastChildIndex);
             }
         }
     }
