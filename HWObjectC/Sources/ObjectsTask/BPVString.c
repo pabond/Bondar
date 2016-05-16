@@ -17,7 +17,7 @@ struct BPVString {
     uint64_t _count;
 };
 
-
+/*
 void BPVStringSetString(void *object, void field, char *string) {
     if (object && BPVHumanGetField(field) != string) {
         if (BPVHumanGetName(object)) {
@@ -30,3 +30,4 @@ void BPVStringSetString(void *object, void field, char *string) {
         }
     }
 }
+*/

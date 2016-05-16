@@ -6,9 +6,12 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
+#include <string.h>
+
 #include "BPVArray.h"
 
 const uint64_t kBPVNotFound = UINT64_MAX;
+const uint64_t kBPVMaxCapacity = UINT64_MAX - 1;
 
 struct BPVArray {
     BPVObject _parentClass;
@@ -28,6 +31,9 @@ static
 bool BPVArrayShouldResize(BPVArray *array);
 
 static
+uint64_t BPVCapasityToAdd(BPVArray *array);
+
+static
 void BPVArrayResize(BPVArray *array);
 
 static
@@ -42,10 +48,13 @@ void BPVArrayReorderObjects(BPVArray *array, uint8_t index);
 #pragma mark -
 #pragma mark Public Implementations
 
-void __BPVArrayDeallocate(BPVArray *object) {
+void __BPVArrayDeallocate(BPVArray *array) {
+    if (array) {
+        free(array->_data);
+        array->_data = NULL;
+    }
     
-    
-    __BPVObjectDeallocate(object);
+    __BPVObjectDeallocate(array);
 }
 
 BPVArray *BPVArrayCreateArrayWithCapacity(uint64_t capacity) {
@@ -93,9 +102,8 @@ void *BPVArrayGetObjectAtIndex(BPVArray *array, uint64_t index) {
 }
 
 void BPVArrayRemoveObjectAtIndex(BPVArray *array, uint64_t index) {
-    if (array && index < BPVArrayGetCount(array)) {
+    if (array) {
         BPVArraySetObjectAtIndex(array, NULL, index);
-        
         BPVArrayReorderObjects(array, index);
         array->_count -= 1;
     }
@@ -116,28 +124,59 @@ void BPVArrayRemoveAllObjects(BPVArray *array) {
 #pragma mark Private Implementations
 
 void BPVArraySetCapacity(BPVArray *array, uint64_t capacity) {
-    if (array) {
+    if (array && capacity != array->_capacity && kBPVMaxCapacity >= capacity) {
+        size_t size = capacity * sizeof(*array->_data);
+        if (size && array->_data) {
+            free(array->_data);
+            array->_data = NULL;
+        } else {
+            array->_data = realloc(array->_data, size);
+        }
+        
+        if (capacity > array->_capacity) {
+            void *startPointer = array->_data + array->_capacity;
+            size_t numberOfBytes = (capacity - array->_capacity) * sizeof(*array->_data);
+            
+            memset(startPointer, 0, numberOfBytes);
+        }
+        
         array->_capacity = capacity;
     }
 }
 
-bool BPVArrayShouldResize(BPVArray *array) {
-    
+uint64_t BPVCapasityToAdd(BPVArray *array) {
+    return 0;
 }
 
-void BPVArrayResize(BPVArray *array);
+bool BPVArrayShouldResize(BPVArray *array) {
+    return array && array->_capacity < BPVCapasityToAdd(array);
+}
+
+void BPVArrayResize(BPVArray *array) {
+    if (array && BPVArrayShouldResize(array)) {
+        BPVArraySetCapacity(array, BPVCapasityToAdd(array));
+    }
+}
 
 void BPVArrayCountAddValue(BPVArray *array, uint64_t value) {
     if (array) {
         array->_count += value;
+        
+        BPVArrayResize(array);
     }
 }
 
 void BPVArrayReorderObjects(BPVArray *array, uint8_t index) {
-    uint8_t lastObjectIndex = BPVArrayGetCount(array) - 1;
-    if (array && index < lastObjectIndex) {
-        BPVArray *lastObject = BPVArrayGetObjectAtIndex(array, lastObjectIndex);
-        BPVArraySetObjectAtIndex(array, lastObject, index);
-        BPVArrayRemoveObjectAtIndex(array, lastObjectIndex);
+    if (array) {
+        uint64_t count = BPVArrayGetCount(array);
+        
+        void **data = array->_data;
+        if (index < count) {
+            uint64_t pointersCount = count - (index + 1);
+            
+            memmove(&data[index], &data[index + 1], pointersCount * sizeof(*data));
+        }
+        
+        data[count - 1] = NULL;
     }
 }
