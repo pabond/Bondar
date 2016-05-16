@@ -6,14 +6,16 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
-#include <stdlib>
+#include <stdlib.h>
 
-#include "BPVObject.h"
 #include "BPVString.h"
 
 struct BPVString {
+    BPVObject _parentClass;
     
-}
+    void **_data;	
+    uint64_t _count;
+};
 
 
 void BPVStringSetString(void *object, void field, char *string) {

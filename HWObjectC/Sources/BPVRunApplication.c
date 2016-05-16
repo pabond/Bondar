@@ -7,7 +7,8 @@
 //
 
 #include "BPVRunApplication.h"
+#include "BPVArrayTests.h"
 
 void BPVRunApplication() {
-    
+    void BPVRunArreyTests();
 }

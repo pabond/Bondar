@@ -9,8 +9,10 @@
 #ifndef BPVString_h
 #define BPVString_h
 
+#include "BPVObject.h"
+
 typedef struct BPVString BPVString;
 
-void BPVHumanSetName(BPVHuman *object, char *name) {
+void BPVStringSetString(void *object, char *string);
 
 #endif /* BPVString_h */
