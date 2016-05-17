@@ -9,10 +9,15 @@
 #ifndef BPVString_h
 #define BPVString_h
 
-#include "BPVObject.h"
-
 typedef struct BPVString BPVString;
 
-void BPVStringSetString(void *object, char *string);
+extern
+void __BPVStringDeallocate(void *object);
+
+extern
+BPVString* BVPStringCreate();
+
+extern
+char *BPVStringGetString(BPVString *object);
 
 #endif /* BPVString_h */
