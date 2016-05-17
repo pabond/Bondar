@@ -85,9 +85,9 @@ char *BPVHumanGetName(BPVHuman *object) {
 }
 
 void BPVHumanSetName(BPVHuman *object, char *name) {
-    if (object && BPVHumanGetName(object) != name) {
-        if (BPVHumanGetName(object)) {
-            free(BPVHumanGetName(object));
+    if (object && object->_name != name) {
+        if (object->_name) {
+            free(object->_name);
             object->_name = NULL;
         }
         
@@ -163,7 +163,7 @@ BPVHuman *BPVHumanGetFather(BPVHuman *object) {
 }
 
 void BPVHumanSetFather(BPVHuman *child, BPVHuman *father) {
-    if (child && BPVHumanGetFather(child) != father) {
+    if (child && child->_father != father) {
         child->_father = father;
     }
 }
@@ -173,7 +173,7 @@ BPVHuman *BPVHumanGetMother(BPVHuman *object) {
 }
 
 void BPVHumanSetMother(BPVHuman *child, BPVHuman *mother) {
-    if (child && BPVHumanGetMother(child) != mother) {
+    if (child && child->_mother != mother) {
         child->_mother = mother;
     }
 }
@@ -215,8 +215,6 @@ void BPVHumanRemoveChildAtIndex(BPVHuman *parent, uint8_t index) {
         BPVHumanSetChildAtIndex(parent, index, NULL);
         BPVHumanChildSetNullParent(parent, index);
         BPVHumanReorderChildren(parent, index);
-        
-        parent->_childrenCount -= 1;
     }
 }
 
@@ -274,13 +272,17 @@ void BPVHumanChildSetNullParent(BPVHuman *parent, uint8_t index) {
 }
 
 void BPVHumanSetChildAtIndex(BPVHuman *parent, uint8_t index, BPVHuman *child) {
-    if (parent && BPVHumanGetChildAtIndex(parent, index) != child) {
-        BPVObjectRelease(BPVHumanGetChildAtIndex(parent, index));
-        
-        parent->_children[index] = BPVObjectRetain(child);
-        if (child) {
+    BPVHuman *currentChildAtIndex = BPVHumanGetChildAtIndex(parent, index);
+    if (parent && currentChildAtIndex != child) {
+        if (currentChildAtIndex && !child) {
+            parent->_childrenCount -= 1;
+        } else if (!currentChildAtIndex && child) {
             parent->_childrenCount += 1;
         }
+        
+        BPVObjectRelease(currentChildAtIndex);
+        
+        parent->_children[index] = BPVObjectRetain(child);
     }
 }
 
