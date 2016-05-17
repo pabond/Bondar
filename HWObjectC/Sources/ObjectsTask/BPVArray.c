@@ -31,7 +31,7 @@ static
 bool BPVArrayShouldResize(BPVArray *array);
 
 static
-uint64_t BPVCapasityToAdd(BPVArray *array);
+uint64_t BPVCapacityToAdd(BPVArray *array);
 
 static
 void BPVArrayResize(BPVArray *array);
@@ -120,6 +120,14 @@ void BPVArrayRemoveAllObjects(BPVArray *array) {
     }
 }
 
+uint64_t BPVArrayGetCapacity(BPVArray *array) {
+    if (!array) {
+        return kBPVMaxCapacity;
+    }
+    
+    return array->_capacity;
+}
+
 #pragma mark -
 #pragma mark Private Implementations
 
@@ -144,17 +152,25 @@ void BPVArraySetCapacity(BPVArray *array, uint64_t capacity) {
     }
 }
 
-uint64_t BPVCapasityToAdd(BPVArray *array) {
-    return 0;
+uint64_t BPVArrayPrefferedCapacity(BPVArray *array) {
+    uint64_t prefferedCapacity = BPVArrayGetCount(array);
+    if (array) {
+        uint64_t count = BPVArrayGetCount(array);
+        if (count > BPVArrayGetCapacity(array)) {
+            prefferedCapacity = count;
+        }
+    }
+    
+    return prefferedCapacity;
 }
 
 bool BPVArrayShouldResize(BPVArray *array) {
-    return array && array->_capacity < BPVCapasityToAdd(array);
+    return array && array->_capacity < BPVCapacityToAdd(array);
 }
 
 void BPVArrayResize(BPVArray *array) {
     if (array && BPVArrayShouldResize(array)) {
-        BPVArraySetCapacity(array, BPVCapasityToAdd(array));
+        BPVArraySetCapacity(array, BPVCapacityToAdd(array));
     }
 }
 
@@ -163,6 +179,21 @@ void BPVArrayCountAddValue(BPVArray *array, uint64_t value) {
         array->_count += value;
         
         BPVArrayResize(array);
+    }
+}
+
+void BPVArraySetObjectAtIndex(BPVArray *array, void *object, uint64_t count){
+    BPVArray *currentObjectAtIndex = BPVArrayGetObjectAtIndex(array, count);
+    if (array && currentObjectAtIndex != object) {
+        if (currentObjectAtIndex && !object) {
+            array->_count -= 1;
+        } else if (!currentObjectAtIndex && object) {
+            array->_count += 1;
+        }
+        
+        BPVObjectRelease(currentObjectAtIndex);
+        
+        array->_data[count] = BPVObjectRetain(object);
     }
 }
 
