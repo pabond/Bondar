@@ -7,6 +7,7 @@
 //
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "BPVString.h"
 #include "BPVObject.h"
@@ -65,10 +66,9 @@ void BPVStringSetString(BPVString *object, char *string) {
 }
 
 BPVString *BPVStringCopyString(char *string) {
-    return BPVStringSetString(BPVStringCreate(), string);
+    return string ? strdup(string) : NULL;
 }
 
-static
 size_t BPVStringGetSize(char *string) {
-    return string ? strdup(string) : 0;
+    return string ? strlen(string) : 0;
 }
