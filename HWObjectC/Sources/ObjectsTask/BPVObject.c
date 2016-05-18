@@ -17,16 +17,17 @@ void __BPVObjectDeallocate(void *object) {
 }
 
 void *__BPVCreateObject(size_t objectSize, BPVObjectDeallocator dealocator) {
-    BPVObject *object = NULL;
     
     if (objectSize && dealocator) {
         BPVObject *object = calloc(1, objectSize);
         
         object->_referenceCount = 1;
         object->_deallocatorFunctionPointer = dealocator;
+        
+        return object;
     }
     
-    return object;
+    return NULL;
 }
 
 uint64_t BPVObjectGetReferenceCount(void *object) {

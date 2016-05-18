@@ -130,7 +130,8 @@ uint64_t BPVArrayGetCapacity(BPVArray *array) {
 #pragma mark Private Implementations
 
 void BPVArraySetCapacity(BPVArray *array, uint64_t capacity) {
-    if (array && capacity != array->_capacity) {
+    uint64_t previousCapacity = array->_capacity;
+    if (array && capacity != previousCapacity) {
         size_t size = capacity * sizeof(*array->_data);
         if (size && array->_data) {
             free(array->_data);
@@ -139,9 +140,10 @@ void BPVArraySetCapacity(BPVArray *array, uint64_t capacity) {
             array->_data = realloc(array->_data, size);
         }
         
-        if (capacity > array->_capacity) {
-            void *startPointer = array->_data + array->_capacity;
-            size_t numberOfBytes = (capacity - array->_capacity) * sizeof(*array->_data);
+        if (capacity > previousCapacity) {
+            void *startPointer = array->_data + previousCapacity;
+            uint64_t differenceCapasity = capacity - previousCapacity;
+            size_t numberOfBytes = differenceCapasity * sizeof(*array->_data);
             
             memset(startPointer, 0, numberOfBytes);
         }
