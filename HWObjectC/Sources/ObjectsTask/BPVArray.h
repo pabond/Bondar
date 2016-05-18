@@ -14,7 +14,6 @@
 #include "BPVObject.h"
 
 extern const uint64_t kBPVNotFound;
-extern const uint64_t kBPVMaxCapacity;
 
 typedef struct BPVArray BPVArray;
 

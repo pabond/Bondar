@@ -11,7 +11,6 @@
 #include "BPVArray.h"
 
 const uint64_t kBPVNotFound = UINT64_MAX;
-const uint64_t kBPVMaxCapacity = UINT64_MAX - 1;
 
 struct BPVArray {
     BPVObject _parentClass;
@@ -37,7 +36,7 @@ static
 void BPVArrayResize(BPVArray *array);
 
 static
-void BPVArrayCountAddValue(BPVArray *array, uint64_t value);
+void BPVArrayCountAddValue(BPVArray *array, int8_t value);
 
 static
 void BPVArraySetObjectAtIndex(BPVArray *array, void *object, uint64_t count);
@@ -50,8 +49,7 @@ void BPVArrayReorderObjects(BPVArray *array, uint8_t index);
 
 void __BPVArrayDeallocate(BPVArray *array) {
     if (array) {
-        free(array->_data);
-        array->_data = NULL;
+        BPVArraySetCapacity(array, 0);
     }
     
     __BPVObjectDeallocate(array);
@@ -105,7 +103,7 @@ void BPVArrayRemoveObjectAtIndex(BPVArray *array, uint64_t index) {
     if (array) {
         BPVArraySetObjectAtIndex(array, NULL, index);
         BPVArrayReorderObjects(array, index);
-        array->_count -= 1;
+        BPVArrayCountAddValue(array, -1);
     }
 }
 
@@ -122,7 +120,7 @@ void BPVArrayRemoveAllObjects(BPVArray *array) {
 
 uint64_t BPVArrayGetCapacity(BPVArray *array) {
     if (!array) {
-        return kBPVMaxCapacity;
+        return 0;
     }
     
     return array->_capacity;
@@ -132,7 +130,7 @@ uint64_t BPVArrayGetCapacity(BPVArray *array) {
 #pragma mark Private Implementations
 
 void BPVArraySetCapacity(BPVArray *array, uint64_t capacity) {
-    if (array && capacity != array->_capacity && kBPVMaxCapacity >= capacity) {
+    if (array && capacity != array->_capacity) {
         size_t size = capacity * sizeof(*array->_data);
         if (size && array->_data) {
             free(array->_data);
@@ -165,7 +163,7 @@ uint64_t BPVArrayPrefferedCapacity(BPVArray *array) {
 }
 
 bool BPVArrayShouldResize(BPVArray *array) {
-    return array && array->_capacity < BPVArrayPrefferedCapacity(array);
+    return array && BPVArrayGetCapacity(array) != BPVArrayPrefferedCapacity(array);
 }
 
 void BPVArrayResize(BPVArray *array) {
@@ -174,7 +172,7 @@ void BPVArrayResize(BPVArray *array) {
     }
 }
 
-void BPVArrayCountAddValue(BPVArray *array, uint64_t value) {
+void BPVArrayCountAddValue(BPVArray *array, int8_t value) {
     if (array) {
         array->_count += value;
         
@@ -185,12 +183,6 @@ void BPVArrayCountAddValue(BPVArray *array, uint64_t value) {
 void BPVArraySetObjectAtIndex(BPVArray *array, void *object, uint64_t count){
     BPVArray *currentObjectAtIndex = BPVArrayGetObjectAtIndex(array, count);
     if (array && currentObjectAtIndex != object) {
-        if (currentObjectAtIndex && !object) {
-            array->_count -= 1;
-        } else if (!currentObjectAtIndex && object) {
-            array->_count += 1;
-        }
-        
         BPVObjectRelease(currentObjectAtIndex);
         
         array->_data[count] = BPVObjectRetain(object);
