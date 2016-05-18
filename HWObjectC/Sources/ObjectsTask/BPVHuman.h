@@ -61,7 +61,6 @@ BPVHuman *BPVHumanGiveBirthToChild(BPVHuman *parent);
 BPVHuman *BPVHumanGetChildAtIndex(BPVHuman *parent, uint8_t index);
 uint8_t BPVHumanGetChildIndex(BPVHuman *parent, BPVHuman *child);
 uint8_t BPVHumanGetChildrenCount(BPVHuman *object);
-void BPVHumanSetChildrenCount(BPVHuman *human, uint8_t value);
 void BPVHumanRemoveChildAtIndex(BPVHuman *parent, uint8_t index);
 
 #endif /* BPVHuman_h */

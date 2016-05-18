@@ -31,7 +31,7 @@ static
 bool BPVArrayShouldResize(BPVArray *array);
 
 static
-uint64_t BPVCapacityToAdd(BPVArray *array);
+uint64_t BPVArrayPrefferedCapacity(BPVArray *array);
 
 static
 void BPVArrayResize(BPVArray *array);
@@ -165,12 +165,12 @@ uint64_t BPVArrayPrefferedCapacity(BPVArray *array) {
 }
 
 bool BPVArrayShouldResize(BPVArray *array) {
-    return array && array->_capacity < BPVCapacityToAdd(array);
+    return array && array->_capacity < BPVArrayPrefferedCapacity(array);
 }
 
 void BPVArrayResize(BPVArray *array) {
     if (array && BPVArrayShouldResize(array)) {
-        BPVArraySetCapacity(array, BPVCapacityToAdd(array));
+        BPVArraySetCapacity(array, BPVArrayPrefferedCapacity(array));
     }
 }
 

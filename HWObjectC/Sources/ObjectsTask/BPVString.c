@@ -10,26 +10,11 @@
 #include <string.h>
 
 #include "BPVString.h"
-#include "BPVObject.h"
-
-struct BPVString {
-    BPVObject _parentClass;
-    
-    void *_data;
-    uint64_t _count;
-};
 
 #pragma mark -
 #pragma mark Private Declarations
 
-static
 void BPVStringSetString(BPVString *object, char *string);
-
-static
-BPVString *BPVStringCopySrting(char *string);
-
-static
-size_t BPVStringGetSize(char *string);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -41,12 +26,19 @@ void __BPVStringDeallocate(void *object) {
     __BPVObjectDeallocate(object);
 }
 
-BPVString* BVPStringCreate() {
-    return BPVObjectCreateWithType(BPVString);
+BPVString* BPVStringCreate(char *string) {
+    BPVString *object = BPVObjectCreateWithType(BPVString);
+    BPVStringSetString(object, string);
+    
+    return object;
 }
 
 char *BPVStringGetString(BPVString *object) {
     return object ? object->_data : NULL;
+}
+
+size_t BPVStringGetSize(char *string) {
+    return string ? strlen(string) : 0;
 }
 
 #pragma mark -
@@ -60,15 +52,7 @@ void BPVStringSetString(BPVString *object, char *string) {
         }
         
         if (string) {
-            object->_data = BPVStringCopySrting(string);
+            object->_data = strdup(string);
         }
     }
-}
-
-BPVString *BPVStringCopyString(char *string) {
-    return string ? strdup(string) : NULL;
-}
-
-size_t BPVStringGetSize(char *string) {
-    return string ? strlen(string) : 0;
 }

@@ -63,6 +63,12 @@ void BPVHumanReorderChildren(BPVHuman *object, uint8_t index);
 static
 void BPVHumanRemoveAllChildren(BPVHuman *parent);
 
+static
+void BPVHumanChildrenCountAddValue(BPVHuman *human, int8_t value);
+
+static
+void BPVHumanSetChildrenCount(BPVHuman *human, uint8_t value);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -182,12 +188,6 @@ uint8_t BPVHumanGetChildrenCount(BPVHuman *object) {
     return object ? object->_childrenCount : 0;
 }
 
-void BPVHumanSetChildrenCount(BPVHuman *human, uint8_t value) {
-    if (human) {
-        human->_childrenCount = value;
-    }
-}
-
 BPVHuman *BPVHumanGiveBirthToChild(BPVHuman *parent) {
     BPVHuman *newborn = NULL;
     
@@ -272,15 +272,19 @@ void BPVHumanChildSetNullParent(BPVHuman *parent, uint8_t index) {
 }
 
 void BPVHumanSetChildAtIndex(BPVHuman *parent, uint8_t index, BPVHuman *child) {
-    BPVHuman *currentChildAtIndex = BPVHumanGetChildAtIndex(parent, index);
-    if (parent && currentChildAtIndex != child) {
-        if (currentChildAtIndex && !child) {
-            parent->_childrenCount -= 1;
-        } else if (!currentChildAtIndex && child) {
-            parent->_childrenCount += 1;
+    BPVHuman *previousChild = BPVHumanGetChildAtIndex(parent, index);
+    if (parent && previousChild != child) {
+        
+        int8_t value = 0;
+        if (previousChild && !child) {
+            value = -1;
+        } else if (!previousChild && child) {
+            value = 1;
         }
         
-        BPVObjectRelease(currentChildAtIndex);
+        BPVHumanChildrenCountAddValue(parent, value);
+        
+        BPVObjectRelease(previousChild);
         
         parent->_children[index] = BPVObjectRetain(child);
     }
@@ -304,5 +308,17 @@ void BPVHumanRemoveAllChildren(BPVHuman *parent) {
                 BPVHumanRemoveChildAtIndex(parent, lastChildIndex);
             }
         }
+    }
+}
+
+void BPVHumanChildrenCountAddValue(BPVHuman *human, int8_t value) {
+    if (human && value) {
+        BPVHumanSetChildrenCount(human, BPVHumanGetChildrenCount(human) + value);
+    }
+}
+
+void BPVHumanSetChildrenCount(BPVHuman *human, uint8_t value) {
+    if (human) {
+        human->_childrenCount = value;
     }
 }
