@@ -17,7 +17,6 @@ struct BPVString {
     BPVObject _parentClass;
     
     void *_data;
-    uint64_t _count;
 };
 
 extern
@@ -28,9 +27,6 @@ BPVString* BPVStringCreate(char *string);
 
 extern
 char *BPVStringGetString(BPVString *object);
-
-extern
-void BPVStringSetString(BPVString *object, char *string);
 
 extern
 size_t BPVStringGetSize(char *string);

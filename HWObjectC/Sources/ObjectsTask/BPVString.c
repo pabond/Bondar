@@ -14,13 +14,16 @@
 #pragma mark -
 #pragma mark Private Declarations
 
+static
 void BPVStringSetString(BPVString *object, char *string);
+
+static
+char *BPVStringCopy(char *string);
 
 #pragma mark -
 #pragma mark Public Implementations
 
 void __BPVStringDeallocate(void *object) {
-    
     BPVStringSetString(object, NULL);
     
     __BPVObjectDeallocate(object);
@@ -52,7 +55,11 @@ void BPVStringSetString(BPVString *object, char *string) {
         }
         
         if (string) {
-            object->_data = strdup(string);
+            object->_data = BPVStringCopy(string);
         }
     }
+}
+
+char *BPVStringCopy(char *string) {
+    return string ? strdup(string) : NULL;
 }
