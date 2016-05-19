@@ -33,7 +33,10 @@ static
 uint64_t BPVArrayPrefferedCapacity(BPVArray *array);
 
 static
-void BPVArrayResize(BPVArray *array);
+void BPVArrayResizeIfNeeded(BPVArray *array);
+
+static
+void BPVArraySetCount(BPVArray *array, uint64_t value);
 
 static
 void BPVArrayCountAddValue(BPVArray *array, int8_t value);
@@ -48,9 +51,7 @@ void BPVArrayReorderObjects(BPVArray *array, uint8_t index);
 #pragma mark Public Implementations
 
 void __BPVArrayDeallocate(BPVArray *array) {
-    if (array) {
-        BPVArraySetCapacity(array, 0);
-    }
+    BPVArraySetCapacity(array, 0);
     
     __BPVObjectDeallocate(array);
 }
@@ -65,7 +66,7 @@ BPVArray *BPVArrayCreateArrayWithCapacity(uint64_t capacity) {
 void BPVArrayAddObject(BPVArray *array, void *object) {
     if (array && object) {
         if (BPVArrayShouldResize(array)) {
-            BPVArrayResize(array);
+            BPVArrayResizeIfNeeded(array);
         }
   
         BPVArraySetObjectAtIndex(array, object, BPVArrayGetCount(array));
@@ -111,74 +112,93 @@ void BPVArrayRemoveAllObjects(BPVArray *array) {
     if (array) {
         uint64_t count = BPVArrayGetCount(array);
         for (uint64_t index = 0; index < count; index++) {
-            BPVArrayRemoveObjectAtIndex(array, count - index - 1);
+            BPVArraySetObjectAtIndex(array, NULL, count - index - 1);
         }
         
-        BPVArraySetCapacity(array, 0);
+        BPVArraySetCapacity(array, 1);
     }
 }
 
 uint64_t BPVArrayGetCapacity(BPVArray *array) {
-    if (!array) {
-        return 0;
-    }
-    
-    return array->_capacity;
+    return array ? array->_capacity : 0;
 }
 
 #pragma mark -
 #pragma mark Private Implementations
 
 void BPVArraySetCapacity(BPVArray *array, uint64_t capacity) {
-    uint64_t previousCapacity = array->_capacity;
-    if (array && capacity != previousCapacity) {
-        size_t size = capacity * sizeof(*array->_data);
-        if (size && array->_data) {
-            free(array->_data);
-            array->_data = NULL;
-        } else {
-            array->_data = realloc(array->_data, size);
-        }
+    if (array) {
+        uint64_t previousCapacity = array->_capacity;
+        size_t elementSize = sizeof(*array->_data);
         
-        if (capacity > previousCapacity) {
-            void *startPointer = array->_data + previousCapacity;
-            uint64_t differenceCapasity = capacity - previousCapacity;
-            size_t numberOfBytes = differenceCapasity * sizeof(*array->_data);
+        if (capacity != previousCapacity) {
+            size_t size = capacity * elementSize;
+            if (!capacity) {
+                if (array->_data) {
+                    free(array->_data);
+                    array->_data = NULL;
+                }
+            } else {
+                array->_data = realloc(array->_data, size);
+                
+                if (capacity > previousCapacity) {
+                    void *startPointer = array->_data + previousCapacity;
+                    uint64_t capacityDelta = capacity - previousCapacity;
+                    size_t numberOfBytes = capacityDelta * elementSize;
+                    
+                    memset(startPointer, 0, numberOfBytes);
+                }
+
+            }
             
-            memset(startPointer, 0, numberOfBytes);
+            array->_capacity = capacity;
         }
-        
-        array->_capacity = capacity;
     }
 }
 
 uint64_t BPVArrayPrefferedCapacity(BPVArray *array) {
-    uint64_t prefferedCapacity = BPVArrayGetCount(array);
-    if (array) {
-        uint64_t count = BPVArrayGetCount(array);
-        if (count > BPVArrayGetCapacity(array)) {
-            prefferedCapacity = count;
-        }
+    if (!array) {
+        return 0;
+    }
+
+    uint64_t capacity = BPVArrayGetCount(array);
+    uint64_t count = BPVArrayGetCount(array);
+    
+    if (!capacity) {
+        return 1;
     }
     
-    return prefferedCapacity;
+    if (count >= capacity) {
+        return count < 500 ? capacity * 2 : count < 5000 ? capacity * 10 / 6 : capacity * 10 / 8;
+    }
+    
+    if (count <= capacity / 2) {
+        return count < capacity / 3 ? capacity / 2 : capacity * 3 / 4;
+    }
+    
+    return capacity;
 }
 
 bool BPVArrayShouldResize(BPVArray *array) {
     return array && BPVArrayGetCapacity(array) != BPVArrayPrefferedCapacity(array);
 }
 
-void BPVArrayResize(BPVArray *array) {
+void BPVArrayResizeIfNeeded(BPVArray *array) {
     if (array && BPVArrayShouldResize(array)) {
         BPVArraySetCapacity(array, BPVArrayPrefferedCapacity(array));
     }
 }
 
+void BPVArraySetCount(BPVArray *array, uint64_t value) {
+    array->_count = value;
+}
+
 void BPVArrayCountAddValue(BPVArray *array, int8_t value) {
     if (array) {
-        array->_count += value;
+        uint64_t newValue = value + BPVArrayGetCount(array);
+        BPVArraySetCount(array, newValue);
         
-        BPVArrayResize(array);
+        BPVArrayResizeIfNeeded(array);
     }
 }
 
