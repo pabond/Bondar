@@ -169,11 +169,11 @@ uint64_t BPVArrayPrefferedCapacity(BPVArray *array) {
     }
     
     if (count >= capacity) {
-        return count < 500 ? capacity * 2 : count < 5000 ? capacity * 10 / 6 : capacity * 10 / 8;
+        return capacity * 2;
     }
     
-    if (count <= capacity / 2) {
-        return count < capacity / 3 ? capacity / 2 : capacity * 3 / 4;
+    if (count <= capacity / 3) {
+        return capacity / 2;
     }
     
     return capacity;
