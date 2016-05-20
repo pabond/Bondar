@@ -14,10 +14,16 @@
 #pragma mark Private Declarations
 
 static
-void BPVLinkedListSetHead(BPVLinkedList *object, BPVLinkedListNode *head);
+void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head);
 
 static
-void *BPVLinkedListGetHead(BPVLinkedList *list);
+BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
+
+static
+void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value);
+
+static
+void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -54,27 +60,54 @@ bool BPVLinkedListIsEmpty(BPVLinkedList *list) {
 }
 
 void BPVLinkedListAddObject(BPVLinkedList *list, void *object) {
-    if (list && !BPVLinkedListContainsObject(list, object)) {
-        <#statements#>
+    if (list) {
+        BPVLinkedListNode *node = BPVLinkedListNodeCreateWithObject(object);
+        BPVLinkedListNodeSetNextNode(node, BPVLinkedListGetHead(list));
+        
+        BPVLinkedListSetHead(list, node);
+        BPVLinkedListCountAddValue(list, 1);
+        BPVObjectRelease(node);
     }
 }
 
 void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object);
 
-void BPVLinkedListRemoveAllObjects(BPVLinkedList *list);
-
-bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
-    return ;
+void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
+    if (list) {
+        BPVLinkedListSetHead(list, NULL);
+        BPVLinkedListSetCount(list, 0);
+    }
 }
 
-uint64_t BPVLinkedListGetCount(BPVLinkedList *list);
+bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object);
+
+uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
+    return list ? list->_nodesCount : 0;
+}
 
 #pragma mark -
 #pragma mark Private Implementations 
 
-void BPVLinkedListSetHead(BPVLinkedList *object, BPVLinkedListNode *head);
+void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head) {
+    if (list && head != list->_head) {
+        BPVObjectRelease(head);
+        
+        list->_head = BPVObjectRetain(head);
+    }
+}
 
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list) {
     return list ? list->_head : NULL;
 }
 
+void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value) {
+    if (list) {
+        list->_nodesCount = value;
+    }
+}
+
+void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value) {
+    if (list && value) {
+        BPVLinkedListSetCount(list, BPVLinkedListGetCount(list) + value);
+    }
+}

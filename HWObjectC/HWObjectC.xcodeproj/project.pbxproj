@@ -15,7 +15,8 @@
 		2DECEC5A1CEF24F500FE66F3 /* BPVLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC501CEF24F500FE66F3 /* BPVLinkedList.c */; };
 		2DECEC5B1CEF24F500FE66F3 /* BPVObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC531CEF24F500FE66F3 /* BPVObject.c */; };
 		2DECEC5C1CEF24F500FE66F3 /* BPVString.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC561CEF24F500FE66F3 /* BPVString.c */; };
-		2DECEC621CEF254900FE66F3 /* BPVLinkedListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC601CEF254900FE66F3 /* BPVLinkedListNode.c */; };
+		2DECEC6C1CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC671CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c */; };
+		2DECEC6D1CEF5FF300FE66F3 /* BPVLinkedListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC6A1CEF5FF300FE66F3 /* BPVLinkedListNode.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,8 +48,10 @@
 		2DECEC541CEF24F500FE66F3 /* BPVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVObject.h; sourceTree = "<group>"; };
 		2DECEC561CEF24F500FE66F3 /* BPVString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVString.c; sourceTree = "<group>"; };
 		2DECEC571CEF24F500FE66F3 /* BPVString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVString.h; sourceTree = "<group>"; };
-		2DECEC601CEF254900FE66F3 /* BPVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLinkedListNode.c; sourceTree = "<group>"; };
-		2DECEC611CEF254900FE66F3 /* BPVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListNode.h; sourceTree = "<group>"; };
+		2DECEC671CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLinkedListEnumerator.c; sourceTree = "<group>"; };
+		2DECEC681CEF5FF300FE66F3 /* BPVLinkedListEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListEnumerator.h; sourceTree = "<group>"; };
+		2DECEC6A1CEF5FF300FE66F3 /* BPVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLinkedListNode.c; sourceTree = "<group>"; };
+		2DECEC6B1CEF5FF300FE66F3 /* BPVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,10 +143,10 @@
 		2DECEC4F1CEF24F500FE66F3 /* BPVLinkedList */ = {
 			isa = PBXGroup;
 			children = (
+				2DECEC661CEF5FF300FE66F3 /* BPVLinkedListEnumerator */,
+				2DECEC691CEF5FF300FE66F3 /* BPVLinkedListNode */,
 				2DECEC501CEF24F500FE66F3 /* BPVLinkedList.c */,
 				2DECEC511CEF24F500FE66F3 /* BPVLinkedList.h */,
-				2DECEC601CEF254900FE66F3 /* BPVLinkedListNode.c */,
-				2DECEC611CEF254900FE66F3 /* BPVLinkedListNode.h */,
 			);
 			path = BPVLinkedList;
 			sourceTree = "<group>";
@@ -164,6 +167,24 @@
 				2DECEC571CEF24F500FE66F3 /* BPVString.h */,
 			);
 			path = BPVString;
+			sourceTree = "<group>";
+		};
+		2DECEC661CEF5FF300FE66F3 /* BPVLinkedListEnumerator */ = {
+			isa = PBXGroup;
+			children = (
+				2DECEC671CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c */,
+				2DECEC681CEF5FF300FE66F3 /* BPVLinkedListEnumerator.h */,
+			);
+			path = BPVLinkedListEnumerator;
+			sourceTree = "<group>";
+		};
+		2DECEC691CEF5FF300FE66F3 /* BPVLinkedListNode */ = {
+			isa = PBXGroup;
+			children = (
+				2DECEC6A1CEF5FF300FE66F3 /* BPVLinkedListNode.c */,
+				2DECEC6B1CEF5FF300FE66F3 /* BPVLinkedListNode.h */,
+			);
+			path = BPVLinkedListNode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,10 +244,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DECEC441CEF220800FE66F3 /* BPVArrayTests.c in Sources */,
+				2DECEC6D1CEF5FF300FE66F3 /* BPVLinkedListNode.c in Sources */,
 				2DECEC221CE2032E00FE66F3 /* main.c in Sources */,
 				2DECEC591CEF24F500FE66F3 /* BPVHuman.c in Sources */,
 				2DECEC5C1CEF24F500FE66F3 /* BPVString.c in Sources */,
-				2DECEC621CEF254900FE66F3 /* BPVLinkedListNode.c in Sources */,
+				2DECEC6C1CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c in Sources */,
 				2DECEC5B1CEF24F500FE66F3 /* BPVObject.c in Sources */,
 				2DECEC5A1CEF24F500FE66F3 /* BPVLinkedList.c in Sources */,
 				2DECEC581CEF24F500FE66F3 /* BPVArray.c in Sources */,

@@ -12,7 +12,6 @@ void __BPVLinkedListNodeDeallocate(BPVLinkedListNode *node) {
     BPVLinkedListNodeSetObject(node, 0);
     
     __BPVObjectDeallocate(node);
-
 }
 
 BPVLinkedListNode *BPVLinkedListNodeCreate(BPVObject *object) {
