@@ -222,11 +222,18 @@ BPVHuman *BPVHumanGetChildAtIndex(BPVHuman *parent, uint8_t index) {
     return parent ? parent->_children[index] : NULL;
 }
 
+void BPVHumanRemoveChild(BPVHuman *parent, BPVHuman *child) {
+    if (child) {
+        BPVHumanRemoveChildAtIndex(parent, BPVHumanGetChildIndex(parent, child));
+    }
+}
+
 uint8_t BPVHumanGetChildIndex(BPVHuman *parent, BPVHuman *child) {
     uint8_t result = BPVIndexNotFound;
     for (uint8_t index = 0; index < BPVHumanGetChildrenCount(parent); index++) {
         if (BPVHumanGetChildAtIndex(parent, index) == child) {
             result = index;
+            break;
         }
     }
     
