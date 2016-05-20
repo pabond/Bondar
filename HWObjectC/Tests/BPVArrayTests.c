@@ -12,7 +12,7 @@
 #include "BPVArray.h"
 #include "BPVString.h"
 
-void BPVRunArreyTests() {
+void BPVRunArrayTests() {
     printf("test started\n");
     
     uint8_t objectsCount = 10;

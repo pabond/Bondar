@@ -9,6 +9,6 @@
 #ifndef BPVArrayTests_h
 #define BPVArrayTests_h
 
-void BPVRunArreyTests();
+void BPVRunArrayTests();
 
 #endif /* BPVArrayTests_h */

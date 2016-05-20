@@ -10,5 +10,5 @@
 #include "BPVArrayTests.h"
 
 void BPVRunApplication() {
-    BPVRunArreyTests();
+    BPVRunArrayTests();
 }
