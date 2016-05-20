@@ -30,6 +30,9 @@ extern
 uint64_t BPVArrayGetCount(BPVArray *array);
 
 extern
+uint64_t BPVArrayGetCapacity(BPVArray *array);
+
+extern
 bool BPVArrayContainsObject(BPVArray *array, void *object);
 
 extern

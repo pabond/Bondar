@@ -10,6 +10,18 @@
 
 #include "BPVObject.h"
 
+#pragma mark -
+#pragma mark Private Declarations
+
+static
+void BPVObjectSetCount(BPVObject *object, uint64_t value);
+
+static
+void BPVObjectRetainCountAddValue(BPVObject *object, int8_t value);
+
+#pragma mark -
+#pragma mark Public Implementations
+
 void __BPVObjectDeallocate(void *object) {
     if (object) {
         free(object);
@@ -21,7 +33,7 @@ void *__BPVCreateObject(size_t objectSize, BPVObjectDeallocator dealocator) {
     if (objectSize && dealocator) {
         BPVObject *object = calloc(1, objectSize);
         
-        object->_referenceCount = 1;
+        object->_retainCount = 1;
         object->_deallocatorFunctionPointer = dealocator;
         
         return object;
@@ -30,13 +42,13 @@ void *__BPVCreateObject(size_t objectSize, BPVObjectDeallocator dealocator) {
     return NULL;
 }
 
-uint64_t BPVObjectGetReferenceCount(void *object) {
-    return object ? ((BPVObject *)object)->_referenceCount : 0;
+uint64_t BPVObjectGetRetainCount(void *object) {
+    return object ? ((BPVObject *)object)->_retainCount : 0;
 }
 
 void *BPVObjectRetain(void *object) {
     if (object) {
-        ((BPVObject*)object)->_referenceCount += 1;
+        BPVObjectRetainCountAddValue(((BPVObject*)object), 1);
     }
     
     return object;
@@ -45,9 +57,22 @@ void *BPVObjectRetain(void *object) {
 void BPVObjectRelease(void *object) {
     if (object) {
         BPVObject *objectPointer = (BPVObject *)object;
-        objectPointer->_referenceCount -= 1;
-        if (0 == BPVObjectGetReferenceCount(objectPointer)) {
+        BPVObjectRetainCountAddValue(objectPointer, -1);
+        if (0 == BPVObjectGetRetainCount(objectPointer)) {
             objectPointer->_deallocatorFunctionPointer(object);
         }
+    }
+}
+
+#pragma mark -
+#pragma mark Privare Implementations
+
+void BPVObjectSetCount(BPVObject *object, uint64_t value) {
+    object->_retainCount = value;
+}
+
+void BPVObjectRetainCountAddValue(BPVObject *object, int8_t value) {
+    if (object) {
+        BPVObjectSetCount(object, object->_retainCount += value);
     }
 }

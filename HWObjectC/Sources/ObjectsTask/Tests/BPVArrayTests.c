@@ -15,8 +15,22 @@
 void BPVRunArreyTests() {
     printf("test started\n");
     
+    uint8_t objectsCount = 10;
+    
     for (uint8_t iteration = 0; iteration < 100; iteration++) {
-        BPVArray *array = BPVArrayCreateArrayWithCapacity(10);
+        BPVArray *array = BPVArrayCreateArrayWithCapacity(0);
+        
+        printf("Retain count after array created: %llu\n", BPVObjectGetRetainCount(array));
+        
+        BPVObjectRetain(array);
+        
+        printf("Retain count after RETAIN: %llu\n", BPVObjectGetRetainCount(array));
+        
+        BPVObjectRelease(array);
+        
+        printf("Retain count after RELEASE: %llu\n", BPVObjectGetRetainCount(array));
+        
+        printf("Capacity after array created: %llu\n", BPVArrayGetCapacity(array));
         
         if (array) {
             printf("Arrey created\n");
@@ -24,46 +38,28 @@ void BPVRunArreyTests() {
         
         BPVString *object = BPVStringCreate("test object");
         
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
-        BPVArrayAddObject(array, object);
+        for (uint8_t iteration = 0; iteration < objectsCount; iteration++) {
+            BPVArrayAddObject(array, object);
+        }
         
         if (BPVArrayGetObjectAtIndex(array, 0)
             && BPVArrayGetObjectAtIndex(array, 1)
             && BPVArrayGetObjectAtIndex(array, 5)
             && BPVArrayGetObjectAtIndex(array, 9))
         {
-            printf("Objectrs added to array\n");
+            printf("%llu objectrs added to array\n", BPVArrayGetCount(array));
+            printf("Capacity afterobjects added is %llu\n", BPVArrayGetCapacity(array));
         }
         
-        BPVArrayRemoveObjectAtIndex(array, 9);
-        BPVArrayRemoveObjectAtIndex(array, 8);
-        BPVArrayRemoveObjectAtIndex(array, 7);
-        BPVArrayRemoveObjectAtIndex(array, 6);
-        BPVArrayRemoveObjectAtIndex(array, 5);
-        BPVArrayRemoveObjectAtIndex(array, 4);
-        BPVArrayRemoveObjectAtIndex(array, 3);
-        BPVArrayRemoveObjectAtIndex(array, 2);
-        BPVArrayRemoveObjectAtIndex(array, 1);
-        BPVArrayRemoveObjectAtIndex(array, 0);
-        
-        if (BPVArrayGetCount(array)) {
-            printf("count not empty\n");
+        for (uint8_t iteration = 0; iteration < objectsCount; iteration++) {
+            BPVArrayRemoveObjectAtIndex(array, iteration);
         }
         
-        __BPVArrayDeallocate(array);
+        printf("%llu objectrs in array after removing\n", BPVArrayGetCount(array));
+        printf("Capacity after objects deleted: %llu\n", BPVArrayGetCapacity(array));
         
-        if (array) {
-            printf("arrey not deleted\n");
-        }
+        BPVObjectRelease(array);
     }
     
-    printf("test finished successfully\n");
+    printf("test finished\n");
 }

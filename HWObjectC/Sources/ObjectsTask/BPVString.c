@@ -17,9 +17,6 @@
 static
 void BPVStringSetString(BPVString *object, char *string);
 
-static
-char *BPVStringCopy(char *string);
-
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -34,6 +31,10 @@ BPVString* BPVStringCreate(char *string) {
     BPVStringSetString(object, string);
     
     return object;
+}
+
+BPVString *BPVStringCopy(BPVString *object) {
+    return BPVStringCreate(BPVStringGetString(object));
 }
 
 char *BPVStringGetString(BPVString *object) {
@@ -55,11 +56,7 @@ void BPVStringSetString(BPVString *object, char *string) {
         }
         
         if (string) {
-            object->_data = BPVStringCopy(string);
+            object->_data = strdup(string);
         }
     }
-}
-
-char *BPVStringCopy(char *string) {
-    return string ? strdup(string) : NULL;
 }

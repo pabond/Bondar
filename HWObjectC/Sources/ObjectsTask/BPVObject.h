@@ -14,7 +14,7 @@
 typedef void (*BPVObjectDeallocator)(void *object);
 
 typedef struct {
-    uint64_t _referenceCount;
+    uint64_t _retainCount;
     BPVObjectDeallocator _deallocatorFunctionPointer;
 } BPVObject;
 
@@ -28,7 +28,7 @@ extern
 void *__BPVCreateObject(size_t objectSize, BPVObjectDeallocator dealocator);
 
 extern
-uint64_t BPVObjectGetReferenceCount(void *object);
+uint64_t BPVObjectGetRetainCount(void *object);
 
 extern
 void *BPVObjectRetain(void *object);

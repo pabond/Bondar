@@ -26,6 +26,9 @@ extern
 BPVString* BPVStringCreate(char *string);
 
 extern
+BPVString *BPVStringCopy(BPVString *string);
+
+extern
 char *BPVStringGetString(BPVString *object);
 
 extern
