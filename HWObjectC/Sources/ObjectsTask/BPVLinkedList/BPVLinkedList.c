@@ -96,7 +96,31 @@ void BPVLinkedListAddObject(BPVLinkedList *list, void *object) {
     }
 }
 
-void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object);
+void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object) {
+    if (list && object) {
+        BPVLinkedListNode *node = BPVLinkedListGetHead(list);
+        BPVLinkedListNode *previousNode = NULL;
+        
+        do {
+            BPVObject *nodeObject = BPVLinkedListNodeGetObject(node);
+            BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
+            
+            if (object == nodeObject) {
+                if (node == BPVLinkedListGetHead(list)) {
+                    BPVLinkedListSetHead(list, nextNode);
+                } else {
+                    BPVLinkedListNodeSetNextNode(previousNode, nextNode);
+                }
+                
+                BPVLinkedListCountAddValue(list, -1);
+                break;
+            }
+            
+            previousNode = node;
+            node = nextNode;
+        } while (BPVLinkedListNodeGetNextNode(node));
+    }
+}
 
 void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
     if (list) {
@@ -105,7 +129,21 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
     }
 }
 
-bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object);
+bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
+    bool result = false;
+    
+    if (list && object) {
+        BPVLinkedListNode *node = BPVLinkedListGetHead(list);
+        do {
+            if (object == BPVLinkedListNodeGetObject(node)) {
+                result = true;
+                break;
+            }
+        } while (BPVLinkedListNodeGetNextNode(node));
+    }
+    
+    return result;
+}
 
 uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
     return list ? list->_count : 0;
