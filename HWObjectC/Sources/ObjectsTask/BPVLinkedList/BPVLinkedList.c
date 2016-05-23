@@ -9,15 +9,10 @@
 #include "BPVLinkedList.h"
 #include "BPVLinkedListEnumerator.h"
 #include "BPVLinkedListNode.h"
+#include "BPVLinkedListPrivate.h"
 
 #pragma mark -
 #pragma mark Private Declarations
-
-static
-void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head);
-
-static
-BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
 
 static
 void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value);

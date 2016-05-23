@@ -12,7 +12,6 @@
 #include <stdbool.h>
 
 #include "BPVObject.h"
-#include "BPVLinkedListPrivate.h"
 
 typedef struct BPVLinkedListNode BPVLinkedListNode;
 

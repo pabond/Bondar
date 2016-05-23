@@ -9,6 +9,7 @@
 #include "BPVLinkedListEnumerator.h"
 #include "BPVLinkedListNode.h"
 #include "BPVLinkedList.h"
+#include "BPVLinkedListPrivate.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -31,6 +32,9 @@ void BPVLinkedListEnumeratorSetMutationsCount(BPVLinkedListEnumerator *enumerato
 static
 uint64_t BPVLinkedListEnumeratorGetMutationsCount(BPVLinkedListEnumerator *enumerator);
 
+static
+void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, bool value);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -42,7 +46,7 @@ void __BPVLinkedListEnumeratorDeallocate(void *object) {
 }
 
 BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateWithList(void *list) {
-    if (!list) {
+    if (!list && !BPVLinkedListGetHead(list)) {
         return NULL;
     }
     
@@ -50,6 +54,7 @@ BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateWithList(void *list) {
     
     BPVLinkedListEnumeratorSetList(enumerator, list);
     BPVLinkedListEnumeratorSetMutationsCount(enumerator, BPVLinkedListGetMutationsCount(list));
+    BPVLinkedListEnumeratorSetValidity(enumerator, true);
     
     return enumerator;
 }
@@ -62,7 +67,9 @@ void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator) 
     return NULL;
 }
 
-bool BPVLinkedListEnumeratorIsValid(BPVLinkedListEnumerator *enumerator);
+bool BPVLinkedListEnumeratorIsValid(BPVLinkedListEnumerator *enumerator){
+    return enumerator && enumerator->_isValid;
+}
 
 #pragma mark -
 #pragma mark Private Implementations
@@ -100,4 +107,10 @@ void BPVLinkedListEnumeratorSetMutationsCount(BPVLinkedListEnumerator *enumerato
 
 uint64_t BPVLinkedListEnumeratorGetMutationsCount(BPVLinkedListEnumerator *enumerator) {
     return enumerator ? enumerator->_mutationsCount : 0;
+}
+
+void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, bool value) {
+    if (enumerator) {
+        enumerator->_isValid = value;
+    }
 }
