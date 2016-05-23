@@ -20,6 +20,9 @@ void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value);
 static
 void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value);
 
+static
+void BPVLinkedListAddMutation(BPVLinkedList *list);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -168,6 +171,7 @@ void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value) {
 void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value) {
     if (list && value) {
         BPVLinkedListSetCount(list, BPVLinkedListGetCount(list) + value);
+        BPVLinkedListAddMutation(list);
     }
 }
 
@@ -179,4 +183,10 @@ void BPVLinkedListSetMutationsCount(BPVLinkedList *list, uint64_t count) {
 
 uint64_t BPVLinkedListGetMutationsCount(BPVLinkedList *list) {
     return list ? list->_mutationsCount : 0;
+}
+
+void BPVLinkedListAddMutation(BPVLinkedList *list) {
+    if (list) {
+        BPVLinkedListSetMutationsCount(list, BPVLinkedListGetMutationsCount(list) + 1);
+    }
 }
