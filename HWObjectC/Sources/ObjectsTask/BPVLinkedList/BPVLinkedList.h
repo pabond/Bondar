@@ -20,7 +20,7 @@ typedef struct {
     
     BPVLinkedListNode *_head;
     
-    uint64_t _nodesCount;
+    uint64_t _count;
 } BPVLinkedList;
 
 extern
@@ -33,7 +33,7 @@ extern
 void BPVLinkedListRemoveFirstObject(BPVLinkedList *list);
 
 extern
-BPVLinkedList *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list);
+BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object);
 
 extern
 bool BPVLinkedListIsEmpty(BPVLinkedList *list);

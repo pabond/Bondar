@@ -48,11 +48,29 @@ void BPVLinkedListRemoveFirstObject(BPVLinkedList *list) {
     if (list) {
         BPVLinkedListNode *node = BPVLinkedListGetHead(list);
         BPVLinkedListSetHead(list, BPVLinkedListNodeGetNextNode(node));
+        BPVLinkedListCountAddValue(list, -1);
     }
 }
 
-BPVLinkedList *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list) {
-    return NULL; //back when enumerator will be writen
+BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object) {
+    BPVLinkedListNode *head = BPVLinkedListGetHead(list);
+    
+    if (!list && object == BPVLinkedListNodeGetObject(head)) {
+        return NULL;
+    }
+    
+    BPVObject *previousObject = BPVLinkedListNodeGetObject(head);
+    BPVLinkedListNode *currentNode = BPVLinkedListNodeGetNextNode(head);
+    
+    do {
+        previousObject = BPVLinkedListNodeGetObject(currentNode);
+        currentNode = BPVLinkedListNodeGetNextNode(BPVLinkedListGetHead(list));
+        if (object == BPVLinkedListNodeGetObject(currentNode)) {
+            break;
+        }
+    } while (BPVLinkedListNodeGetNextNode(currentNode));
+    
+    return previousObject;
 }
 
 bool BPVLinkedListIsEmpty(BPVLinkedList *list) {
@@ -82,7 +100,7 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
 bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object);
 
 uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
-    return list ? list->_nodesCount : 0;
+    return list ? list->_count : 0;
 }
 
 #pragma mark -
@@ -102,7 +120,7 @@ BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list) {
 
 void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value) {
     if (list) {
-        list->_nodesCount = value;
+        list->_count = value;
     }
 }
 

@@ -9,12 +9,12 @@
 #include "BPVLinkedListNode.h"
 
 void __BPVLinkedListNodeDeallocate(BPVLinkedListNode *node) {
-    BPVLinkedListNodeSetObject(node, 0);
+    BPVLinkedListNodeSetObject(node, NULL);
     
     __BPVObjectDeallocate(node);
 }
 
-BPVLinkedListNode *BPVLinkedListNodeCreate(BPVObject *object) {
+BPVLinkedListNode *BPVLinkedListNodeCreateWithObject(BPVObject *object) {
     BPVLinkedListNode *result = BPVObjectCreateWithType(BPVLinkedListNode);
     BPVLinkedListNodeSetObject(result, object);
     
