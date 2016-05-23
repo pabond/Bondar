@@ -52,6 +52,7 @@
 		2DECEC681CEF5FF300FE66F3 /* BPVLinkedListEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListEnumerator.h; sourceTree = "<group>"; };
 		2DECEC6A1CEF5FF300FE66F3 /* BPVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLinkedListNode.c; sourceTree = "<group>"; };
 		2DECEC6B1CEF5FF300FE66F3 /* BPVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListNode.h; sourceTree = "<group>"; };
+		2DECEC6F1CF32CED00FE66F3 /* BPVLinkedListPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListPrivate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +148,7 @@
 				2DECEC691CEF5FF300FE66F3 /* BPVLinkedListNode */,
 				2DECEC501CEF24F500FE66F3 /* BPVLinkedList.c */,
 				2DECEC511CEF24F500FE66F3 /* BPVLinkedList.h */,
+				2DECEC6F1CF32CED00FE66F3 /* BPVLinkedListPrivate.h */,
 			);
 			path = BPVLinkedList;
 			sourceTree = "<group>";

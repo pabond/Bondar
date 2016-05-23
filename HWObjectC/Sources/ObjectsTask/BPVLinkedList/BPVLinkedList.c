@@ -7,7 +7,7 @@
 //
 
 #include "BPVLinkedList.h"
-
+#include "BPVLinkedListEnumerator.h"
 #include "BPVLinkedListNode.h"
 
 #pragma mark -
@@ -32,6 +32,14 @@ void __BPVLinkedListDeallocate(BPVLinkedList *list) {
     BPVLinkedListSetHead(list, NULL);
     
     __BPVObjectDeallocate(list);
+}
+
+BPVLinkedList *BPVLinkedListCreate() {
+    return BPVObjectCreateWithType(BPVLinkedList);
+}
+
+BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateFromList(BPVLinkedList *list) {
+    return BPVLinkedListEnumeratorCreateWithList(list);
 }
 
 BPVObject *BPVLinkedListGetFirstObject(BPVLinkedList *list) {
@@ -128,4 +136,14 @@ void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value) {
     if (list && value) {
         BPVLinkedListSetCount(list, BPVLinkedListGetCount(list) + value);
     }
+}
+
+void BPVLinkedListSetMutationsCount(BPVLinkedList *list, uint64_t count) {
+    if (list) {
+        list->_mutationsCount = count;
+    }
+}
+
+uint64_t BPVLinkedListGetMutationsCount(BPVLinkedList *list) {
+    return list ? list->_mutationsCount : 0;
 }

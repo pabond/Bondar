@@ -12,19 +12,29 @@
 #include <stdbool.h>
 
 #include "BPVObject.h"
+#include "BPVLinkedListPrivate.h"
 
 typedef struct BPVLinkedListNode BPVLinkedListNode;
+typedef struct BPVLinkedListEnumerator BPVLinkedListEnumerator;
 
-typedef struct {
+struct BPVLinkedList {
     BPVObject _parentClass;
     
     BPVLinkedListNode *_head;
     
     uint64_t _count;
-} BPVLinkedList;
+    
+    uint64_t _mutationsCount;
+};
 
 extern
 void __BPVLinkedListDeallocate(BPVLinkedList *list);
+
+extern
+BPVLinkedList *BPVLinkedListCreate();
+
+extern
+BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateFromList(BPVLinkedList *list);
 
 extern
 BPVObject *BPVLinkedListGetFirstObject(BPVLinkedList *list);

@@ -9,17 +9,35 @@
 #ifndef BPVLinkedListEnumerator_h
 #define BPVLinkedListEnumerator_h
 
-#include "BPVObject.h"
+#include <stdbool.h>
 
-typedef struct BPVLinkedList BPVLinkedList;
+#include "BPVObject.h"
+#include "BPVLinkedListPrivate.h"
+
 typedef struct BPVLinkedListNode BPVLinkedListNode;
 
-typedef struct {
+struct BPVLinkedListEnumerator {
     BPVObject _parentClass;
     
-    BPVLinkedList *_list;
+    void *_list;
     BPVLinkedListNode *_currentNode;
-} BPVLinkedListEnumerator;
+    
+    uint64_t _mutationsCount;
+    bool _isValid;
+};
 
+typedef struct BPVLinkedListEnumerator BPVLinkedListEnumerator;
+
+extern
+void __BPVLinkedListEnumeratorDeallocate(void *object);
+
+extern
+BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateWithList(void *list);
+
+extern
+void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator);
+
+extern
+bool BPVLinkedListEnumeratorIsValid(BPVLinkedListEnumerator *enumerator);
 
 #endif /* BPVLinkedListEnumerator_h */
