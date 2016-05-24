@@ -17,6 +17,8 @@
 		2DECEC5C1CEF24F500FE66F3 /* BPVString.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC561CEF24F500FE66F3 /* BPVString.c */; };
 		2DECEC6C1CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC671CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c */; };
 		2DECEC6D1CEF5FF300FE66F3 /* BPVLinkedListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC6A1CEF5FF300FE66F3 /* BPVLinkedListNode.c */; };
+		2DECEC721CF49B7100FE66F3 /* BPVLinkedListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC701CF49B7100FE66F3 /* BPVLinkedListTests.c */; };
+		2DECEC751CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC731CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +55,10 @@
 		2DECEC6A1CEF5FF300FE66F3 /* BPVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLinkedListNode.c; sourceTree = "<group>"; };
 		2DECEC6B1CEF5FF300FE66F3 /* BPVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListNode.h; sourceTree = "<group>"; };
 		2DECEC6F1CF32CED00FE66F3 /* BPVLinkedListPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListPrivate.h; sourceTree = "<group>"; };
+		2DECEC701CF49B7100FE66F3 /* BPVLinkedListTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVLinkedListTests.c; sourceTree = "<group>"; };
+		2DECEC711CF49B7100FE66F3 /* BPVLinkedListTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListTests.h; sourceTree = "<group>"; };
+		2DECEC731CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BPVLinkedListsEnumeratorTests.c; path = ../HWObjectC/BPVLinkedListsEnumeratorTests.c; sourceTree = "<group>"; };
+		2DECEC741CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPVLinkedListsEnumeratorTests.h; path = ../HWObjectC/BPVLinkedListsEnumeratorTests.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,10 @@
 			children = (
 				2DECEC421CEF220800FE66F3 /* BPVArrayTests.c */,
 				2DECEC431CEF220800FE66F3 /* BPVArrayTests.h */,
+				2DECEC701CF49B7100FE66F3 /* BPVLinkedListTests.c */,
+				2DECEC711CF49B7100FE66F3 /* BPVLinkedListTests.h */,
+				2DECEC731CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.c */,
+				2DECEC741CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.h */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -247,6 +257,7 @@
 			files = (
 				2DECEC441CEF220800FE66F3 /* BPVArrayTests.c in Sources */,
 				2DECEC6D1CEF5FF300FE66F3 /* BPVLinkedListNode.c in Sources */,
+				2DECEC721CF49B7100FE66F3 /* BPVLinkedListTests.c in Sources */,
 				2DECEC221CE2032E00FE66F3 /* main.c in Sources */,
 				2DECEC591CEF24F500FE66F3 /* BPVHuman.c in Sources */,
 				2DECEC5C1CEF24F500FE66F3 /* BPVString.c in Sources */,
@@ -255,6 +266,7 @@
 				2DECEC5A1CEF24F500FE66F3 /* BPVLinkedList.c in Sources */,
 				2DECEC581CEF24F500FE66F3 /* BPVArray.c in Sources */,
 				2DECEC321CE203C500FE66F3 /* BPVRunApplication.c in Sources */,
+				2DECEC751CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

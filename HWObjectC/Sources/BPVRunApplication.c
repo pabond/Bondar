@@ -8,7 +8,9 @@
 
 #include "BPVRunApplication.h"
 #include "BPVArrayTests.h"
+#include "BPVLinkedListsEnumeratorTests.h"
 
 void BPVRunApplication() {
     BPVRunArrayTests();
+    BPVRunLinkedListEnumeratorTest();
 }
