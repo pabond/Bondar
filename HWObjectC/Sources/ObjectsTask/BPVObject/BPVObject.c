@@ -68,7 +68,9 @@ void BPVObjectRelease(void *object) {
 #pragma mark Privare Implementations
 
 void BPVObjectSetCount(BPVObject *object, uint64_t value) {
-    object->_retainCount = value;
+    if (object) {
+        object->_retainCount = value;
+    }
 }
 
 void BPVObjectRetainCountAddValue(BPVObject *object, int8_t value) {

@@ -22,7 +22,6 @@ typedef struct {
     BPVLinkedListNode *_head;
     
     uint64_t _count;
-    
     uint64_t _mutationsCount;
 } BPVLinkedList;
 

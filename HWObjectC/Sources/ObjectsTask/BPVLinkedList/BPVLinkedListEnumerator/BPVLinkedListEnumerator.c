@@ -88,11 +88,7 @@ bool BPVLinkedListEnumeratorIsValid(BPVLinkedListEnumerator *enumerator){
 #pragma mark Private Implementations
 
 void BPVLinkedListEnumeratorSetList(BPVLinkedListEnumerator *enumerator, BPVLinkedList *list) {
-    if (enumerator && enumerator->_list != list) {
-        BPVObjectRelease(enumerator);
-        
-        enumerator->_list = BPVObjectRetain(list);
-    }
+    BPVObjectStrogSetter(enumerator, _list, list);
 }
 
 BPVLinkedList *BPVLinkedListEnumeratorGetList(BPVLinkedListEnumerator *enumerator) {
@@ -100,12 +96,7 @@ BPVLinkedList *BPVLinkedListEnumeratorGetList(BPVLinkedListEnumerator *enumerato
 }
 
 void BPVLinkedListEnumeratorSetNode(BPVLinkedListEnumerator *enumerator, BPVLinkedListNode *node) {
-    if (enumerator && enumerator->_currentNode != node) {
-        BPVObjectRelease(enumerator);
-        
-        enumerator->_currentNode = BPVObjectRetain(node);
-    }
-
+    BPVObjectStrogSetter(enumerator, _currentNode, node);
 }
 
 BPVLinkedListNode *BPVLinkedListEnumeratorGetNode(BPVLinkedListEnumerator *enumerator) {
@@ -113,9 +104,7 @@ BPVLinkedListNode *BPVLinkedListEnumeratorGetNode(BPVLinkedListEnumerator *enume
 }
 
 void BPVLinkedListEnumeratorSetMutationsCount(BPVLinkedListEnumerator *enumerator, uint64_t mutationsCount) {
-    if (enumerator) {
-        enumerator->_mutationsCount = mutationsCount;
-    }
+    BPVObjectWeakSetter(enumerator, _mutationsCount, mutationsCount);
 }
 
 uint64_t BPVLinkedListEnumeratorGetMutationsCount(BPVLinkedListEnumerator *enumerator) {
@@ -123,9 +112,7 @@ uint64_t BPVLinkedListEnumeratorGetMutationsCount(BPVLinkedListEnumerator *enume
 }
 
 void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, bool value) {
-    if (enumerator) {
-        enumerator->_isValid = value;
-    }
+    BPVObjectWeakSetter(enumerator, _isValid, value)
 }
 
 bool BPVLinkedListEnumeratorMutationsCountValidate(BPVLinkedListEnumerator *enumerator) {
