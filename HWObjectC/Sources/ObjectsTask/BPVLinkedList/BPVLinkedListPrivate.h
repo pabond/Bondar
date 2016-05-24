@@ -11,6 +11,12 @@
 
 #include "BPVLinkedList.h"
 
+typedef struct {
+    void *previousNode;
+    void *node;
+    void *object;
+} BPVLinkedListNodeContext;
+
 extern
 void BPVLinkedListSetMutationsCount(BPVLinkedList *list, uint64_t count);
 
@@ -22,5 +28,7 @@ void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head);
 
 extern
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
+
+BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list, BPVLinkedListNodeContext *context);
 
 #endif /* BPVLinkedListPrivate_h */
