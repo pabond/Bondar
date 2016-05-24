@@ -36,7 +36,7 @@ static
 void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, bool value);
 
 static
-bool BPVLinkedListEnumeratorMutationsCountValidave(BPVLinkedListEnumerator *enumerator);
+bool BPVLinkedListEnumeratorMutationsCountValidate(BPVLinkedListEnumerator *enumerator);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -63,20 +63,16 @@ BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateWithList(void *list) {
 }
 
 void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator) {
-    if (enumerator && BPVLinkedListEnumeratorMutationsCountValidave(enumerator)) {
+    if (enumerator && BPVLinkedListEnumeratorMutationsCountValidate(enumerator)) {
         BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
         BPVLinkedList *list = BPVLinkedListEnumeratorGetList(enumerator);
-        if (!node) {
-            node = BPVLinkedListGetHead(list);
-        } else {
-            BPVLinkedListNodeGetNextNode(node);
-        }
+        
+        node = !node ? BPVLinkedListGetHead(list) : BPVLinkedListNodeGetNextNode(node);
+        BPVLinkedListEnumeratorSetNode(enumerator, node);
         
         if (!node) {
             BPVLinkedListEnumeratorSetValidity(enumerator, false);
         }
-        
-        BPVLinkedListEnumeratorSetNode(enumerator, node);
         
         return BPVLinkedListNodeGetObject(node);
     }
@@ -132,7 +128,7 @@ void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, boo
     }
 }
 
-bool BPVLinkedListEnumeratorMutationsCountValidave(BPVLinkedListEnumerator *enumerator) {
+bool BPVLinkedListEnumeratorMutationsCountValidate(BPVLinkedListEnumerator *enumerator) {
     BPVLinkedList *list = BPVLinkedListEnumeratorGetList(enumerator);
     
     return BPVLinkedListGetMutationsCount(list) == BPVLinkedListEnumeratorGetMutationsCount(enumerator);

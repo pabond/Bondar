@@ -9,6 +9,7 @@
 #include "BPVLinkedListNode.h"
 
 void __BPVLinkedListNodeDeallocate(BPVLinkedListNode *node) {
+    BPVLinkedListNodeSetNextNode(node, NULL);
     BPVLinkedListNodeSetObject(node, NULL);
     
     __BPVObjectDeallocate(node);

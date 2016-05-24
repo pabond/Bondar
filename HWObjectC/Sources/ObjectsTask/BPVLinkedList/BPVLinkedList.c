@@ -21,7 +21,7 @@ static
 void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value);
 
 static
-void BPVLinkedListAddMutation(BPVLinkedList *list);
+void BPVLinkedListIncrementMutation(BPVLinkedList *list);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -61,7 +61,7 @@ void BPVLinkedListRemoveFirstObject(BPVLinkedList *list) {
 BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object) {
     BPVLinkedListNode *head = BPVLinkedListGetHead(list);
     
-    if (!list && object == BPVLinkedListNodeGetObject(head)) {
+    if (!list || object == BPVLinkedListNodeGetObject(head)) {
         return NULL;
     }
     
@@ -70,7 +70,7 @@ BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *ob
     
     do {
         previousObject = BPVLinkedListNodeGetObject(currentNode);
-        currentNode = BPVLinkedListNodeGetNextNode(BPVLinkedListGetHead(list));
+        currentNode = BPVLinkedListNodeGetNextNode(currentNode);
         if (object == BPVLinkedListNodeGetObject(currentNode)) {
             break;
         }
@@ -79,8 +79,35 @@ BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *ob
     return previousObject;
 }
 
+BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object) {
+    BPVLinkedListNode *head = BPVLinkedListGetHead(list);
+    
+    if (!list) {
+        return NULL;
+    }
+    
+    BPVLinkedListNode *currentNode = head;
+    BPVObject *currentObject = BPVLinkedListNodeGetObject(head);
+    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(currentNode);
+    BPVObject *nextObject =BPVLinkedListNodeGetObject(nextNode);
+    
+    do {
+        if (object == currentObject) {
+            break;
+        }
+        
+        currentNode = nextNode;
+        currentObject = nextObject;
+        nextNode = BPVLinkedListNodeGetNextNode(currentNode);
+        nextObject = BPVLinkedListNodeGetObject(nextNode);
+        } while (BPVLinkedListNodeGetNextNode(currentNode));
+    
+    return nextObject;
+}
+
+
 bool BPVLinkedListIsEmpty(BPVLinkedList *list) {
-    return !list && !BPVLinkedListGetHead(list);
+    return !list || !BPVLinkedListGetHead(list);
 }
 
 void BPVLinkedListAddObject(BPVLinkedList *list, void *object) {
@@ -128,19 +155,16 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
 }
 
 bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
-    bool result = false;
-    
     if (list && object) {
         BPVLinkedListNode *node = BPVLinkedListGetHead(list);
         do {
             if (object == BPVLinkedListNodeGetObject(node)) {
-                result = true;
-                break;
+                return true;
             }
         } while (BPVLinkedListNodeGetNextNode(node));
     }
     
-    return result;
+    return false;
 }
 
 uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
@@ -151,11 +175,7 @@ uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
 #pragma mark Private Implementations 
 
 void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head) {
-    if (list && head != list->_head) {
-        BPVObjectRelease(head);
-        
-        list->_head = BPVObjectRetain(head);
-    }
+    BPVObjectStrogSetter(list, _head, head);
 }
 
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list) {
@@ -163,29 +183,25 @@ BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list) {
 }
 
 void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value) {
-    if (list) {
-        list->_count = value;
-    }
+    BPVObjectWeakSetter(list, _count, value);
 }
 
 void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value) {
     if (list && value) {
         BPVLinkedListSetCount(list, BPVLinkedListGetCount(list) + value);
-        BPVLinkedListAddMutation(list);
+        BPVLinkedListIncrementMutation(list);
     }
 }
 
 void BPVLinkedListSetMutationsCount(BPVLinkedList *list, uint64_t count) {
-    if (list) {
-        list->_mutationsCount = count;
-    }
+    BPVObjectWeakSetter(list, _mutationsCount, count);
 }
 
 uint64_t BPVLinkedListGetMutationsCount(BPVLinkedList *list) {
     return list ? list->_mutationsCount : 0;
 }
 
-void BPVLinkedListAddMutation(BPVLinkedList *list) {
+void BPVLinkedListIncrementMutation(BPVLinkedList *list) {
     if (list) {
         BPVLinkedListSetMutationsCount(list, BPVLinkedListGetMutationsCount(list) + 1);
     }

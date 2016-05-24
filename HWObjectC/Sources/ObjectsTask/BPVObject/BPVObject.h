@@ -36,4 +36,15 @@ void *BPVObjectRetain(void *object);
 extern
 void BPVObjectRelease(void *object);
 
+#define BPVObjectWeakSetter(object, field, value) \
+    if (object) { \
+        object->field = value; \
+    }
+
+#define BPVObjectStrogSetter(object, field, value) \
+    if (object && object->field != value) { \
+        BPVObjectRelease(object->field); \
+        object->field = BPVObjectRetain(value); \
+    }
+
 #endif /* BPVObject_h */

@@ -13,12 +13,13 @@
 
 #include "BPVObject.h"
 
+typedef struct BPVLinkedList BPVLinkedList;
 typedef struct BPVLinkedListNode BPVLinkedListNode;
 
 struct BPVLinkedListEnumerator {
     BPVObject _parentClass;
     
-    void *_list;
+    BPVLinkedList *_list;
     BPVLinkedListNode *_currentNode;
     
     uint64_t _mutationsCount;

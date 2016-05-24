@@ -45,6 +45,9 @@ extern
 BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object);
 
 extern
+BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object);
+
+extern
 bool BPVLinkedListIsEmpty(BPVLinkedList *list);
 
 extern
