@@ -84,18 +84,22 @@ BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *ob
 
 BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object) {
     if (list) {
-        BPVLinkedListNode *head = BPVLinkedListGetHead(list);
-        BPVLinkedListNode *currentNode = head;
-        BPVObject *currentObject = BPVLinkedListNodeGetObject(head);
+        BPVLinkedListNodeContext context = BPVLinkedListCreateEmptyContext();
+        context.object = object;
         
+        BPVLinkedListNode *node;
         do {
+            node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+            context.node = node;
+            BPVObject *currentObject = BPVLinkedListNodeGetObject(node);
+            
             if (object == currentObject) {
-                return BPVLinkedListNodeGetObject(BPVLinkedListNodeGetNextNode(currentNode));
+                return BPVLinkedListNodeGetObject(BPVLinkedListNodeGetNextNode(node));
             }
             
-            currentNode = BPVLinkedListNodeGetNextNode(currentNode);
-            currentObject = BPVLinkedListNodeGetObject(currentNode);
-            } while (BPVLinkedListNodeGetNextNode(currentNode));
+            node = BPVLinkedListNodeGetNextNode(node);
+            currentObject = BPVLinkedListNodeGetObject(node);
+        } while (node);
     }
     
     return NULL;
