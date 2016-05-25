@@ -47,4 +47,12 @@ void BPVObjectRelease(void *object);
         object->field = BPVObjectRetain(value); \
     }
 
+/*
+extern
+void BPVObjectStrogSetter(void *object, void **field, void *value);
+
+extern
+void BPVObjectWeakSetter(void *object, void **field, void *value);
+*/
+ 
 #endif /* BPVObject_h */

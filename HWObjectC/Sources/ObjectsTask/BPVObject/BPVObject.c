@@ -64,6 +64,23 @@ void BPVObjectRelease(void *object) {
     }
 }
 
+/*
+void BPVObjectStrogSetter(void *object, void **field, void *value) {
+    if (!object && *field == value) {
+        return;
+    }
+    
+    BPVObjectRelease(*field);
+    *field = BPVObjectRetain(value);
+}
+
+void BPVObjectWeakSetter(void *object, void **field, void *value) {
+    if (object) {
+        object->field = value;
+    }
+}
+*/
+
 #pragma mark -
 #pragma mark Privare Implementations
 
