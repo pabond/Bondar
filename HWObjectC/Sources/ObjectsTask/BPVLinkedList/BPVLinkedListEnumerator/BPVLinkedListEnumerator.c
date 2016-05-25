@@ -90,7 +90,7 @@ bool BPVLinkedListEnumeratorValid(BPVLinkedListEnumerator *enumerator){
 #pragma mark Private Implementations
 
 void BPVLinkedListEnumeratorSetList(BPVLinkedListEnumerator *enumerator, BPVLinkedList *list) {
-    BPVObjectStrogSetter(enumerator, _list, list);
+    BPVStrogSetter(enumerator, _list, list);
 }
 
 BPVLinkedList *BPVLinkedListEnumeratorGetList(BPVLinkedListEnumerator *enumerator) {
@@ -98,7 +98,7 @@ BPVLinkedList *BPVLinkedListEnumeratorGetList(BPVLinkedListEnumerator *enumerato
 }
 
 void BPVLinkedListEnumeratorSetNode(BPVLinkedListEnumerator *enumerator, BPVLinkedListNode *node) {
-    BPVObjectStrogSetter(enumerator, _currentNode, node);
+    BPVStrogSetter(enumerator, _currentNode, node);
 }
 
 void BPVLinkedListEnumeratorSetMutationsCount(BPVLinkedListEnumerator *enumerator, uint64_t mutationsCount) {

@@ -32,6 +32,9 @@ extern
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
 
 extern
+BPVLinkedListNodeContext BPVLinkedListCreateEmptyContext();
+
+extern
 BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
                                                        BPVLinkedListComparisonFunction comparator,
                                                        BPVLinkedListNodeContext *context);

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
+#include <String.h>
+
 #include "BPVLinkedList.h"
 #include "BPVLinkedListEnumerator.h"
 #include "BPVLinkedListNode.h"
@@ -116,27 +118,24 @@ void BPVLinkedListAddObject(BPVLinkedList *list, void *object) {
 
 void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object) {
     if (list && object) {
-        BPVLinkedListNode *node = BPVLinkedListGetHead(list);
-        BPVLinkedListNode *previousNode = NULL;
         
+        BPVLinkedListNode *head = BPVLinkedListGetHead(list);
+        
+        BPVLinkedListNodeContext context = BPVLinkedListCreateEmptyContext();
+        context.object = object;
+        
+        BPVLinkedListNode *node;
         do {
-            BPVObject *nodeObject = BPVLinkedListNodeGetObject(node);
-            BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
-            
-            if (object == nodeObject) {
-                if (node == BPVLinkedListGetHead(list)) {
-                    BPVLinkedListSetHead(list, nextNode);
+            node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+            if (node) {
+                if (node == head) {
+                    BPVLinkedListSetHead(list, BPVLinkedListNodeGetNextNode(node));
                 } else {
-                    BPVLinkedListNodeSetNextNode(previousNode, nextNode);
+                    BPVLinkedListNodeSetNextNode(context.previousNode, BPVLinkedListNodeGetNextNode(node));
+                    BPVLinkedListCountAddValue(list, -1);
                 }
-                
-                BPVLinkedListCountAddValue(list, -1);
-                break;
             }
-            
-            previousNode = node;
-            node = nextNode;
-        } while (BPVLinkedListNodeGetNextNode(node));
+        } while (node);
     }
 }
 
@@ -148,27 +147,32 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
 }
 
 bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
-    if (list && object) {
-        BPVLinkedListNode *node = BPVLinkedListGetHead(list);
-        do {
-            if (object == BPVLinkedListNodeGetObject(node)) {
-                return true;
-            }
-        } while (BPVLinkedListNodeGetNextNode(node));
+    if (list) {
+        BPVLinkedListNodeContext context = BPVLinkedListCreateEmptyContext();
+        context.object = object;
+        
+        return BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     }
     
-    return false;
+    return NULL;
 }
 
 uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
     return list ? list->_count : 0;
 }
 
+BPVLinkedListNodeContext BPVLinkedListCreateEmptyContext() {
+    BPVLinkedListNodeContext context;
+    memset(&context, 0, sizeof(context));
+    
+    return context;
+}
+
 #pragma mark -
 #pragma mark Private Implementations 
 
 void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head) {
-    BPVObjectStrogSetter(list, _head, head);
+    BPVStrogSetter(list, _head, head);
 }
 
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list) {
