@@ -17,6 +17,8 @@ typedef struct {
     void *object;
 } BPVLinkedListNodeContext;
 
+typedef bool (*BPVLinkedListComparisonFunction)(BPVLinkedListNode *node, BPVLinkedListNodeContext context);
+
 extern
 void BPVLinkedListSetMutationsCount(BPVLinkedList *list, uint64_t count);
 
@@ -29,6 +31,12 @@ void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head);
 extern
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
 
-BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list, BPVLinkedListNodeContext *context);
+extern
+BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
+                                                       BPVLinkedListComparisonFunction comparator,
+                                                       BPVLinkedListNodeContext *context);
+
+extern
+bool BPVLinkedListNodeContainsObject(BPVLinkedListNode *node, BPVLinkedListNodeContext context);
 
 #endif /* BPVLinkedListPrivate_h */

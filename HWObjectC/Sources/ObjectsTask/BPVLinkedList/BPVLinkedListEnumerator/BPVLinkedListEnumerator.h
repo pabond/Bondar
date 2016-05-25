@@ -22,7 +22,7 @@ struct BPVLinkedListEnumerator {
     BPVLinkedListNode *_currentNode;
     
     uint64_t _mutationsCount;
-    bool _isValid;
+    bool _valid;
 };
 
 typedef struct BPVLinkedListEnumerator BPVLinkedListEnumerator;
@@ -37,6 +37,6 @@ extern
 void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator);
 
 extern
-bool BPVLinkedListEnumeratorIsValid(BPVLinkedListEnumerator *enumerator);
+bool BPVLinkedListEnumeratorValid(BPVLinkedListEnumerator *enumerator);
 
 #endif /* BPVLinkedListEnumerator_h */

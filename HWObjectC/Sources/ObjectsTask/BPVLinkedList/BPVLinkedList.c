@@ -10,6 +10,7 @@
 #include "BPVLinkedListEnumerator.h"
 #include "BPVLinkedListNode.h"
 #include "BPVLinkedListPrivate.h"
+#include "BPVLinkedListEnumeratorPrivate.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -21,7 +22,7 @@ static
 void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value);
 
 static
-void BPVLinkedListIncrementMutation(BPVLinkedList *list);
+void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -80,31 +81,23 @@ BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *ob
 }
 
 BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object) {
-    BPVLinkedListNode *head = BPVLinkedListGetHead(list);
-    
-    if (!list) {
-        return NULL;
+    if (list) {
+        BPVLinkedListNode *head = BPVLinkedListGetHead(list);
+        BPVLinkedListNode *currentNode = head;
+        BPVObject *currentObject = BPVLinkedListNodeGetObject(head);
+        
+        do {
+            if (object == currentObject) {
+                return BPVLinkedListNodeGetObject(BPVLinkedListNodeGetNextNode(currentNode));
+            }
+            
+            currentNode = BPVLinkedListNodeGetNextNode(currentNode);
+            currentObject = BPVLinkedListNodeGetObject(currentNode);
+            } while (BPVLinkedListNodeGetNextNode(currentNode));
     }
     
-    BPVLinkedListNode *currentNode = head;
-    BPVObject *currentObject = BPVLinkedListNodeGetObject(head);
-    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(currentNode);
-    BPVObject *nextObject =BPVLinkedListNodeGetObject(nextNode);
-    
-    do {
-        if (object == currentObject) {
-            break;
-        }
-        
-        currentNode = nextNode;
-        currentObject = nextObject;
-        nextNode = BPVLinkedListNodeGetNextNode(currentNode);
-        nextObject = BPVLinkedListNodeGetObject(nextNode);
-        } while (BPVLinkedListNodeGetNextNode(currentNode));
-    
-    return nextObject;
+    return NULL;
 }
-
 
 bool BPVLinkedListIsEmpty(BPVLinkedList *list) {
     return !list || !BPVLinkedListGetHead(list);
@@ -189,7 +182,7 @@ void BPVLinkedListSetCount(BPVLinkedList *list, uint64_t value) {
 void BPVLinkedListCountAddValue(BPVLinkedList *list, int8_t value) {
     if (list && value) {
         BPVLinkedListSetCount(list, BPVLinkedListGetCount(list) + value);
-        BPVLinkedListIncrementMutation(list);
+        BPVLinkedListIncrementMutationsCount(list);
     }
 }
 
@@ -201,8 +194,38 @@ uint64_t BPVLinkedListGetMutationsCount(BPVLinkedList *list) {
     return list ? list->_mutationsCount : 0;
 }
 
-void BPVLinkedListIncrementMutation(BPVLinkedList *list) {
+void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list) {
     if (list) {
         BPVLinkedListSetMutationsCount(list, BPVLinkedListGetMutationsCount(list) + 1);
     }
+}
+
+BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
+                                                       BPVLinkedListComparisonFunction comparator,
+                                                       BPVLinkedListNodeContext *context)
+{
+    if (list) {
+        BPVLinkedListEnumerator *enumerator = BPVLinkedListEnumeratorCreateFromList(list);
+        BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
+        context->node = node;
+        
+        while (BPVLinkedListEnumeratorValid(enumerator)) {
+            
+            if (BPVLinkedListNodeContainsObject(node, *context)) {
+                return node;
+            }
+            
+            context->previousNode = node;
+            context->node = BPVLinkedListNodeGetNextNode(node);
+            node = context->node;
+        }
+        
+        BPVObjectRelease(enumerator);
+    }
+    
+    return NULL;
+}
+
+bool BPVLinkedListNodeContainsObject(BPVLinkedListNode *node, BPVLinkedListNodeContext context) {
+    return node && context.object == BPVLinkedListNodeGetObject(node);
 }

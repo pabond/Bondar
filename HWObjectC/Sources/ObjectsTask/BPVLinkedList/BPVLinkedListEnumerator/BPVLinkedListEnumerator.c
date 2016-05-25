@@ -10,6 +10,7 @@
 #include "BPVLinkedListNode.h"
 #include "BPVLinkedList.h"
 #include "BPVLinkedListPrivate.h"
+#include "BPVLinkedListEnumeratorPrivate.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -24,16 +25,13 @@ static
 void BPVLinkedListEnumeratorSetNode(BPVLinkedListEnumerator *enumerator, BPVLinkedListNode *node);
 
 static
-BPVLinkedListNode *BPVLinkedListEnumeratorGetNode(BPVLinkedListEnumerator *enumerator);
-
-static
 void BPVLinkedListEnumeratorSetMutationsCount(BPVLinkedListEnumerator *enumerator, uint64_t mutationsCount);
 
 static
 uint64_t BPVLinkedListEnumeratorGetMutationsCount(BPVLinkedListEnumerator *enumerator);
 
 static
-void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, bool value);
+void BPVLinkedListEnumeratorSetValid(BPVLinkedListEnumerator *enumerator, bool value);
 
 static
 bool BPVLinkedListEnumeratorMutationsCountValidate(BPVLinkedListEnumerator *enumerator);
@@ -57,31 +55,35 @@ BPVLinkedListEnumerator *BPVLinkedListEnumeratorCreateWithList(void *list) {
     
     BPVLinkedListEnumeratorSetList(enumerator, list);
     BPVLinkedListEnumeratorSetMutationsCount(enumerator, BPVLinkedListGetMutationsCount(list));
-    BPVLinkedListEnumeratorSetValidity(enumerator, true);
+    BPVLinkedListEnumeratorSetValid(enumerator, true);
     
     return enumerator;
 }
 
-void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator) {
-    if (enumerator && BPVLinkedListEnumeratorMutationsCountValidate(enumerator)) {
-        BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
-        BPVLinkedList *list = BPVLinkedListEnumeratorGetList(enumerator);
-        
-        node = !node ? BPVLinkedListGetHead(list) : BPVLinkedListNodeGetNextNode(node);
-        BPVLinkedListEnumeratorSetNode(enumerator, node);
-        
-        if (!node) {
-            BPVLinkedListEnumeratorSetValidity(enumerator, false);
-        }
-        
-        return BPVLinkedListNodeGetObject(node);
-    }
-    
-    return NULL;
+BPVLinkedListNode *BPVLinkedListEnumeratorGetNode(BPVLinkedListEnumerator *enumerator) {
+    return enumerator ? enumerator->_currentNode : NULL;
 }
 
-bool BPVLinkedListEnumeratorIsValid(BPVLinkedListEnumerator *enumerator){
-    return enumerator && enumerator->_isValid;
+void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator) {
+    if (!enumerator && !BPVLinkedListEnumeratorMutationsCountValidate(enumerator)) {
+        return NULL;
+    }
+    
+    BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
+    BPVLinkedList *list = BPVLinkedListEnumeratorGetList(enumerator);
+    
+    node = !node ? BPVLinkedListGetHead(list) : BPVLinkedListNodeGetNextNode(node);
+    BPVLinkedListEnumeratorSetNode(enumerator, node);
+    
+    if (!node) {
+        BPVLinkedListEnumeratorSetValid(enumerator, false);
+    }
+    
+    return BPVLinkedListNodeGetObject(node);
+}
+
+bool BPVLinkedListEnumeratorValid(BPVLinkedListEnumerator *enumerator){
+    return enumerator && enumerator->_valid;
 }
 
 #pragma mark -
@@ -99,10 +101,6 @@ void BPVLinkedListEnumeratorSetNode(BPVLinkedListEnumerator *enumerator, BPVLink
     BPVObjectStrogSetter(enumerator, _currentNode, node);
 }
 
-BPVLinkedListNode *BPVLinkedListEnumeratorGetNode(BPVLinkedListEnumerator *enumerator) {
-    return enumerator ? enumerator->_currentNode : NULL;
-}
-
 void BPVLinkedListEnumeratorSetMutationsCount(BPVLinkedListEnumerator *enumerator, uint64_t mutationsCount) {
     BPVObjectWeakSetter(enumerator, _mutationsCount, mutationsCount);
 }
@@ -111,8 +109,8 @@ uint64_t BPVLinkedListEnumeratorGetMutationsCount(BPVLinkedListEnumerator *enume
     return enumerator ? enumerator->_mutationsCount : 0;
 }
 
-void BPVLinkedListEnumeratorSetValidity(BPVLinkedListEnumerator *enumerator, bool value) {
-    BPVObjectWeakSetter(enumerator, _isValid, value)
+void BPVLinkedListEnumeratorSetValid(BPVLinkedListEnumerator *enumerator, bool value) {
+    BPVObjectWeakSetter(enumerator, _valid, value)
 }
 
 bool BPVLinkedListEnumeratorMutationsCountValidate(BPVLinkedListEnumerator *enumerator) {

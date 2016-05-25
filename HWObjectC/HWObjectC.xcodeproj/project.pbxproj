@@ -59,6 +59,7 @@
 		2DECEC711CF49B7100FE66F3 /* BPVLinkedListTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListTests.h; sourceTree = "<group>"; };
 		2DECEC731CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BPVLinkedListsEnumeratorTests.c; path = ../HWObjectC/BPVLinkedListsEnumeratorTests.c; sourceTree = "<group>"; };
 		2DECEC741CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPVLinkedListsEnumeratorTests.h; path = ../HWObjectC/BPVLinkedListsEnumeratorTests.h; sourceTree = "<group>"; };
+		2DECEC761CF5C6E700FE66F3 /* BPVLinkedListEnumeratorPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPVLinkedListEnumeratorPrivate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +187,7 @@
 			children = (
 				2DECEC671CEF5FF300FE66F3 /* BPVLinkedListEnumerator.c */,
 				2DECEC681CEF5FF300FE66F3 /* BPVLinkedListEnumerator.h */,
+				2DECEC761CF5C6E700FE66F3 /* BPVLinkedListEnumeratorPrivate.h */,
 			);
 			path = BPVLinkedListEnumerator;
 			sourceTree = "<group>";

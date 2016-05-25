@@ -47,7 +47,7 @@ void BPVRunLinkedListEnumeratorTest() {
     
     uint8_t iterations = 0;
     BPVObject *object = BPVLinkedListEnumeratorGetNextObject(enumerator);
-    while (BPVLinkedListEnumeratorIsValid(enumerator)) {
+    while (BPVLinkedListEnumeratorValid(enumerator)) {
         iterations++;
         object = BPVLinkedListEnumeratorGetNextObject(enumerator);
     }
@@ -56,7 +56,7 @@ void BPVRunLinkedListEnumeratorTest() {
         printf("Test 4 done\n");
     }
     
-    printf("Is enumerator valid %d\n", BPVLinkedListEnumeratorIsValid(enumerator));
+    printf("Is enumerator valid %d\n", BPVLinkedListEnumeratorValid(enumerator));
 
     BPVObjectRelease(enumerator);
     BPVObjectRelease(list);
