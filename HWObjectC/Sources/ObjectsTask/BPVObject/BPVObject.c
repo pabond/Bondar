@@ -64,9 +64,9 @@ void BPVObjectRelease(void *object) {
     }
 }
 
-/*
-void BPVObjectStrogSetter(void *object, void **field, void *value) {
-    if (!object && *field == value) {
+
+void BPVObjectStrongSetter(void **field, void *value) {
+    if (*field == value) {
         return;
     }
     
@@ -74,6 +74,7 @@ void BPVObjectStrogSetter(void *object, void **field, void *value) {
     *field = BPVObjectRetain(value);
 }
 
+/*
 void BPVObjectWeakSetter(void *object, void **field, void *value) {
     if (object) {
         object->field = value;

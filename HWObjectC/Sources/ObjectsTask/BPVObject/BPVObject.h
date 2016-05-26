@@ -41,19 +41,19 @@ void BPVObjectRelease(void *object);
         object->field = value; \
     }
 
-//#define BPVObjectStrogSetter(object, field, value) \
+//#define BPVObjectStrongSetter(object, field, value) \
 //    if (object && object->field != value) { \
 //        BPVObjectRelease(object->field); \
 //        object->field = BPVObjectRetain(value); \
 //    }
 
-#define BPVStrogSetter(object, field, value)\
+#define BPVStrongSetter(object, field, value)\
     if (object) {\
-        BPVObjectStrogSetter(&object->field, value);\
+        BPVObjectStrongSetter((void **)&object->field, value);\
     }
 
 extern
-void BPVObjectStrogSetter(void **field, void *value);
+void BPVObjectStrongSetter(void **field, void *value);
 
 /*
 extern

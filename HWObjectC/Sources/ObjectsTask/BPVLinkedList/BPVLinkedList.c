@@ -176,7 +176,7 @@ BPVLinkedListNodeContext BPVLinkedListCreateEmptyContext() {
 #pragma mark Private Implementations 
 
 void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head) {
-    BPVStrogSetter(list, _head, head);
+    BPVStrongSetter(list, _head, head);
 }
 
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list) {
