@@ -75,10 +75,8 @@ void BPVObjectStrongSetter(void **field, void *value) {
 }
 
 /*
-void BPVObjectWeakSetter(void *object, void **field, void *value) {
-    if (object) {
-        object->field = value;
-    }
+void BPVObjectWeakSetter(void **field, void *value); {
+    *field = value;
 }
 */
 
