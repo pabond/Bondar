@@ -32,7 +32,7 @@ extern
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
 
 extern
-void *BPVLinkedListCreateEmptyContext();
+BPVLinkedListNodeContext *BPVLinkedListGetEmptyContext();
 
 extern
 BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
