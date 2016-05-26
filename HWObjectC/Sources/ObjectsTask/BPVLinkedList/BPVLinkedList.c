@@ -14,6 +14,11 @@
 #include "BPVLinkedListPrivate.h"
 #include "BPVLinkedListEnumeratorPrivate.h"
 
+#define BPVCreateContextWithType(type) \
+type *context;  \
+BPVLinkedListCreateEmptyContext(context); \
+} \
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -61,12 +66,20 @@ void BPVLinkedListRemoveFirstObject(BPVLinkedList *list) {
     }
 }
 
+BPVObject *BPVLinkedListGetNextObject(BPVLinkedList *list, BPVLinkedListNode *node) {
+    if (list && node) {
+        return BPVLinkedListNodeGetObject(BPVLinkedListNodeGetNextNode(node));
+    }
+    
+    return NULL;
+}
+
 BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object) {
     if (!list) {
         return NULL;
     }
     
-    BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
+    BPVLinkedListNodeContext *context = BPVCreateContextWithType(BPVLinkedListNodeContext);
     context->object = object;
     
     BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
@@ -76,12 +89,12 @@ BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *ob
 
 BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object) {
     if (list) {
-        BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
+        BPVLinkedListNodeContext *context = BPVCreateContextWithType(BPVLinkedListNodeContext);
         context->object = object;
         
         BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
         
-        return BPVLinkedListNodeGetObject(BPVLinkedListNodeGetNextNode(node));
+        return BPVLinkedListGetNextObject(list, node);
     }
     
     return NULL;
@@ -107,7 +120,7 @@ void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object) {
         
         BPVLinkedListNode *head = BPVLinkedListGetHead(list);
         
-        BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
+        BPVLinkedListNodeContext *context = BPVCreateContextWithType(BPVLinkedListNodeContext);
         context->object = object;
         
         BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
@@ -132,7 +145,7 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
 
 bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
     if (list) {
-        BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
+        BPVLinkedListNodeContext *context = BPVCreateContextWithType(BPVLinkedListNodeContext);
         context->object = object;
         
         return BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
@@ -145,17 +158,7 @@ uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
     return list ? list->_count : 0;
 }
 
-#define BPVCreateEmptyContextWithType(type)  \
-    type BPVLinkedListCreateEmptyContext() { \
-        type *context; \
-        memset(&context, 0, sizeof(context)); \
-        \
-        return context;\
-    } \
-
-
-void *BPVLinkedListCreateEmptyContext() {
-    void *context;
+void *BPVLinkedListCreateEmptyContext(void *context) {
     memset(&context, 0, sizeof(context));
     
     return context;

@@ -41,6 +41,9 @@ extern
 void BPVLinkedListRemoveFirstObject(BPVLinkedList *list);
 
 extern
+BPVObject *BPVLinkedListGetNextObject(BPVLinkedList *list, BPVLinkedListNode *node);
+
+extern
 BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object);
 
 extern

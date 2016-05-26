@@ -60,4 +60,6 @@ void BPVRunLinkedListEnumeratorTest() {
 
     BPVObjectRelease(enumerator);
     BPVObjectRelease(list);
+    
+    BPVObjectCreateWithType(BPVLinkedListNode); 
 }
