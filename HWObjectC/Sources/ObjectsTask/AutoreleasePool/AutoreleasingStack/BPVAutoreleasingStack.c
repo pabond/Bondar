@@ -30,6 +30,7 @@ void BPVAutoreleasingStackSetSize(BPVAutoreleasingStack *stack, size_t size);
 #pragma mark Public Implementations
 
 void __BPVAutoreleasingStackDeallocate(void *stack) {
+    BPVAutoreleasingStackSetHead(stack, NULL);
     BPVAutoreleasingStackSetSize(stack, 0);
     
     __BPVObjectDeallocate(stack);
@@ -41,6 +42,7 @@ BPVAutoreleasingStack *BPVAutoreleasingStackCreateWithSize(size_t size) {
     }
     
     BPVAutoreleasingStack *stack = BPVObjectCreateWithType(BPVAutoreleasingStack);
+    
     BPVAutoreleasingStackSetSize(stack, size);
     BPVAutoreleasingStackSetHead(stack, BPVAutoreleasingStackGetData(stack));
     
@@ -63,7 +65,11 @@ bool BPVAutoreleasingStackIsEmpty(BPVAutoreleasingStack *stack) {
     return stack && BPVAutoreleasingStackGetHead(stack) == BPVAutoreleasingStackGetData(stack);
 }
 
-void BPVAutoreleasingStackPushObject(BPVAutoreleasingStack *stack, void *object);
+void BPVAutoreleasingStackPushObject(BPVAutoreleasingStack *stack, void *object) {
+    if (stack && BPVAutoreleasingStackIsFull(stack)) {
+        
+    }
+}
 
 BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObject(BPVAutoreleasingStack *stack);
 
@@ -78,7 +84,7 @@ void **BPVAutoreleasingStackGetData(BPVAutoreleasingStack *stack) {
 
 void BPVAutoreleasingStackSetHead(BPVAutoreleasingStack *stack, void *head) {
     if (stack) {
-        stack->_head = object;
+        stack->_head = head;
     }
 }
 

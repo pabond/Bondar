@@ -6,4 +6,14 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
+#include <stdio.h>
+
+#include "BPVLinkedListPrivate.h"
+#include "BPVLinkedList.h"
 #include "BPVLinkedListTests.h"
+
+void BPVRunLinkedListTest() {
+    BPVLinkedListNodeContext context;
+    BPVGetEmptyContextWithType(&context);
+    printf("Size of context = %lu\n", sizeof(context));
+}

@@ -9,6 +9,6 @@
 #ifndef BPVAutoreleasingStackTests_h
 #define BPVAutoreleasingStackTests_h
 
-#include <stdio.h>
+
 
 #endif /* BPVAutoreleasingStackTests_h */

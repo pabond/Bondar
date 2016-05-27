@@ -74,20 +74,22 @@ BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *ob
         return NULL;
     }
     
-    BPVLinkedListNodeContext *context = BPVLinkedListGetEmptyContext();
-    context->object = object;
+    BPVLinkedListNodeContext context;
+    BPVGetEmptyContextWithType(&context);
+    context.object = object;
     
-    BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
+    BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     
-    return BPVLinkedListNodeGetObject(context->previousNode);
+    return BPVLinkedListNodeGetObject(context.previousNode);
 }
 
 BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object) {
     if (list) {
-        BPVLinkedListNodeContext *context = BPVLinkedListGetEmptyContext();
-        context->object = object;
+        BPVLinkedListNodeContext context;
+        BPVGetEmptyContextWithType(&context);
+        context.object = object;
         
-        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
+        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
         
         return BPVLinkedListGetNextObject(list, node);
     }
@@ -115,16 +117,17 @@ void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object) {
         
         BPVLinkedListNode *head = BPVLinkedListGetHead(list);
         
-        BPVLinkedListNodeContext *context = BPVLinkedListGetEmptyContext();
-        context->object = object;
+        BPVLinkedListNodeContext context;
+        BPVGetEmptyContextWithType(&context);
+        context.object = object;
         
-        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
+        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
         
         if (node) {
             if (node == head) {
                 BPVLinkedListSetHead(list, BPVLinkedListNodeGetNextNode(node));
             } else {
-                BPVLinkedListNodeSetNextNode(context->previousNode, BPVLinkedListNodeGetNextNode(node));
+                BPVLinkedListNodeSetNextNode(context.previousNode, BPVLinkedListNodeGetNextNode(node));
                 BPVLinkedListCountAddValue(list, -1);
             }
         }
@@ -140,10 +143,12 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
 
 bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
     if (list) {
-        BPVLinkedListNodeContext *context = BPVLinkedListGetEmptyContext();
-        context->object = object;
+        BPVLinkedListNodeContext context;
+        BPVGetEmptyContextWithType(&context);
         
-        return BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
+        context.object = object;
+        
+        return BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     }
     
     return NULL;
@@ -153,12 +158,10 @@ uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
     return list ? list->_count : 0;
 }
 
-BPVLinkedListNodeContext *BPVLinkedListGetEmptyContext() {
-    BPVLinkedListNodeContext *context;
-    memset(&context, 0, sizeof(context));
-    
-    return context;
+void BPVSetEmptyContextWithSize(void *context, size_t size) {
+    memset(context, 0, size);
 }
+
 
 #pragma mark -
 #pragma mark Private Implementations 

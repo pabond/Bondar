@@ -9,5 +9,6 @@
 #ifndef BPVLinkedListTests_h
 #define BPVLinkedListTests_h
 
+void BPVRunLinkedListTest();
 
 #endif /* BPVLinkedListTests_h */
