@@ -11,9 +11,6 @@
 
 #include "BPVLinkedList.h"
 
-#define BPVGetEmptyContextWithType(typeValue) \
-BPVSetEmptyContextWithSize(typeValue, sizeof(*typeValue))
-
 typedef struct {
     void *previousNode;
     void *node;
@@ -34,7 +31,8 @@ void BPVLinkedListSetHead(BPVLinkedList *list, BPVLinkedListNode *head);
 extern
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
 
-void BPVSetEmptyContextWithSize(void *context, size_t size);
+extern
+BPVLinkedListNodeContext *BPVLinkedListGetEmptyContext();
 
 extern
 BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
