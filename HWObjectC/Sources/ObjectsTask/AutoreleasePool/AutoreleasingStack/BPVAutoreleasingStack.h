@@ -13,18 +13,19 @@
 
 #include "BPVObject.h"
 
-
 typedef struct BPVAutoreleasingStack BPVAutoreleasingStack;
 
 struct BPVAutoreleasingStack {
     BPVObject _parentClass;
     
     void **_data;
-    void *_head;
+    void **_head;
+    uint64_t _count;
     size_t _size;
 };
 
 typedef enum {
+    BPVAutoreleasingStackPopObjectTypeNone,
     BPVAutoreleasingStackPopObjectTypeNull,
     BPVAutoreleasingStackPopObjectTypeObject
 } BPVAutoreleasingStackPopObjectType;
@@ -49,5 +50,15 @@ BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObject(BPVAutoreleasi
 
 extern
 BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjectsUntilNull(BPVAutoreleasingStack *stack);
+
+extern
+void **BPVAutoreleasingStackGetData(BPVAutoreleasingStack *stack);
+
+extern
+uint64_t BPVAutoreleasingStackGetCount(BPVAutoreleasingStack *stack);
+
+extern
+size_t BPVAutoreleasingStackGetSize(BPVAutoreleasingStack *stack);
+
 
 #endif /* BPVAutoreleasingStack_h */

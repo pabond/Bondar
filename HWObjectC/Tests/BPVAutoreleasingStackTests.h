@@ -9,6 +9,6 @@
 #ifndef BPVAutoreleasingStackTests_h
 #define BPVAutoreleasingStackTests_h
 
-
+void BPVRunAutoreleasingStackTest();
 
 #endif /* BPVAutoreleasingStackTests_h */
