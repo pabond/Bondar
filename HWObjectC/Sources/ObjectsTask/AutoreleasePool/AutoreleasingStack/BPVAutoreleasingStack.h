@@ -60,5 +60,7 @@ uint64_t BPVAutoreleasingStackGetCount(BPVAutoreleasingStack *stack);
 extern
 size_t BPVAutoreleasingStackGetSize(BPVAutoreleasingStack *stack);
 
+extern
+void BPVAutoreleasingStackPopAllObjects(BPVAutoreleasingStack *stack);
 
 #endif /* BPVAutoreleasingStack_h */

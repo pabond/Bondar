@@ -66,7 +66,35 @@ void BPVRunAutoreleasingStackTest() {
         printf("Correct retain count1\n");
     }
     
-    BPVObjectRelease(object);
+    for (uint64_t iterations = 0; iterations < 9; iterations++) {
+        BPVAutoreleasingStackPushObject(stack, object);
+    }
+    
+    printf("dataSize = %lu\n", sizeof(stack->_data));
+    
+    if (!BPVAutoreleasingStackIsEmpty(stack) && BPVAutoreleasingStackIsFull(stack)) {
+        printf("Stack is full\n");
+    }
+    
+    printf("Chack after stack is full works correctly\n");
+    
+    BPVAutoreleasingStackPopObjectsUntilNull(stack);
+    
+    printf("count = %llu\n", BPVAutoreleasingStackGetCount(stack));
+    
+    BPVAutoreleasingStackPopObjectsUntilNull(stack);
+    
+    printf("count = %llu\n", BPVAutoreleasingStackGetCount(stack));
+    
+    BPVAutoreleasingStackPopAllObjects(stack);
+    
+    printf("count = %llu\n", BPVAutoreleasingStackGetCount(stack));
+ 
+    
+    if (BPVAutoreleasingStackIsEmpty(stack) && !BPVAutoreleasingStackIsFull(stack)) {
+        printf("Stack is empty\n");
+    }
+    
     BPVObjectRelease(stack);
 
 }

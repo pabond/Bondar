@@ -74,7 +74,7 @@ void BPVAutoreleasingStackPushObject(BPVAutoreleasingStack *stack, void *object)
     }
     
     if (BPVAutoreleasingStackIsFull(stack)) {
-        printf("This stack is full, object not added");
+        printf("This stack is full, object not added\n");
         return;
     }
     
@@ -104,11 +104,20 @@ BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjectsUntilNull(BPVA
     if (stack) {
         do {
             type = BPVAutoreleasingStackPopObject(stack);
-        } while (!BPVAutoreleasingStackIsEmpty(stack) && !(BPVAutoreleasingStackPopObjectTypeNull == type));
+        } while (!(BPVAutoreleasingStackPopObjectTypeNull == type || !BPVAutoreleasingStackIsEmpty(stack)));
     }
     
     return type;
 }
+
+void BPVAutoreleasingStackPopAllObjects(BPVAutoreleasingStack *stack) {
+    if (stack) {
+        do {
+            BPVAutoreleasingStackPopObject(stack);
+        } while (!BPVAutoreleasingStackIsEmpty(stack));
+    }
+}
+
 
 #pragma mark -
 #pragma mark Private Implementations
