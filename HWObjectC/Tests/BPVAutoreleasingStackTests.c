@@ -31,6 +31,42 @@ void BPVRunAutoreleasingStackTest() {
         printf("Stack is empty\n");
     }
     
+    BPVObject *object = BPVObjectCreateWithType(BPVObject);
     
+    if (BPVObjectGetRetainCount(object) == 1) {
+        printf("Correct retain count1\n");
+    }
+    
+    BPVObjectRetain(object);
+    if (BPVObjectGetRetainCount(object) == 2) {
+        printf("Correct retain count2\n");
+    }
+    
+    BPVAutoreleasingStackPushObject(stack, object);
+    
+    if (BPVObjectGetRetainCount(object) == 2) {
+        printf("Correct retain count2\n");
+    }
+    
+    BPVObjectRetain(object);
+    
+    if (BPVObjectGetRetainCount(object) == 3) {
+        printf("Correct retain count3\n");
+    }
+    
+    BPVObjectRelease(object);
+    
+    if (BPVObjectGetRetainCount(object) == 2) {
+        printf("Correct retain count2\n");
+    }
+    
+    BPVAutoreleasingStackPopObject(stack);
+    
+    if (BPVObjectGetRetainCount(object) == 1) {
+        printf("Correct retain count1\n");
+    }
+    
+    BPVObjectRelease(object);
+    BPVObjectRelease(stack);
 
 }
