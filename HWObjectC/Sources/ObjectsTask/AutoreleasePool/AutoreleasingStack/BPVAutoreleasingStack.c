@@ -65,7 +65,7 @@ bool BPVAutoreleasingStackIsFull(BPVAutoreleasingStack *stack) {
 }
 
 bool BPVAutoreleasingStackIsEmpty(BPVAutoreleasingStack *stack) {
-    return stack && BPVAutoreleasingStackGetHead(stack) == BPVAutoreleasingStackGetData(stack);
+    return stack && BPVAutoreleasingStackGetCount(stack) == 0;
 }
 
 void BPVAutoreleasingStackPushObject(BPVAutoreleasingStack *stack, void *object) {
