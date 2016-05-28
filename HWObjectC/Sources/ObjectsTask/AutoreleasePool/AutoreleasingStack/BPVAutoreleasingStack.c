@@ -101,10 +101,10 @@ BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObject(BPVAutoreleasi
 
 BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjectsUntilNull(BPVAutoreleasingStack *stack) {
     BPVAutoreleasingStackPopObjectType type = BPVAutoreleasingStackPopObjectTypeNone;
-    if (stack) {
+    if (stack && !BPVAutoreleasingStackIsEmpty(stack)) {
         do {
             type = BPVAutoreleasingStackPopObject(stack);
-        } while (!(BPVAutoreleasingStackPopObjectTypeNull == type || !BPVAutoreleasingStackIsEmpty(stack)));
+        } while (BPVAutoreleasingStackPopObjectTypeNull != type && !BPVAutoreleasingStackIsEmpty(stack));
     }
     
     return type;
@@ -112,9 +112,9 @@ BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjectsUntilNull(BPVA
 
 void BPVAutoreleasingStackPopAllObjects(BPVAutoreleasingStack *stack) {
     if (stack) {
-        do {
+        while (!BPVAutoreleasingStackIsEmpty(stack)) {
             BPVAutoreleasingStackPopObject(stack);
-        } while (!BPVAutoreleasingStackIsEmpty(stack));
+        }
     }
 }
 

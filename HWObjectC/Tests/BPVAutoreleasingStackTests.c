@@ -78,17 +78,17 @@ void BPVRunAutoreleasingStackTest() {
     
     printf("Chack after stack is full works correctly\n");
     
-    BPVAutoreleasingStackPopObjectsUntilNull(stack);
+    BPVAutoreleasingStackPopObjectType type = BPVAutoreleasingStackPopObjectsUntilNull(stack);
+    
+    if (type == BPVAutoreleasingStackPopObjectTypeObject) {
+        printf("Poped type is correct\n");
+    }
     
     printf("count = %llu\n", BPVAutoreleasingStackGetCount(stack));
     
     BPVAutoreleasingStackPopObjectsUntilNull(stack);
-    
-    printf("count = %llu\n", BPVAutoreleasingStackGetCount(stack));
     
     BPVAutoreleasingStackPopAllObjects(stack);
-    
-    printf("count = %llu\n", BPVAutoreleasingStackGetCount(stack));
  
     
     if (BPVAutoreleasingStackIsEmpty(stack) && !BPVAutoreleasingStackIsFull(stack)) {
