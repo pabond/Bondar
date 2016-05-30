@@ -12,8 +12,8 @@
 #include <stdbool.h>
 
 #include "BPVObject.h"
+#include "BPVLinkedList.h"
 
-typedef struct BPVLinkedList BPVLinkedList;
 typedef struct BPVAutoreleasingStack BPVAutoreleasingStack;
 
 typedef struct BPVAutoreleasePool BPVAutoreleasePool;
@@ -22,7 +22,7 @@ struct BPVAutoreleasePool {
     BPVObject _parentClass;
     
     BPVLinkedList *_list;
-    uint64_t _stacksCount;
+    uint64_t _poolsCount;
 };
 
 extern
@@ -44,7 +44,9 @@ extern
 void BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool, BPVLinkedList *list);
 
 extern
-BPVLinkedList BPVAutoreleasePoolGetLinkedList(BPVAutoreleasePool *pool);
+BPVLinkedList *BPVAutoreleasePoolGetLinkedList(BPVAutoreleasePool *pool);
 
+extern
+void BPVAutoreleasePoolAddObject(BPVAutoreleasePool *pool, void *object);
 
 #endif /* BPVAutoreleasePool_h */

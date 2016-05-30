@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2DC4C5991CF9D1C40053E07F /* BPVAutoreleasePool.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4C5971CF9D1C40053E07F /* BPVAutoreleasePool.c */; };
+		2DC4C59C1CFC7D670053E07F /* BPVAutorleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4C59A1CFC7D670053E07F /* BPVAutorleasePoolTests.c */; };
 		2DECEC221CE2032E00FE66F3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC211CE2032E00FE66F3 /* main.c */; };
 		2DECEC321CE203C500FE66F3 /* BPVRunApplication.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC2D1CE203C500FE66F3 /* BPVRunApplication.c */; };
 		2DECEC441CEF220800FE66F3 /* BPVArrayTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DECEC421CEF220800FE66F3 /* BPVArrayTests.c */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		2DC4C5971CF9D1C40053E07F /* BPVAutoreleasePool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVAutoreleasePool.c; sourceTree = "<group>"; };
 		2DC4C5981CF9D1C40053E07F /* BPVAutoreleasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVAutoreleasePool.h; sourceTree = "<group>"; };
+		2DC4C59A1CFC7D670053E07F /* BPVAutorleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVAutorleasePoolTests.c; sourceTree = "<group>"; };
+		2DC4C59B1CFC7D670053E07F /* BPVAutorleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVAutorleasePoolTests.h; sourceTree = "<group>"; };
 		2DECEC1E1CE2032E00FE66F3 /* HWObjectC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HWObjectC; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DECEC211CE2032E00FE66F3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		2DECEC2D1CE203C500FE66F3 /* BPVRunApplication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVRunApplication.c; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				2DECEC741CF49B9600FE66F3 /* BPVLinkedListsEnumeratorTests.h */,
 				2DECEC771CF75D8600FE66F3 /* BPVAutoreleasingStackTests.c */,
 				2DECEC781CF75D8600FE66F3 /* BPVAutoreleasingStackTests.h */,
+				2DC4C59A1CFC7D670053E07F /* BPVAutorleasePoolTests.c */,
+				2DC4C59B1CFC7D670053E07F /* BPVAutorleasePoolTests.h */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -137,9 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				2DECEC7F1CF7772000FE66F3 /* AutoreleasePool */,
+				2DECEC4F1CEF24F500FE66F3 /* BPVLinkedList */,
 				2DECEC491CEF24F500FE66F3 /* BPVArray */,
 				2DECEC4C1CEF24F500FE66F3 /* BPVHuman */,
-				2DECEC4F1CEF24F500FE66F3 /* BPVLinkedList */,
 				2DECEC521CEF24F500FE66F3 /* BPVObject */,
 				2DECEC551CEF24F500FE66F3 /* BPVString */,
 			);
@@ -291,6 +296,7 @@
 				2DECEC441CEF220800FE66F3 /* BPVArrayTests.c in Sources */,
 				2DECEC6D1CEF5FF300FE66F3 /* BPVLinkedListNode.c in Sources */,
 				2DECEC721CF49B7100FE66F3 /* BPVLinkedListTests.c in Sources */,
+				2DC4C59C1CFC7D670053E07F /* BPVAutorleasePoolTests.c in Sources */,
 				2DECEC831CF7772000FE66F3 /* BPVAutoreleasingStack.c in Sources */,
 				2DECEC221CE2032E00FE66F3 /* main.c in Sources */,
 				2DECEC591CEF24F500FE66F3 /* BPVHuman.c in Sources */,

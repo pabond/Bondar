@@ -67,4 +67,7 @@ bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object);
 extern
 uint64_t BPVLinkedListGetCount(BPVLinkedList *list);
 
+extern
+BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
+
 #endif /* BPVLinkedList_h */

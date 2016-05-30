@@ -11,10 +11,12 @@
 #include "BPVLinkedListsEnumeratorTests.h"
 #include "BPVLinkedListTests.h"
 #include "BPVAutoreleasingStackTests.h"
+#include "BPVAutorleasePoolTests.h"
 
 void BPVRunApplication() {
     BPVRunArrayTests();
     BPVRunLinkedListEnumeratorTest();
     BPVRunLinkedListTest();
     BPVRunAutoreleasingStackTest();
+    BPVRunAutoreleasePoolTest();
 }
