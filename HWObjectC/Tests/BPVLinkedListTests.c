@@ -13,6 +13,17 @@
 #include "BPVLinkedListTests.h"
 
 void BPVRunLinkedListTest() {
-    BPVLinkedListNodeContext *context = BPVLinkedListGetEmptyContext();
+    BPVLinkedList *list = BPVLinkedListCreate();
+    
+    BPVObject *object = BPVObjectCreateWithType(BPVObject);
+    BPVObject *object2 = BPVObjectCreateWithType(BPVObject);
+    BPVLinkedListAddObject(list, object);
+    BPVLinkedListAddObject(list, object2);
+    
+    BPVLinkedListGetObjectAfterObject(list, object);
+    
+    BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
     printf("Size of context = %lu\n", sizeof(*context));
+    
+    BPVObjectRelease(context);
 }

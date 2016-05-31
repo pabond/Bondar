@@ -29,7 +29,7 @@ extern
 void __BPVAutoreleasePoolDeallocate(BPVAutoreleasePool *pool);
 
 extern
-BPVAutoreleasePool *BPVAutoreleasePoolCreateWithEmptyStack();
+BPVAutoreleasePool *BPVAutoreleasePoolCreateWithListAndStack();
 
 extern
 bool BPVAutoreleasePoolIsValid(BPVAutoreleasePool *pool);
@@ -41,7 +41,7 @@ extern
 uint64_t BPVAutoreleasePoolGetCount(BPVAutoreleasePool *pool);
 
 extern
-void BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool, BPVLinkedList *list);
+BPVLinkedList *BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool);
 
 extern
 BPVLinkedList *BPVAutoreleasePoolGetLinkedList(BPVAutoreleasePool *pool);

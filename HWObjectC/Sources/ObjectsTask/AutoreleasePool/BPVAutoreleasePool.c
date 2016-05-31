@@ -11,6 +11,8 @@
 
 static const uint64_t kBPVStackSize = 64;
 
+BPVAutoreleasePool *autoreleasePool = NULL;
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -21,7 +23,10 @@ static
 void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool);
 
 static
-BPVAutoreleasingStack *BPVAutoreleasePoolAddStack(BPVAutoreleasePool *pool);
+BPVAutoreleasingStack *BPVAutoreleasePoolNewStack(BPVAutoreleasePool *pool);
+
+static
+BPVAutoreleasingStack *BPVAutoreleasePoolAddStackToList(BPVAutoreleasePool *pool);
 
 static
 void BPVAutoreleasePoolSetCount(BPVAutoreleasePool *pool, uint64_t value);
@@ -34,21 +39,22 @@ void BPVAutoreleasePoolCountAddValue(BPVAutoreleasePool *pool, int64_t value);
 
 void __BPVAutoreleasePoolDeallocate(BPVAutoreleasePool *pool) {
     BPVAutoreleasePoolDrainAll(pool);
-    BPVAutoreleasePoolSetLinkedList(pool, NULL);
-    BPVAutoreleasePoolSetCount(pool, 0);
+    BPVObjectRelease(pool->_list);
     
     __BPVObjectDeallocate(pool);
 }
 
 BPVAutoreleasePool *BPVAutoreleasePoolCreateWithListAndStack() {
-    BPVAutoreleasePool *pool = BPVObjectCreateWithType(BPVAutoreleasePool);
-    BPVLinkedList *list = BPVLinkedListCreate();
-    BPVAutoreleasingStack *stack = BPVAutoreleasePoolAddStack(pool);
-    BPVAutoreleasePoolSetLinkedList(pool, list);
-    BPVLinkedListAddObject(list, stack);
-    BPVAutoreleasePoolCountAddValue(pool, 1);
+    if (!autoreleasePool) {
+        autoreleasePool = BPVObjectCreateWithType(BPVAutoreleasePool);
+        BPVAutoreleasePoolSetLinkedList(autoreleasePool);
+        BPVAutoreleasePoolAddStackToList(autoreleasePool);
+    }
     
-    return pool;
+    BPVAutoreleasePoolAddObject(autoreleasePool, NULL);
+    BPVAutoreleasePoolCountAddValue(autoreleasePool, 1);
+    
+    return autoreleasePool;
 }
 
 bool BPVAutoreleasePoolIsValid(BPVAutoreleasePool *pool) {
@@ -75,8 +81,17 @@ uint64_t BPVAutoreleasePoolGetCount(BPVAutoreleasePool *pool) {
     return pool ? pool->_poolsCount : 0;
 }
 
-void BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool, BPVLinkedList *list) {
+BPVLinkedList *BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool) {
+    if (!pool) {
+        return NULL;
+    }
+    
+    BPVLinkedList *list = BPVLinkedListCreate();
     BPVStrongSetter(pool, _list, list);
+    
+    BPVObjectRelease(list);
+    
+    return list;
 }
 
 BPVLinkedList *BPVAutoreleasePoolGetLinkedList(BPVAutoreleasePool *pool) {
@@ -90,13 +105,15 @@ void BPVAutoreleasePoolAddObject(BPVAutoreleasePool *pool, void *object) {
         BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)object;
         
         if (BPVAutoreleasingStackIsFull(stack)) {
-            stack = BPVAutoreleasePoolAddStack(pool);
+            stack = BPVAutoreleasePoolAddStackToList(pool);
         }
 
         if (BPVAutoreleasingStackIsEmpty(stack)) {
             object = BPVLinkedListGetObjectAfterObject(list, object);
-            BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)object;
-            stack = BPVAutoreleasingStackIsFull(nextStack) ? stack : nextStack;
+            if (object) {
+                BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)object;
+                stack = BPVAutoreleasingStackIsFull(nextStack) ? stack : nextStack;
+            }
         }
         
         BPVAutoreleasingStackPushObject(stack, object);
@@ -112,6 +129,15 @@ void BPVAutoreleasePoolDrainAll(BPVAutoreleasePool *pool) {
     } while (BPVAutoreleasePoolIsValid(pool));
     
     BPVAutoreleasePoolDeleteEmptyStacks(pool);
+}
+
+BPVAutoreleasingStack *BPVAutoreleasePoolAddStackToList(BPVAutoreleasePool *pool) {
+    BPVAutoreleasingStack *stack = BPVAutoreleasePoolNewStack(pool);
+    BPVLinkedListAddObject(BPVAutoreleasePoolGetLinkedList(pool), stack);
+    
+    BPVObjectRelease(stack);
+    
+    return stack;
 }
 
 void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool) {
@@ -130,7 +156,7 @@ void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool) {
     }
 }
 
-BPVAutoreleasingStack *BPVAutoreleasePoolAddStack(BPVAutoreleasePool *pool) {
+BPVAutoreleasingStack *BPVAutoreleasePoolNewStack(BPVAutoreleasePool *pool) {
     return pool ? BPVAutoreleasingStackCreateWithSize(kBPVStackSize) : NULL;
 }
 
