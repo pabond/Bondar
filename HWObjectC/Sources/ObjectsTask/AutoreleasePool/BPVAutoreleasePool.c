@@ -138,12 +138,7 @@ BPVAutoreleasingStack *BPVAutoreleasePoolGetLastAutoreleasingStack(BPVAutoreleas
     
     BPVAutoreleasingStack *stack = BPVAutoreleasePoolGetFirstAutoreleasingStack(pool);
     BPVAutoreleasingStack *nextStack = BPVAutoreleasePoolGetNextAutoreleasingStack(pool, stack);
-    BPVArray *emptyStacks;
     while (nextStack) {
-        if (BPVAutoreleasingStackIsEmpty(stack)) {
-            BPVArrayAddObject(emptyStacks, stack);
-        }
-        
         stack = nextStack;
         nextStack = BPVAutoreleasePoolGetNextAutoreleasingStack(pool, stack);
     }
@@ -180,18 +175,18 @@ void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool) {
         return;
     }
     
-    BPVLinkedList *list = BPVAutoreleasePoolGetLinkedList(pool);
-    void *object = BPVLinkedListGetFirstObject(list);
-    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)object;
-    
+    BPVAutoreleasingStack *stack = BPVAutoreleasePoolGetFirstAutoreleasingStack(pool);
+    BPVArray *emptyStacks;
+    uint64_t count = 0;
     while (BPVAutoreleasingStackIsEmpty(stack)) {
-        BPVAutoreleasingStack *previousStack = stack;
-        object = BPVLinkedListGetObjectAfterObject(list, object);
-        stack = (BPVAutoreleasingStack *)object;
+        BPVArrayAddObject(emptyStacks, stack);
+        count += 1;
         
-        if (BPVAutoreleasingStackIsEmpty(stack)) {
-            BPVLinkedListRemoveObject(list, previousStack);
-        }
+        stack = BPVAutoreleasePoolGetNextAutoreleasingStack(pool, stack);
+    }
+    
+    for (uint64_t iterator = 0; iterator < count - 1; iterator++) {
+        BPVLinkedListRemoveObject(BPVAutoreleasePoolGetLinkedList(pool), BPVArrayGetObjectAtIndex(emptyStacks, iterator));
     }
 }
 
