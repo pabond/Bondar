@@ -43,7 +43,7 @@ BPVObject *BPVLinkedListNodeGetObject(BPVLinkedListNode *node) {
 void BPVLinkedListNodeSetObject(BPVLinkedListNode *node, void *object) {
     BPVLinkedListNode *previousObject = node->_object;
     
-    if (node && object != previousObject && node != object) {
+    if (node && object != previousObject) {
         BPVObjectRelease(previousObject);
         
         node->_object = BPVObjectRetain(object);

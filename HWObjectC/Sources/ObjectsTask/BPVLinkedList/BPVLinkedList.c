@@ -70,37 +70,34 @@ BPVObject *BPVLinkedListGetNextObject(BPVLinkedList *list, BPVLinkedListNode *no
 }
 
 
-BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object) {
+void *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, void *object) {
     if (!list) {
         return NULL;
     }
     
-    BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
-    context->object = object;
+    BPVLinkedListNodeContext context;
+    memset(&context, 0, sizeof(context));
+    context.object = object;
     
-    BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
+    BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     
-    BPVObject *previousObject =BPVLinkedListNodeGetObject(context->previousNode);
-    
-    free(context);
+    void *previousObject =BPVLinkedListNodeGetObject(context.previousNode);
     
     return previousObject;
 }
 
-BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object) {
-    BPVObject *nextObject = NULL;
-    if (list) {
-        BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
-        context->object = object;
-        
-        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
-        
-        nextObject = BPVLinkedListGetNextObject(list, node);
-        
-        free(context);
+void *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, void *object) {
+    if (!list) {
+        return NULL;
     }
     
-    return nextObject;
+    BPVLinkedListNodeContext context;
+    memset(&context, 0, sizeof(context));
+    context.object = object;
+    
+    BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+    
+    return BPVLinkedListGetNextObject(list, node);
 }
 
 bool BPVLinkedListIsEmpty(BPVLinkedList *list) {
@@ -120,21 +117,19 @@ void BPVLinkedListAddObject(BPVLinkedList *list, void *object) {
 
 void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object) {
     if (list && object) {
-        
         BPVLinkedListNode *head = BPVLinkedListGetHead(list);
         
-        BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
-        context->object = object;
+        BPVLinkedListNodeContext context;
+        memset(&context, 0, sizeof(context));
+        context.object = object;
         
-        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
-        
-        free(context);
+        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
         
         if (node) {
             if (node == head) {
                 BPVLinkedListSetHead(list, BPVLinkedListNodeGetNextNode(node));
             } else {
-                BPVLinkedListNodeSetNextNode(context->previousNode, BPVLinkedListNodeGetNextNode(node));
+                BPVLinkedListNodeSetNextNode(context.previousNode, BPVLinkedListNodeGetNextNode(node));
                 BPVLinkedListCountAddValue(list, -1);
             }
         }
@@ -149,29 +144,21 @@ void BPVLinkedListRemoveAllObjects(BPVLinkedList *list) {
 }
 
 bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
-    if (list) {
-        BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
-        context->object = object;
-        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, context);
-        
-        free(context);
-        
-        if (node) {
-        return true;
-        }
+    BPVLinkedListNode *node = NULL;
+    if (!list) {
+        return false;
     }
     
-    return false;
+    BPVLinkedListNodeContext context;
+    memset(&context, 0, sizeof(context));
+    context.object = object;
+    node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+    
+    return (bool)node;
 }
 
 uint64_t BPVLinkedListGetCount(BPVLinkedList *list) {
     return list ? list->_count : 0;
-}
-
-BPVLinkedListNodeContext *BPVLinkedListCreateEmptyContext() {
-    BPVLinkedListNodeContext *context = calloc(1, sizeof(*context));
-    
-    return context;
 }
 
 #pragma mark -
@@ -212,28 +199,26 @@ void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list) {
 
 BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
                                                        BPVLinkedListComparisonFunction comparator,
-                                                       BPVLinkedListNodeContext *context)
+                                                       void *context)
 {
-    if (list) {
-        BPVLinkedListEnumerator *enumerator = BPVLinkedListEnumeratorCreateFromList(list);
-        BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
-        context->node = node;
-        
-        while (BPVLinkedListEnumeratorValid(enumerator)) {
-            
-            if (BPVLinkedListNodeContainsObject(node, context)) {
-                return node;
-            }
-            
-            context->previousNode = node;
-            context->node = BPVLinkedListNodeGetNextNode(node);
-            node = context->node;
-        }
-        
-        BPVObjectRelease(enumerator);
+    BPVLinkedListNode *result = NULL;
+    if (!list) {
+        return result;
     }
     
-    return NULL;
+    BPVLinkedListEnumerator *enumerator = BPVLinkedListEnumeratorCreateFromList(list);
+    
+    while (BPVLinkedListEnumeratorValid(enumerator) && BPVLinkedListEnumeratorGetNextObject(enumerator)) {
+        BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
+        
+        if (comparator(node, context)) {
+            result = node;
+        }
+    }
+    
+    BPVObjectRelease(enumerator);
+    
+    return result;
 }
 
 bool BPVLinkedListNodeContainsObject(BPVLinkedListNode *node, BPVLinkedListNodeContext *context) {

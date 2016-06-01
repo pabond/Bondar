@@ -44,10 +44,10 @@ extern
 BPVObject *BPVLinkedListGetNextObject(BPVLinkedList *list, BPVLinkedListNode *node);
 
 extern
-BPVObject *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, BPVObject *object);
+void *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, void *object);
 
 extern
-BPVObject *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, BPVObject *object);
+void *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, void *object);
 
 extern
 bool BPVLinkedListIsEmpty(BPVLinkedList *list);

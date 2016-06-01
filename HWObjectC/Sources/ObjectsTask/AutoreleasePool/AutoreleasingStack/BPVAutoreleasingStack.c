@@ -60,7 +60,7 @@ bool BPVAutoreleasingStackIsFull(BPVAutoreleasingStack *stack) {
     
     void **data = BPVAutoreleasingStackGetData(stack);
     size_t size = BPVAutoreleasingStackGetSize(stack);
-    uint64_t count = size/sizeof(*data);
+    uint64_t count = size / sizeof(*data);
     
     return BPVAutoreleasingStackGetCount(stack) == count;
 }
@@ -102,7 +102,7 @@ BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObject(BPVAutoreleasi
     return type;
 }
 
-BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjectsUntilNull(BPVAutoreleasingStack *stack) {
+BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjects(BPVAutoreleasingStack *stack) {
     BPVAutoreleasingStackPopObjectType type = BPVAutoreleasingStackPopObjectTypeNone;
     if (stack && !BPVAutoreleasingStackIsEmpty(stack)) {
         do {

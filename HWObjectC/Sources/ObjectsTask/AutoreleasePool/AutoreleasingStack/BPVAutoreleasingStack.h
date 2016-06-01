@@ -49,7 +49,7 @@ extern
 BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObject(BPVAutoreleasingStack *stack);
 
 extern
-BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjectsUntilNull(BPVAutoreleasingStack *stack);
+BPVAutoreleasingStackPopObjectType BPVAutoreleasingStackPopObjects(BPVAutoreleasingStack *stack);
 
 extern
 void **BPVAutoreleasingStackGetData(BPVAutoreleasingStack *stack);

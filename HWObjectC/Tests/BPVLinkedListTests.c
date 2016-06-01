@@ -21,9 +21,4 @@ void BPVRunLinkedListTest() {
     BPVLinkedListAddObject(list, object2);
     
     BPVLinkedListGetObjectAfterObject(list, object);
-    
-    BPVLinkedListNodeContext *context = BPVLinkedListCreateEmptyContext();
-    printf("Size of context = %lu\n", sizeof(*context));
-    
-    BPVObjectRelease(context);
 }

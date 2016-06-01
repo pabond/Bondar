@@ -32,21 +32,30 @@ extern
 BPVAutoreleasePool *BPVAutoreleasePoolCreateWithListAndStack();
 
 extern
+BPVAutoreleasePool *BPVAutoreleasePoolGetPool();
+
+extern
 bool BPVAutoreleasePoolIsValid(BPVAutoreleasePool *pool);
 
 extern
 void BPVAutoreleasePoolDrain(BPVAutoreleasePool *pool);
 
 extern
-uint64_t BPVAutoreleasePoolGetCount(BPVAutoreleasePool *pool);
-
-extern
-BPVLinkedList *BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool);
+uint64_t BPVAutoreleasePoolGetPoolsCount(BPVAutoreleasePool *pool);
 
 extern
 BPVLinkedList *BPVAutoreleasePoolGetLinkedList(BPVAutoreleasePool *pool);
 
 extern
 void BPVAutoreleasePoolAddObject(BPVAutoreleasePool *pool, void *object);
+
+extern
+BPVAutoreleasingStack *BPVAutoreleasePoolGetFirstAutoreleasingStack(BPVAutoreleasePool *pool);
+
+extern
+BPVAutoreleasingStack *BPVAutoreleasePoolGetLastAutoreleasingStack(BPVAutoreleasePool *pool);
+
+extern
+BPVAutoreleasingStack *BPVAutoreleasePoolGetNextAutoreleasingStack(BPVAutoreleasePool *pool, void *stack);
 
 #endif /* BPVAutoreleasePool_h */
