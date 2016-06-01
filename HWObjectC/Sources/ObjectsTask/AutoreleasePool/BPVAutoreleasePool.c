@@ -67,7 +67,7 @@ BPVAutoreleasePool *BPVAutoreleasePoolGetPool() {
 }
 
 bool BPVAutoreleasePoolIsValid(BPVAutoreleasePool *pool) {
-    return BPVAutoreleasePoolGetPoolsCount(pool);
+    return BPVAutoreleasingStackIsEmpty(BPVAutoreleasePoolGetLastAutoreleasingStack(pool));
 }
 
 void BPVAutoreleasePoolDrain(BPVAutoreleasePool *pool) {
