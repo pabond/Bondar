@@ -11,13 +11,21 @@
 
 #include "BPVLinkedList.h"
 
+typedef struct BPVLinkedListNodeObjectContext BPVLinkedListNodeObjectContext;
+
 typedef struct {
+    BPVLinkedListNodeObjectContext *objectContext;
     void *previousNode;
     void *node;
     void *object;
 } BPVLinkedListNodeContext;
 
 typedef bool (*BPVLinkedListComparisonFunction)(BPVLinkedListNode *node, BPVLinkedListNodeContext *context);
+
+struct BPVLinkedListNodeObjectContext {
+    void *object;
+    BPVLinkedListComparisonFunction comparator;
+};
 
 extern
 void BPVLinkedListSetMutationsCount(BPVLinkedList *list, uint64_t count);

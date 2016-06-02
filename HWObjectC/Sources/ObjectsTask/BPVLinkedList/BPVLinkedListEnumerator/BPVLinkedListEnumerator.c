@@ -65,6 +65,10 @@ BPVLinkedListNode *BPVLinkedListEnumeratorGetNode(BPVLinkedListEnumerator *enume
 }
 
 void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator) {
+    return BPVLinkedListNodeGetObject(BPVLinkedListEnumeratorGetNextNode(enumerator));
+}
+
+void *BPVLinkedListEnumeratorGetNextNode(BPVLinkedListEnumerator *enumerator) {
     if (!enumerator && !BPVLinkedListEnumeratorMutationsCountValidate(enumerator)) {
         return NULL;
     }
@@ -79,7 +83,7 @@ void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator) 
         BPVLinkedListEnumeratorSetValid(enumerator, false);
     }
     
-    return BPVLinkedListNodeGetObject(node);
+    return node;
 }
 
 bool BPVLinkedListEnumeratorValid(BPVLinkedListEnumerator *enumerator){

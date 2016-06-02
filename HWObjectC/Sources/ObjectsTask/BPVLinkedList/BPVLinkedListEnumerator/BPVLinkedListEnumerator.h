@@ -37,6 +37,9 @@ extern
 void *BPVLinkedListEnumeratorGetNextObject(BPVLinkedListEnumerator *enumerator);
 
 extern
+void *BPVLinkedListEnumeratorGetNextNode(BPVLinkedListEnumerator *enumerator);
+
+extern
 bool BPVLinkedListEnumeratorValid(BPVLinkedListEnumerator *enumerator);
 
 #endif /* BPVLinkedListEnumerator_h */

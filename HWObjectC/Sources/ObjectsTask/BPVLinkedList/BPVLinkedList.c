@@ -208,7 +208,7 @@ BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
     
     BPVLinkedListEnumerator *enumerator = BPVLinkedListEnumeratorCreateFromList(list);
     
-    while (BPVLinkedListEnumeratorValid(enumerator) && BPVLinkedListEnumeratorGetNextObject(enumerator)) {
+    while (BPVLinkedListEnumeratorValid(enumerator) && BPVLinkedListEnumeratorGetNextNode(enumerator)) {
         BPVLinkedListNode *node = BPVLinkedListEnumeratorGetNode(enumerator);
         
         if (comparator(node, context)) {

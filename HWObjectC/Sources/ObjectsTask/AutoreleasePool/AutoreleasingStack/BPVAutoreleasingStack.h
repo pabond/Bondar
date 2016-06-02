@@ -19,7 +19,6 @@ struct BPVAutoreleasingStack {
     BPVObject _parentClass;
     
     void **_data;
-    void **_head;
     uint64_t _count;
     size_t _size;
 };

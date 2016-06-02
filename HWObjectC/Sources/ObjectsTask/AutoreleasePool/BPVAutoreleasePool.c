@@ -176,7 +176,7 @@ void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool) {
     }
     
     BPVAutoreleasingStack *stack = BPVAutoreleasePoolGetFirstAutoreleasingStack(pool);
-    BPVArray *emptyStacks;
+    BPVArray *emptyStacks = BPVArrayCreateArrayWithCapacity(20);
     uint64_t count = 0;
     while (BPVAutoreleasingStackIsEmpty(stack)) {
         BPVArrayAddObject(emptyStacks, stack);
