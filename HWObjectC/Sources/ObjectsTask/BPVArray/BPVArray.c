@@ -160,9 +160,11 @@ uint64_t BPVArrayPrefferedCapacity(BPVArray *array) {
     if (!array) {
         return 0;
     }
+    
+    uint64_t currentCount = BPVArrayGetCount(array);
 
-    uint64_t capacity = BPVArrayGetCount(array);
-    uint64_t count = BPVArrayGetCount(array);
+    uint64_t capacity = currentCount;
+    uint64_t count = currentCount;
     
     if (!capacity) {
         return 1;

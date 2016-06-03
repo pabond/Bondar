@@ -135,11 +135,13 @@ void BPVAutoreleasingStackCountAddValue(BPVAutoreleasingStack *stack, int64_t va
 
 void BPVAutoreleasingStackSetObject(BPVAutoreleasingStack *stack, void *object) {
     if (stack) {
+        uint64_t count = BPVAutoreleasingStackGetCount(stack);
+        
         if (!object) {
-            BPVObjectRelease(*(stack->_data + (BPVAutoreleasingStackGetCount(stack) - 1)));
+            BPVObjectRelease(*(stack->_data + (count - 1)));
         }
         
-        *(stack->_data + BPVAutoreleasingStackGetCount(stack)) = object;
+        *(stack->_data + count) = object;
     }
 }
 

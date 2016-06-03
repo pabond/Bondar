@@ -6,10 +6,14 @@
 //  Copyright © 2016 Pavel Bondar. All rights reserved.
 //
 
+#include <string.h>
+
 #include "BPVAutoreleasePool.h"
 #include "BPVAutoreleasingStack.h"
 #include "BPVLinkedListNode.h"
 #include "BPVArray.h"
+#include "BPVLinkedList.h"
+#include "BPVLinkedListPrivate.h"
 
 static const uint64_t kBPVStackSize = 64;
 
@@ -23,6 +27,9 @@ void BPVAutoreleasePoolDrainAll(BPVAutoreleasePool *pool);
 
 static
 void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool);
+
+static
+void BPVAutorleasingStackRemoveEmptyStacks(BPVLinkedList *list);
 
 static
 BPVAutoreleasingStack *BPVAutoreleasePoolNewStack(BPVAutoreleasePool *pool);
@@ -170,24 +177,20 @@ BPVAutoreleasingStack *BPVAutoreleasePoolAddStackToList(BPVAutoreleasePool *pool
     return stack;
 }
 
+void BPVAutorleasingStackRemoveEmptyStacks(BPVLinkedList *list) {
+    BPVLinkedListContext context;
+    memset(&context, 0, sizeof(context));
+    BPVLinkedListNodeGetNodeWithContext(list, BPVAccumulationFunction, &context);
+}
+
 void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool) {
     if (!pool) {
         return;
     }
     
-    BPVAutoreleasingStack *stack = BPVAutoreleasePoolGetFirstAutoreleasingStack(pool);
-    BPVArray *emptyStacks = BPVArrayCreateArrayWithCapacity(20);
-    uint64_t count = 0;
-    while (BPVAutoreleasingStackIsEmpty(stack)) {
-        BPVArrayAddObject(emptyStacks, stack);
-        count += 1;
-        
-        stack = BPVAutoreleasePoolGetNextAutoreleasingStack(pool, stack);
-    }
+    BPVLinkedList *list = BPVAutoreleasePoolGetLinkedList(pool);
     
-    for (uint64_t iterator = 0; iterator < count - 1; iterator++) {
-        BPVLinkedListRemoveObject(BPVAutoreleasePoolGetLinkedList(pool), BPVArrayGetObjectAtIndex(emptyStacks, iterator));
-    }
+    BPVAutorleasingStackRemoveEmptyStacks(list);
 }
 
 BPVLinkedList *BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool) {

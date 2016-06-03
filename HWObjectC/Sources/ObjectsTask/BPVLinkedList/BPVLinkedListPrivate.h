@@ -11,20 +11,20 @@
 
 #include "BPVLinkedList.h"
 
-typedef struct BPVLinkedListNodeObjectContext BPVLinkedListNodeObjectContext;
+typedef struct BPVLinkedListContext BPVLinkedListContext;
 
 typedef struct {
-    BPVLinkedListNodeObjectContext *objectContext;
+    BPVLinkedListContext *objectContext;
     void *previousNode;
     void *node;
     void *object;
 } BPVLinkedListNodeContext;
 
-typedef bool (*BPVLinkedListComparisonFunction)(BPVLinkedListNode *node, BPVLinkedListNodeContext *context);
+typedef bool (*BPVLinkedListComparisonFunction)(void *object, void *context);
 
-struct BPVLinkedListNodeObjectContext {
-    void *object;
-    BPVLinkedListComparisonFunction comparator;
+struct BPVLinkedListContext {
+    void *accumulator;
+    void *comparator;
 };
 
 extern
@@ -45,6 +45,9 @@ BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
                                                        void *context);
 
 extern
-bool BPVLinkedListNodeContainsObject(BPVLinkedListNode *node, BPVLinkedListNodeContext *context);
+bool BPVAccumulationFunction(void *object, void *context);
+
+extern
+bool BPVLinkedListNodeContainsObject(void *node, void *context);
 
 #endif /* BPVLinkedListPrivate_h */

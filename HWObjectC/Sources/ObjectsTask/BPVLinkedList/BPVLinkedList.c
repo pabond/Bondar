@@ -13,6 +13,8 @@
 #include "BPVLinkedListNode.h"
 #include "BPVLinkedListPrivate.h"
 #include "BPVLinkedListEnumeratorPrivate.h"
+#include "BPVArray.h"
+#include "BPVAutoreleasingStack.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -197,6 +199,26 @@ void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list) {
     }
 }
 
+bool BPVAccumulationFunction(void *object, void *context) {
+    BPVLinkedListContext *wrapperContext = (BPVLinkedListContext *)context;
+    BPVArray *array = wrapperContext->accumulator;
+    
+    BPVLinkedListNode *node = object;
+    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
+    
+    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(node);
+    BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(nextNode);
+    
+    if (BPVAutoreleasingStackIsEmpty(stack) && BPVAutoreleasingStackIsEmpty(nextStack)) {
+        BPVArrayAddObject(array, stack);
+    } else {
+        BPVArrayRemoveAllObjects(array);
+        return true;
+    }
+    
+    return false;
+}
+
 BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
                                                        BPVLinkedListComparisonFunction comparator,
                                                        void *context)
@@ -221,6 +243,8 @@ BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
     return result;
 }
 
-bool BPVLinkedListNodeContainsObject(BPVLinkedListNode *node, BPVLinkedListNodeContext *context) {
-    return node && context->object == BPVLinkedListNodeGetObject(node);
+bool BPVLinkedListNodeContainsObject(void *object, void *context) {
+    BPVLinkedListNodeContext *contextWithType = (BPVLinkedListNodeContext *)context;
+        
+    return object && contextWithType->object == BPVLinkedListNodeGetObject(object);
 }
