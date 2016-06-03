@@ -199,26 +199,6 @@ void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list) {
     }
 }
 
-bool BPVAccumulationFunction(void *object, void *context) {
-    BPVLinkedListContext *wrapperContext = (BPVLinkedListContext *)context;
-    BPVArray *array = wrapperContext->accumulator;
-    
-    BPVLinkedListNode *node = object;
-    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
-    
-    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(node);
-    BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(nextNode);
-    
-    if (BPVAutoreleasingStackIsEmpty(stack) && BPVAutoreleasingStackIsEmpty(nextStack)) {
-        BPVArrayAddObject(array, stack);
-    } else {
-        BPVArrayRemoveAllObjects(array);
-        return true;
-    }
-    
-    return false;
-}
-
 BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
                                                        BPVLinkedListComparisonFunction comparator,
                                                        void *context)

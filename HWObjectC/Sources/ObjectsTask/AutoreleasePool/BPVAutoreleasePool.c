@@ -177,6 +177,26 @@ BPVAutoreleasingStack *BPVAutoreleasePoolAddStackToList(BPVAutoreleasePool *pool
     return stack;
 }
 
+bool BPVAccumulationFunction(void *object, void *context) {
+    BPVLinkedListContext *wrapperContext = (BPVLinkedListContext *)context;
+    BPVArray *array = wrapperContext->accumulator;
+    
+    BPVLinkedListNode *node = object;
+    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
+    
+    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(node);
+    BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(nextNode);
+    
+    if (BPVAutoreleasingStackIsEmpty(stack) && BPVAutoreleasingStackIsEmpty(nextStack)) {
+        BPVArrayAddObject(array, stack);
+    } else {
+        BPVArrayRemoveAllObjects(array);
+        return true;
+    }
+    
+    return false;
+}
+
 void BPVAutorleasingStackRemoveEmptyStacks(BPVLinkedList *list) {
     BPVLinkedListContext context;
     memset(&context, 0, sizeof(context));
