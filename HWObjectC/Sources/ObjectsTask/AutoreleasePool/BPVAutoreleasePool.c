@@ -26,12 +26,6 @@ static
 void BPVAutoreleasePoolDrainAll(BPVAutoreleasePool *pool);
 
 static
-void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool);
-
-static
-void BPVAutorleasingStackRemoveEmptyStacks(BPVLinkedList *list);
-
-static
 BPVAutoreleasingStack *BPVAutoreleasePoolNewStack(BPVAutoreleasePool *pool);
 
 static
@@ -45,6 +39,9 @@ BPVLinkedList *BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool);
 
 static
 void BPVAutoreleasePoolPoolsCountAddValue(BPVAutoreleasePool *pool, int64_t value);
+
+static
+void BPVAutoreleasePoolFindEmptySteksToResizePool(BPVAutoreleasePool *pool);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -74,7 +71,7 @@ BPVAutoreleasePool *BPVAutoreleasePoolGetPool() {
 }
 
 bool BPVAutoreleasePoolIsValid(BPVAutoreleasePool *pool) {
-    return BPVAutoreleasingStackIsEmpty(BPVAutoreleasePoolGetLastAutoreleasingStack(pool));
+    return pool && BPVAutoreleasePoolGetPoolsCount(pool);
 }
 
 void BPVAutoreleasePoolDrain(BPVAutoreleasePool *pool) {
@@ -92,7 +89,7 @@ void BPVAutoreleasePoolDrain(BPVAutoreleasePool *pool) {
     } while (type != BPVAutoreleasingStackPopObjectTypeNull);
     
     BPVAutoreleasePoolPoolsCountAddValue(pool, -1);
-    BPVAutoreleasePoolDeleteEmptyStacks(pool);
+    BPVAutoreleasePoolFindEmptySteksToResizePool(pool);
 }
 
 uint64_t BPVAutoreleasePoolGetPoolsCount(BPVAutoreleasePool *pool) {
@@ -165,7 +162,7 @@ void BPVAutoreleasePoolDrainAll(BPVAutoreleasePool *pool) {
         BPVAutoreleasePoolDrain(pool);
     } while (BPVAutoreleasePoolIsValid(pool));
     
-    BPVAutoreleasePoolDeleteEmptyStacks(pool);
+    BPVAutoreleasePoolFindEmptySteksToResizePool(pool);
 }
 
 BPVAutoreleasingStack *BPVAutoreleasePoolAddStackToList(BPVAutoreleasePool *pool) {
@@ -177,40 +174,33 @@ BPVAutoreleasingStack *BPVAutoreleasePoolAddStackToList(BPVAutoreleasePool *pool
     return stack;
 }
 
-bool BPVAccumulationFunction(void *object, void *context) {
-    BPVLinkedListContext *wrapperContext = (BPVLinkedListContext *)context;
-    BPVArray *array = wrapperContext->accumulator;
-    
-    BPVLinkedListNode *node = object;
-    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
-    
-    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(node);
-    BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(nextNode);
-    
+bool BPVAutoreleasePoolDeleteEmptySteks(BPVArray *accumulator, BPVAutoreleasingStack *stack, BPVAutoreleasingStack *nextStack) {
     if (BPVAutoreleasingStackIsEmpty(stack) && BPVAutoreleasingStackIsEmpty(nextStack)) {
-        BPVArrayAddObject(array, stack);
+        BPVArrayAddObject(accumulator, stack);
     } else {
-        BPVArrayRemoveAllObjects(array);
+        BPVArrayRemoveAllObjects(accumulator);
+        BPVObjectRelease(accumulator);
         return true;
     }
     
     return false;
 }
 
-void BPVAutorleasingStackRemoveEmptyStacks(BPVLinkedList *list) {
-    BPVLinkedListContext context;
-    memset(&context, 0, sizeof(context));
-    BPVLinkedListNodeGetNodeWithContext(list, BPVAccumulationFunction, &context);
-}
-
-void BPVAutoreleasePoolDeleteEmptyStacks(BPVAutoreleasePool *pool) {
+void BPVAutoreleasePoolFindEmptySteksToResizePool(BPVAutoreleasePool *pool) {
     if (!pool) {
         return;
     }
     
     BPVLinkedList *list = BPVAutoreleasePoolGetLinkedList(pool);
+    BPVLinkedListContext context;
+    memset(&context, 0, sizeof(context));
     
-    BPVAutorleasingStackRemoveEmptyStacks(list);
+    BPVArray *array = BPVArrayCreateArrayWithCapacity(0);
+    
+    context.accumulator = array;
+    context.comparator = BPVAutoreleasePoolDeleteEmptySteks;
+    
+    BPVLinkedListGetObjectWithContext(list, BPVWrapperContext, &context);
 }
 
 BPVLinkedList *BPVAutoreleasePoolSetLinkedList(BPVAutoreleasePool *pool) {

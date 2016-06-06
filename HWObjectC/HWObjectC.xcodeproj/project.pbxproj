@@ -38,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2D6EEBE51D056B1A00AB53F8 /* BPVAutoreleasePoolPrivat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVAutoreleasePoolPrivat.h; sourceTree = "<group>"; };
 		2DC4C5971CF9D1C40053E07F /* BPVAutoreleasePool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVAutoreleasePool.c; sourceTree = "<group>"; };
 		2DC4C5981CF9D1C40053E07F /* BPVAutoreleasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPVAutoreleasePool.h; sourceTree = "<group>"; };
 		2DC4C59A1CFC7D670053E07F /* BPVAutorleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BPVAutorleasePoolTests.c; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 				2DECEC801CF7772000FE66F3 /* AutoreleasingStack */,
 				2DC4C5971CF9D1C40053E07F /* BPVAutoreleasePool.c */,
 				2DC4C5981CF9D1C40053E07F /* BPVAutoreleasePool.h */,
+				2D6EEBE51D056B1A00AB53F8 /* BPVAutoreleasePoolPrivat.h */,
 			);
 			path = AutoreleasePool;
 			sourceTree = "<group>";

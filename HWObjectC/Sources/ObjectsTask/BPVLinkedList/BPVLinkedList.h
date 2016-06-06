@@ -53,9 +53,6 @@ extern
 bool BPVLinkedListIsEmpty(BPVLinkedList *list);
 
 extern
-void *BPVLinkedListGetObjectWithContext(BPVLinkedList *list, void *comparator, void *context);
-
-extern
 void BPVLinkedListAddObject(BPVLinkedList *list, void *object);
 
 extern

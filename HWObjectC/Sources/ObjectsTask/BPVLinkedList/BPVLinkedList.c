@@ -15,6 +15,7 @@
 #include "BPVLinkedListEnumeratorPrivate.h"
 #include "BPVArray.h"
 #include "BPVAutoreleasingStack.h"
+#include "BPVAutoreleasePool.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -81,7 +82,7 @@ void *BPVLinkedListGetObjectBeforeObject(BPVLinkedList *list, void *object) {
     memset(&context, 0, sizeof(context));
     context.object = object;
     
-    BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+    BPVLinkedListGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     
     void *previousObject =BPVLinkedListNodeGetObject(context.previousNode);
     
@@ -97,7 +98,7 @@ void *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, void *object) {
     memset(&context, 0, sizeof(context));
     context.object = object;
     
-    BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+    BPVLinkedListNode *node = BPVLinkedListGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     
     return BPVLinkedListGetNextObject(list, node);
 }
@@ -125,7 +126,7 @@ void BPVLinkedListRemoveObject(BPVLinkedList *list, void *object) {
         memset(&context, 0, sizeof(context));
         context.object = object;
         
-        BPVLinkedListNode *node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+        BPVLinkedListNode *node = BPVLinkedListGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
         
         if (node) {
             if (node == head) {
@@ -154,7 +155,7 @@ bool BPVLinkedListContainsObject(BPVLinkedList *list, void *object) {
     BPVLinkedListNodeContext context;
     memset(&context, 0, sizeof(context));
     context.object = object;
-    node = BPVLinkedListNodeGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
+    node = BPVLinkedListGetNodeWithContext(list, BPVLinkedListNodeContainsObject, &context);
     
     return (bool)node;
 }
@@ -199,7 +200,33 @@ void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list) {
     }
 }
 
-BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
+bool BPVWrapperContext(void *object, void *context) {
+    BPVLinkedListContext *newContext = context;
+    BPVArray *array = newContext->accumulator;
+    
+    BPVLinkedListNode *node = object;
+    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
+
+    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(node);
+    BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(nextNode);
+    
+    bool result = false;
+    
+    result = BPVAutoreleasePoolDeleteEmptySteks(array, stack, nextStack);
+    
+    return result;
+}
+
+void *BPVLinkedListGetObjectWithContext(BPVLinkedList *list,
+                                        BPVLinkedListComparisonFunction comparator,
+                                        void *context)
+{
+    void *object = BPVLinkedListNodeGetObject(BPVLinkedListGetNodeWithContext(list, comparator, context));
+    
+    return object;
+}
+
+BPVLinkedListNode *BPVLinkedListGetNodeWithContext(BPVLinkedList *list,
                                                        BPVLinkedListComparisonFunction comparator,
                                                        void *context)
 {

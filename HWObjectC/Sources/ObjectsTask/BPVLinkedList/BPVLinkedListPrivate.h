@@ -10,6 +10,7 @@
 #define BPVLinkedListPrivate_h
 
 #include "BPVLinkedList.h"
+#include "BPVAutoreleasePoolPrivat.h"
 
 typedef struct BPVLinkedListContext BPVLinkedListContext;
 
@@ -40,12 +41,20 @@ extern
 BPVLinkedListNode *BPVLinkedListGetHead(BPVLinkedList *list);
 
 extern
-BPVLinkedListNode *BPVLinkedListNodeGetNodeWithContext(BPVLinkedList *list,
+BPVLinkedListNode *BPVLinkedListGetNodeWithContext(BPVLinkedList *list,
                                                        BPVLinkedListComparisonFunction comparator,
                                                        void *context);
 
 extern
-bool BPVAccumulationFunction(void *object, void *context);
+void *BPVLinkedListGetObjectWithContext(BPVLinkedList *list,
+                                        BPVLinkedListComparisonFunction comparator,
+                                        void *context);
+
+extern
+bool BPVWrapperContext(void *object, void *context);
+
+extern
+void BPVAccumulationFunction(void *object, void *context);
 
 extern
 bool BPVLinkedListNodeContainsObject(void *node, void *context);
