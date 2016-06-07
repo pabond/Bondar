@@ -200,30 +200,44 @@ void BPVLinkedListIncrementMutationsCount(BPVLinkedList *list) {
     }
 }
 
-bool BPVWrapperContext(void *object, void *context) {
-    BPVLinkedListContext *newContext = context;
-    BPVArray *array = newContext->accumulator;
+bool BPVNodeObjectBridgeFunction(void *object, void *context) {
+    BPVLinkedListNodeObjectContext *nodeObjectContext = context;
     
-    BPVLinkedListNode *node = object;
-    BPVLinkedListNode *nextNode = BPVLinkedListNodeGetNextNode(node);
+    return nodeObjectContext->comparator(BPVLinkedListNodeGetObject(object), nodeObjectContext->accumulator);
+}
 
-    BPVAutoreleasingStack *stack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(node);
-    BPVAutoreleasingStack *nextStack = (BPVAutoreleasingStack *)BPVLinkedListNodeGetObject(nextNode);
+bool BPVLinkedListAccumulateObjects(void *object, void *context) {
+    BPVArrayAddObject(context, object);
     
-    bool result = false;
-    
-    result = BPVAutoreleasePoolDeleteEmptySteks(array, stack, nextStack);
-    
-    return result;
+    return false;
 }
 
 void *BPVLinkedListGetObjectWithContext(BPVLinkedList *list,
                                         BPVLinkedListComparisonFunction comparator,
                                         void *context)
 {
-    void *object = BPVLinkedListNodeGetObject(BPVLinkedListGetNodeWithContext(list, comparator, context));
+    if (!list) {
+        return NULL;
+    }
     
-    return object;
+    BPVLinkedListNodeObjectContext nodeObjectContext;
+    memset(&nodeObjectContext, 0, sizeof(nodeObjectContext));
+    
+    nodeObjectContext.accumulator = context;
+    nodeObjectContext.comparator = comparator;
+    
+    return BPVLinkedListGetNodeWithContext(list, BPVNodeObjectBridgeFunction, &nodeObjectContext);
+}
+
+BPVArray *BPVLinkedListGetArrayWithList(BPVLinkedList *list) {
+    if (!list) {
+        return NULL;
+    }
+    
+    BPVArray *accumulator = BPVArrayCreateArrayWithCapacity(0);
+    BPVLinkedListGetObjectWithContext(list, BPVLinkedListAccumulateObjects, accumulator);
+    
+    return accumulator;
 }
 
 BPVLinkedListNode *BPVLinkedListGetNodeWithContext(BPVLinkedList *list,

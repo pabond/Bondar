@@ -15,6 +15,7 @@
 
 typedef struct BPVLinkedListNode BPVLinkedListNode;
 typedef struct BPVLinkedListEnumerator BPVLinkedListEnumerator;
+typedef struct BPVArray BPVArray;
 
 typedef struct {
     BPVObject _parentClass;
@@ -51,6 +52,9 @@ void *BPVLinkedListGetObjectAfterObject(BPVLinkedList *list, void *object);
 
 extern
 bool BPVLinkedListIsEmpty(BPVLinkedList *list);
+
+extern
+BPVArray *BPVLinkedListGetArrayWithList(BPVLinkedList *list);
 
 extern
 void BPVLinkedListAddObject(BPVLinkedList *list, void *object);
